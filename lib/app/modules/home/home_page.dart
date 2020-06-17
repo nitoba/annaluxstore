@@ -20,6 +20,14 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        actions: [
+          IconButton(
+              icon: Icon(Icons.exit_to_app),
+              onPressed: () {
+                controller.logout();
+                Modular.to.pushReplacementNamed("/");
+              })
+        ],
       ),
       body: Column(
         children: <Widget>[

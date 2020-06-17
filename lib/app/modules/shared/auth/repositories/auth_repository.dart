@@ -42,6 +42,6 @@ class AuthRepository extends Disposable implements IAuthRepository {
 
   @override
   Future<void> logout() async {
-    await _auth.signOut();
+    await _googleSignIn.signOut();
   }
 }

@@ -18,7 +18,10 @@ abstract class _AuthControllerBase with Store {
   @action
   Future<UserModel> loginWithGoogle() async {
     user = await _authRepository.getGoogleLogin();
-    return user;
+    if (user != null) {
+      return user;
+    }
+    return null;
   }
 
   @action

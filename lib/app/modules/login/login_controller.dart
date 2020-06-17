@@ -1,5 +1,4 @@
 import 'package:annaluxstore/app/modules/shared/auth/auth_controller.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:annaluxstore/app/modules/shared/models/user_model.dart';
 import 'package:mobx/mobx.dart';
 
@@ -21,7 +20,15 @@ abstract class _LoginControllerBase with Store {
   @action
   Future<UserModel> loginWithGoogle() async {
     loading = true;
+
     user = await _authController.loginWithGoogle();
-    return user;
+
+    if (user != null) {
+      return user;
+    }
+
+    loading = false;
+
+    return null;
   }
 }
