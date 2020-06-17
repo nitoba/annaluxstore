@@ -9,7 +9,5 @@ abstract class _HomeControllerBase with Store {
   int value = 0;
 
   @action
-  void increment() {
-    value++;
-  }
+  void increment() {}
 }
