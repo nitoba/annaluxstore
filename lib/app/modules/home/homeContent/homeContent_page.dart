@@ -18,12 +18,18 @@ class HomeContentPage extends StatefulWidget {
 class _HomeContentPageState
     extends ModularState<HomeContentPage, HomeContentController> {
   //use 'controller' variable to access controller
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBarWidget(),
+      appBar: AppBarWidget(
+        onPress: () {},
+      ),
       body: Container(
         //color: Colors.green,
         child: Column(

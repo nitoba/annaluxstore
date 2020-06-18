@@ -1,0 +1,2 @@
+lib/app/modules/home/repositories/categorie_repository.dart
+test/app/modules/home/repositories/categorie_repository_test.dart

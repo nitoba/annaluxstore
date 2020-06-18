@@ -1,0 +1,3 @@
+lib/app/modules/home/repositories/interfaces/categorie_repository_interface.dart
+lib/app/modules/home/repositories/categorie_repository.dart
+test/app/modules/home/repositories/categorie_repository_test.dart
