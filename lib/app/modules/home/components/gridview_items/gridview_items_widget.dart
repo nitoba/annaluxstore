@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class GridViewItems extends StatelessWidget {
   final int items;
   final List<String> childItems;
-  final String title;
+  final List<String> title;
   const GridViewItems({
     Key key,
     this.items,
@@ -38,7 +38,7 @@ class GridViewItems extends StatelessWidget {
                   child: Image.asset(childItems[0]),
                 ),
                 SizedBox(height: 12),
-                Text(title)
+                Text(title[0])
               ],
             );
           },
