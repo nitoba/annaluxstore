@@ -1,0 +1,5 @@
+lib/app/modules/buy/buy_module.dart
+lib/app/modules/buy/buy_page.dart
+test/app/modules/buy/buy_page_test.dart
+lib/app/modules/buy/buy_controller.dart
+test/app/modules/buy/buy_controller_test.dart
