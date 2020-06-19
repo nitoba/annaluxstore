@@ -1,5 +1,6 @@
 import 'package:annaluxstore/app/modules/shared/auth/auth_controller.dart';
 import 'package:annaluxstore/app/modules/shared/auth/repositories/auth_interface.dart';
+import 'package:annaluxstore/app/modules/shared/localstorage/interfaces/local_storage_repository_inteface.dart';
 import 'package:annaluxstore/app/modules/shared/models/user_model.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_modular/flutter_modular_test.dart';
@@ -9,10 +10,15 @@ import 'package:mockito/mockito.dart';
 
 class AuthRepositoryMock extends Mock implements IAuthRepository {}
 
+class SharedLocalStorageMock extends Mock implements ISharedLocalRepository {}
+
 main() {
   initModule(
     AppModule(),
-    changeBinds: [Bind<IAuthRepository>((i) => AuthRepositoryMock())],
+    changeBinds: [
+      Bind<IAuthRepository>((i) => AuthRepositoryMock()),
+      Bind<ISharedLocalRepository>((i) => SharedLocalStorageMock()),
+    ],
   );
 
   AuthController authController;
