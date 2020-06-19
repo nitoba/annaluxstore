@@ -1,14 +1,13 @@
+import 'package:annaluxstore/app/modules/home/homeContent/home_content_controller.dart';
+import 'package:annaluxstore/app/modules/home/models/product_model.dart';
+import 'package:annaluxstore/app/modules/shared/consttants.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class GridViewItems extends StatelessWidget {
-  final int items;
-  final List<String> childItems;
-  final List<String> title;
   const GridViewItems({
     Key key,
-    this.items,
-    this.childItems,
-    this.title,
   }) : super(key: key);
 
   @override
@@ -16,30 +15,56 @@ class GridViewItems extends StatelessWidget {
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: GridView.builder(
-          physics: BouncingScrollPhysics(),
-          itemCount: items,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-            crossAxisCount: 2,
-            childAspectRatio: 2 / 3,
-          ),
-          itemBuilder: (context, index) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    //color: Colors.blue,
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Image.asset(childItems[0]),
+        child: FutureBuilder<List<ProductModel>>(
+          future: Modular.get<HomeContentController>().getAllProducts(),
+          builder: (context, snapshot) {
+            List<ProductModel> products = snapshot.data;
+            if (products == null) {
+              return Center(
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(thirdColor),
                 ),
-                SizedBox(height: 12),
-                Text(title[0])
-              ],
+              );
+            }
+            return GridView.builder(
+              physics: BouncingScrollPhysics(),
+              itemCount: products.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                crossAxisCount: 2,
+                childAspectRatio: 2 / 3,
+              ),
+              itemBuilder: (context, index) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: Container(
+                        height: 220,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          //color: Colors.blue,
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: CachedNetworkImage(
+                          placeholder: (_, url) => Center(
+                            child: CircularProgressIndicator(
+                              valueColor:
+                                  AlwaysStoppedAnimation<Color>(thirdColor),
+                            ),
+                          ),
+                          imageUrl: products[index].images[0],
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    Text(products[index].title)
+                  ],
+                );
+              },
             );
           },
         ),

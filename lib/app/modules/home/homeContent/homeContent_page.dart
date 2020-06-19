@@ -47,11 +47,7 @@ class _HomeContentPageState
               ),
             ),
             SizedBox(height: 32),
-            GridViewItems(
-              title: ["Mascaras"],
-              items: 6,
-              childItems: ["assets/images/logo.png"],
-            )
+            GridViewItems()
           ],
         ),
       ),

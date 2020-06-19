@@ -1,6 +1,7 @@
 import 'package:annaluxstore/app/modules/home/homeContent/home_content_controller.dart';
 import 'package:annaluxstore/app/modules/home/models/categories_model.dart';
 import 'package:annaluxstore/app/modules/shared/consttants.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -18,7 +19,11 @@ class ListCategories extends StatelessWidget {
         builder: (context, snapshot) {
           List<CategoriesModel> categories = snapshot.data;
           if (categories == null) {
-            return Center(child: CircularProgressIndicator());
+            return Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(thirdColor),
+              ),
+            );
           } else {
             return ListView.builder(
               physics: BouncingScrollPhysics(),
@@ -32,14 +37,21 @@ class ListCategories extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(right: 10.0, top: 32),
                       child: Container(
-                        height: 160,
-                        width: 120,
-                        decoration: BoxDecoration(
-                          color: thirdColor.withOpacity(0.5),
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: Image.network(categories[index].image),
-                      ),
+                          height: 160,
+                          width: 120,
+                          decoration: BoxDecoration(
+                            color: thirdColor.withOpacity(0.5),
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: CachedNetworkImage(
+                            placeholder: (_, url) => Center(
+                              child: CircularProgressIndicator(
+                                valueColor:
+                                    AlwaysStoppedAnimation<Color>(thirdColor),
+                              ),
+                            ),
+                            imageUrl: categories[index].image,
+                          )),
                     ),
                     SizedBox(height: 12),
                     Text(categories[index].title)

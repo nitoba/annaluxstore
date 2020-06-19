@@ -1,5 +1,7 @@
 import 'package:annaluxstore/app/modules/home/models/categories_model.dart';
-import 'package:annaluxstore/app/modules/home/repositories/interfaces/categorie_repository_interface.dart';
+import 'package:annaluxstore/app/modules/home/models/product_model.dart';
+import 'package:annaluxstore/app/modules/home/repositories/interfaces/home_repository_interface.dart';
+
 import 'package:annaluxstore/app/modules/shared/auth/auth_controller.dart';
 import 'package:mobx/mobx.dart';
 
@@ -10,10 +12,11 @@ class HomeContentController = _HomeContentControllerBase
 
 abstract class _HomeContentControllerBase with Store {
   AuthController _authController;
-  ICategorieRepository _categorieRepository;
-  _HomeContentControllerBase(this._authController, this._categorieRepository);
+  IHomeRepository _homeRepository;
+  _HomeContentControllerBase(this._authController, this._homeRepository);
 
   List<CategoriesModel> categories = [];
+  List<ProductModel> allProducts = [];
 
   @action
   Future logout() async {
@@ -21,7 +24,12 @@ abstract class _HomeContentControllerBase with Store {
   }
 
   Future<List<CategoriesModel>> getCategories() async {
-    categories = await _categorieRepository.getCategories();
+    categories = await _homeRepository.getCategories();
     return categories;
+  }
+
+  Future<List<ProductModel>> getAllProducts() async {
+    allProducts = await _homeRepository.getAllProducts();
+    return allProducts;
   }
 }

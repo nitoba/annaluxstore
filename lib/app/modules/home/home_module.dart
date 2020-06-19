@@ -1,6 +1,6 @@
 import 'package:annaluxstore/app/modules/home/home_controller.dart';
-import 'package:annaluxstore/app/modules/home/repositories/categorie_repository.dart';
-import 'package:annaluxstore/app/modules/home/repositories/interfaces/categorie_repository_interface.dart';
+import 'package:annaluxstore/app/modules/home/repositories/home_repository.dart';
+import 'package:annaluxstore/app/modules/home/repositories/interfaces/home_repository_interface.dart';
 import 'package:annaluxstore/app/modules/shared/auth/auth_controller.dart';
 import 'package:annaluxstore/app/modules/shared/auth/repositories/auth_interface.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -13,9 +13,8 @@ import 'homeContent/home_content_controller.dart';
 class HomeModule extends ChildModule {
   @override
   List<Bind> get binds => [
-        Bind<ICategorieRepository>((i) => CategorieRepository(i.get())),
-        Bind((i) =>
-            HomeContentController(i.get(), i.get<ICategorieRepository>())),
+        Bind<IHomeRepository>((i) => HomeRepository(i.get())),
+        Bind((i) => HomeContentController(i.get(), i.get<IHomeRepository>())),
         Bind((i) => HomeController()),
         Bind((i) => Firestore.instance),
         Bind((i) => AuthController(AppModule.to.get<IAuthRepository>())),

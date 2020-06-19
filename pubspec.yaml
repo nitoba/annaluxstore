@@ -21,6 +21,7 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  cached_network_image: ^2.2.0+1
   carousel_pro: ^1.0.0
   cloud_firestore: ^0.13.6
   firebase_auth: ^0.16.1
