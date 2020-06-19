@@ -4,14 +4,30 @@ import 'interfaces/local_storage_repository_inteface.dart';
 
 class SharedRepository implements ISharedLocalRepository {
   @override
-  Future<bool> getIsLogin(String key) async {
-    var prefs = await SharedPreferences.getInstance();
-    return prefs.getBool(key);
+  Future get(String key) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.get(key);
   }
 
   @override
-  Future<void> setIsLogin(String key, bool value) async {
+  Future insert(String key, dynamic value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(key, value);
+    if (value is bool) {
+      prefs.setBool(key, value);
+    } else if (value is String) {
+      prefs.setString(key, value);
+    } else if (value is double) {
+      prefs.setDouble(key, value);
+    } else if (value is int) {
+      prefs.setInt(key, value);
+    } else if (value is List<String>) {
+      prefs.setStringList(key, value);
+    }
+  }
+
+  @override
+  Future remove(String key) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.remove(key);
   }
 }

@@ -11,7 +11,7 @@ class _FirstPageState extends State<FirstPage> {
   var prefs = Modular.get<ISharedLocalRepository>();
 
   Future checkLogin() async {
-    bool isLogin = (await prefs.getIsLogin('login') ?? false);
+    bool isLogin = (await prefs.get('login') ?? false);
 
     if (isLogin) {
       Modular.to.pushReplacementNamed('/home');

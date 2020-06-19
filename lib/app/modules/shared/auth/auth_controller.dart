@@ -21,7 +21,7 @@ abstract class _AuthControllerBase with Store {
   Future<UserModel> loginWithGoogle() async {
     user = await _authRepository.getGoogleLogin();
     if (user != null) {
-      await _sharedLocalRepository.setIsLogin("login", true);
+      await _sharedLocalRepository.insert("login", true);
       return user;
     }
     return null;
@@ -49,7 +49,7 @@ abstract class _AuthControllerBase with Store {
       user.name = "";
       user.email = "";
       user.photoUrl = "";
-      await _sharedLocalRepository.setIsLogin("login", false);
+      await _sharedLocalRepository.insert("login", false);
     }
 
     user = UserModel(
@@ -59,7 +59,7 @@ abstract class _AuthControllerBase with Store {
       photoUrl: "",
     );
 
-    await _sharedLocalRepository.setIsLogin("login", false);
+    await _sharedLocalRepository.insert("login", false);
 
     return user;
   }

@@ -1,4 +1,5 @@
 abstract class ISharedLocalRepository {
-  Future<bool> getIsLogin(String key);
-  Future<void> setIsLogin(String key, bool value);
+  Future get(String key);
+  Future remove(String key);
+  Future insert(String key, dynamic value);
 }
