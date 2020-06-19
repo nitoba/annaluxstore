@@ -5,10 +5,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthRepository extends Disposable implements IAuthRepository {
-  final GoogleSignIn _googleSignIn;
-  final FirebaseAuth _auth;
-
-  AuthRepository(this._auth, this._googleSignIn);
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   void dispose() {}

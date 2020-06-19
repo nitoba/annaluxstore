@@ -1,5 +1,5 @@
 import 'package:annaluxstore/app/modules/buy/buy_module.dart';
-import 'package:annaluxstore/app/modules/home/pages/homeContent/homeContent_page.dart';
+import 'package:annaluxstore/app/modules/home/pages/home_content/homeContent_page.dart';
 import 'package:annaluxstore/app/modules/profile/profile_module.dart';
 import 'package:annaluxstore/app/modules/shared/consttants.dart';
 import 'package:flutter/material.dart';

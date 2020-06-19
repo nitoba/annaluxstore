@@ -16,7 +16,7 @@ abstract class _HomeContentControllerBase with Store {
   _HomeContentControllerBase(this._authController, this._homeRepository);
 
   // List<CategoriesModel> categories = [];
-   List<ProductModel> products = [];
+  List<ProductModel> products = [];
 
   @action
   Future logout() async {
@@ -31,7 +31,7 @@ abstract class _HomeContentControllerBase with Store {
     return await _homeRepository.getAllProducts();
   }
 
-  Future<List<ProductModel>> getProduct()async {
-
+  Future<List<ProductModel>> getProductOfCategorie(String categorieID) async {
+    return await _homeRepository.getProductByCategorie(categorieID);
   }
 }

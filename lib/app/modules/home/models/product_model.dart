@@ -1,3 +1,4 @@
+import 'package:annaluxstore/app/modules/home/models/categories_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProductModel {
@@ -17,13 +18,15 @@ class ProductModel {
     this.categorie,
   });
 
-  factory ProductModel.fromDocument(DocumentSnapshot doc) {
+  factory ProductModel.fromDocument(DocumentSnapshot doc,
+      [String categorieID]) {
     return ProductModel(
-      id: doc.documentID,
-      title: doc.data['title'],
-      description: doc.data['description'],
-      images: doc.data['images'],
-      price: doc.data['price'],
+      id: doc.documentID ?? "",
+      title: doc.data['title'] ?? "",
+      description: doc.data['description'] ?? "",
+      images: doc.data['images'] ?? "",
+      price: doc.data['price'] ?? "",
+      categorie: categorieID ?? "",
     );
   }
 

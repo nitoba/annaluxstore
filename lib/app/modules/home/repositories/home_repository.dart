@@ -17,9 +17,9 @@ class HomeRepository implements IHomeRepository {
 
     var documents = await _instance.collection("products").getDocuments();
 
-    documents.documents.map((doc) {
-      categorieList.add(CategoriesModel.fromJson(doc));
-    }).toList();
+    categorieList = documents.documents
+        .map((categorie) => CategoriesModel.fromJson(categorie))
+        .toList();
     //print(categorieList.map((e) => e.id));
     return categorieList;
   }
@@ -55,20 +55,38 @@ class HomeRepository implements IHomeRepository {
       products.add(ProductModel.fromDocument(product));
     }).toList();
 
-    //print(products.length);
+    //print(products[0].id);
 
     return products;
   }
 
   @override
   Future<List<ProductModel>> getProductByCategorie(String categorieID) async {
+    //TODO: Fazer depois começando por aqui!!!!
     List<ProductModel> listProducts = [];
+
+    String categorieName = await _getCategoriesNames(categorieID);
+
     var products = await _getProductsInsideCollection(categorieID);
 
-    products.documents.map((product) {
-      listProducts.add(ProductModel.fromDocument(product));
-    }).toList();
+    listProducts = products.documents
+        .map((product) => ProductModel.fromDocument(product, categorieName))
+        .toList();
+    // print(listProducts.length);
+    // print(listProducts[0].categorie);
 
     return listProducts;
+  }
+
+  Future<String> _getCategoriesNames(String categorieID) async {
+    Map<String, dynamic> categorieMap = {};
+
+    var documents = await _instance.collection("products").getDocuments();
+
+    documents.documents.map((categorie) {
+      categorieMap[categorie.documentID] = categorie.data['title'];
+    }).toList();
+
+    return categorieMap[categorieID];
   }
 }

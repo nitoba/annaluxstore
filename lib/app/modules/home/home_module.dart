@@ -1,5 +1,6 @@
+import 'pages/categorie_page/categorie/categorie_controller.dart';
 import 'package:annaluxstore/app/modules/home/home_controller.dart';
-import 'package:annaluxstore/app/modules/home/pages/homeContent/home_content_controller.dart';
+import 'package:annaluxstore/app/modules/home/pages/home_content/home_content_controller.dart';
 import 'package:annaluxstore/app/modules/home/repositories/home_repository.dart';
 import 'package:annaluxstore/app/modules/home/repositories/interfaces/home_repository_interface.dart';
 import 'package:annaluxstore/app/modules/shared/auth/auth_controller.dart';
@@ -14,17 +15,21 @@ import '../../app_module.dart';
 class HomeModule extends ChildModule {
   @override
   List<Bind> get binds => [
+        Bind((i) => CategorieController()),
         Bind<IHomeRepository>((i) => HomeRepository(i.get())),
         Bind((i) => HomeContentController(i.get(), i.get<IHomeRepository>())),
         Bind((i) => HomeController()),
         Bind((i) => Firestore.instance),
-        Bind((i) => AuthController(AppModule.to.get<IAuthRepository>(),
-            AppModule.to.get<ISharedLocalRepository>())),
+        Bind((i) => AuthController(
+              AppModule.to.get<IAuthRepository>(),
+              AppModule.to.get<ISharedLocalRepository>(),
+            )),
       ];
 
   @override
   List<Router> get routers => [
         Router(Modular.initialRoute, child: (_, args) => HomePage()),
+        Router('/categorie/:id', child: (_, args) => HomePage()),
       ];
 
   static Inject get to => Inject<HomeModule>.of();
