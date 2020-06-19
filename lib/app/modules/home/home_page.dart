@@ -1,11 +1,11 @@
 import 'package:annaluxstore/app/modules/buy/buy_module.dart';
+import 'package:annaluxstore/app/modules/home/pages/homeContent/homeContent_page.dart';
 import 'package:annaluxstore/app/modules/profile/profile_module.dart';
 import 'package:annaluxstore/app/modules/shared/consttants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'homeContent/homeContent_page.dart';
 import 'home_controller.dart';
 
 class HomePage extends StatefulWidget {

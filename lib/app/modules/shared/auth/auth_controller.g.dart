@@ -32,25 +32,18 @@ mixin _$AuthController on _AuthControllerBase, Store {
     return _$loginWithGoogleAsyncAction.run(() => super.loginWithGoogle());
   }
 
+  final _$getUserAsyncAction = AsyncAction('_AuthControllerBase.getUser');
+
+  @override
+  Future getUser() {
+    return _$getUserAsyncAction.run(() => super.getUser());
+  }
+
   final _$logoutAsyncAction = AsyncAction('_AuthControllerBase.logout');
 
   @override
   Future<UserModel> logout() {
     return _$logoutAsyncAction.run(() => super.logout());
-  }
-
-  final _$_AuthControllerBaseActionController =
-      ActionController(name: '_AuthControllerBase');
-
-  @override
-  dynamic setUser(UserModel userModel) {
-    final _$actionInfo = _$_AuthControllerBaseActionController.startAction(
-        name: '_AuthControllerBase.setUser');
-    try {
-      return super.setUser(userModel);
-    } finally {
-      _$_AuthControllerBaseActionController.endAction(_$actionInfo);
-    }
   }
 
   @override

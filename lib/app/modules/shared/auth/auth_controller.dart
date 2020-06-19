@@ -1,4 +1,5 @@
 import 'package:annaluxstore/app/modules/shared/auth/repositories/auth_interface.dart';
+import 'package:annaluxstore/app/modules/shared/localstorage/interfaces/local_storage_repository_inteface.dart';
 import 'package:annaluxstore/app/modules/shared/models/user_model.dart';
 import 'package:mobx/mobx.dart';
 part 'auth_controller.g.dart';
@@ -6,26 +7,39 @@ part 'auth_controller.g.dart';
 class AuthController = _AuthControllerBase with _$AuthController;
 
 abstract class _AuthControllerBase with Store {
-  IAuthRepository _authRepository;
+  final IAuthRepository _authRepository;
+  final ISharedLocalRepository _sharedLocalRepository;
 
   @observable
   UserModel user;
 
-  _AuthControllerBase(this._authRepository) {
-    //_authRepository.getUser().then((setUser));
+  _AuthControllerBase(this._authRepository, this._sharedLocalRepository) {
+    getUser();
   }
 
   @action
   Future<UserModel> loginWithGoogle() async {
     user = await _authRepository.getGoogleLogin();
     if (user != null) {
+      await _sharedLocalRepository.setIsLogin("login", true);
       return user;
     }
     return null;
   }
 
   @action
-  setUser(UserModel userModel) => user = userModel;
+  getUser() async {
+    user = await _authRepository.getUser();
+    if (user != null) {
+      //print(isLogin);
+      //await _sharedLocalRepository.getIsLogin("login");
+      return user;
+    } else if (user == null) {
+      //print(isLogin);
+
+      return null;
+    }
+  }
 
   @action
   Future<UserModel> logout() async {
@@ -35,6 +49,7 @@ abstract class _AuthControllerBase with Store {
       user.name = "";
       user.email = "";
       user.photoUrl = "";
+      await _sharedLocalRepository.setIsLogin("login", false);
     }
 
     user = UserModel(
@@ -43,6 +58,8 @@ abstract class _AuthControllerBase with Store {
       email: "",
       photoUrl: "",
     );
+
+    await _sharedLocalRepository.setIsLogin("login", false);
 
     return user;
   }

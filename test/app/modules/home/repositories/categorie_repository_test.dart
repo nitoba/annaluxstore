@@ -1,10 +1,9 @@
+import 'package:annaluxstore/app/modules/home/repositories/interfaces/home_repository_interface.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import 'package:annaluxstore/app/modules/home/repositories/interfaces/categorie_repository_interface.dart';
-
 void main() {
-  ICategorieRepository repository;
+  IHomeRepository repository;
   // MockClient client;
 
   setUp(() {

@@ -24,27 +24,24 @@ class HomeRepository implements IHomeRepository {
     return categorieList;
   }
 
+  Future<QuerySnapshot> _getProductsInsideCollection(String collection) async {
+    var products = await _instance
+        .collection("products")
+        .document(collection)
+        .collection("items")
+        .getDocuments();
+    return products;
+  }
+
   @override
   Future<List<ProductModel>> getAllProducts() async {
     List<ProductModel> products = [];
 
-    var masks = await _instance
-        .collection("products")
-        .document('mask')
-        .collection("items")
-        .getDocuments();
+    var masks = await _getProductsInsideCollection('mask');
 
-    var dresses = await _instance
-        .collection("products")
-        .document('dresses')
-        .collection("items")
-        .getDocuments();
+    var dresses = await _getProductsInsideCollection('dresses');
 
-    var babyClothes = await _instance
-        .collection("products")
-        .document('baby_clothes')
-        .collection("items")
-        .getDocuments();
+    var babyClothes = await _getProductsInsideCollection('baby_clothes');
 
     masks.documents.map((product) {
       products.add(ProductModel.fromDocument(product));
@@ -61,5 +58,17 @@ class HomeRepository implements IHomeRepository {
     //print(products.length);
 
     return products;
+  }
+
+  @override
+  Future<List<ProductModel>> getProductByCategorie(String categorieID) async {
+    List<ProductModel> listProducts = [];
+    var products = await _getProductsInsideCollection(categorieID);
+
+    products.documents.map((product) {
+      listProducts.add(ProductModel.fromDocument(product));
+    }).toList();
+
+    return listProducts;
   }
 }

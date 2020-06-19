@@ -35,13 +35,17 @@ class AuthRepository extends Disposable implements IAuthRepository {
   @override
   Future<UserModel> getUser() async {
     final user = await _auth.currentUser();
-    final userModel = UserModel.fromJson(user);
 
-    return userModel;
+    if (user != null) {
+      final userModel = UserModel.fromJson(user);
+      return userModel;
+    }
+    return null;
   }
 
   @override
   Future<void> logout() async {
-    await _googleSignIn.signOut();
+    _googleSignIn.signOut();
+    await _auth.signOut();
   }
 }

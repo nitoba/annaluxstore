@@ -1,9 +1,10 @@
-import 'package:annaluxstore/app/modules/home/homeContent/home_content_controller.dart';
 import 'package:annaluxstore/app/modules/home/models/categories_model.dart';
 import 'package:annaluxstore/app/modules/shared/consttants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
+import '../../home_content_controller.dart';
 
 class ListCategories extends StatelessWidget {
   const ListCategories({

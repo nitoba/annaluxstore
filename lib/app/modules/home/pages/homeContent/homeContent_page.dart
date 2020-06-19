@@ -1,9 +1,10 @@
-import 'package:annaluxstore/app/modules/home/components/appbar/appbar_widget.dart';
-import 'package:annaluxstore/app/modules/home/components/gridview_items/gridview_items_widget.dart';
-import 'package:annaluxstore/app/modules/home/components/list_categories/list_categories_widget.dart';
+import 'package:annaluxstore/app/modules/shared/auth/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import 'components/appbar/appbar_widget.dart';
+import 'components/gridview_items/gridview_items_widget.dart';
+import 'components/list_categories/list_categories_widget.dart';
 import 'home_content_controller.dart';
 
 class HomeContentPage extends StatefulWidget {
@@ -28,7 +29,10 @@ class _HomeContentPageState
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBarWidget(
-        onPress: () {},
+        onPress: () async {
+          await Modular.get<AuthController>().logout();
+          Modular.to.pushReplacementNamed("/");
+        },
       ),
       body: Container(
         //color: Colors.green,
