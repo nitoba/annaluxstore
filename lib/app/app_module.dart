@@ -1,16 +1,18 @@
 import 'package:annaluxstore/app/app_controller.dart';
-import 'package:annaluxstore/app/first_page.dart';
-import 'package:annaluxstore/app/modules/shared/auth/auth_controller.dart';
 import 'package:annaluxstore/app/modules/shared/auth/repositories/auth_interface.dart';
-import 'package:annaluxstore/app/modules/shared/auth/repositories/auth_repository.dart';
-import 'package:annaluxstore/app/modules/shared/localstorage/interfaces/local_storage_repository_inteface.dart';
-import 'package:annaluxstore/app/modules/shared/localstorage/local_storage_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter/material.dart';
 import 'package:annaluxstore/app/app_widget.dart';
 import 'package:annaluxstore/app/modules/home/home_module.dart';
 
+import 'first_page.dart';
 import 'modules/login/login_module.dart';
+import 'modules/shared/auth/repositories/auth_interface.dart';
+
+import 'modules/shared/auth/auth_controller.dart';
+import 'modules/shared/auth/repositories/auth_repository.dart';
+import 'modules/shared/localstorage/interfaces/local_storage_repository_inteface.dart';
+import 'modules/shared/localstorage/local_storage_repository.dart';
 
 class AppModule extends MainModule {
   @override
