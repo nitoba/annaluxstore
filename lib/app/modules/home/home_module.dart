@@ -1,5 +1,6 @@
-import 'pages/categorie_page/categorie/categorie_controller.dart';
 import 'package:annaluxstore/app/modules/home/home_controller.dart';
+import 'package:annaluxstore/app/modules/home/pages/categorie_page/categorie_controller.dart';
+import 'package:annaluxstore/app/modules/home/pages/categorie_page/categorie_page.dart';
 import 'package:annaluxstore/app/modules/home/pages/home_content/home_content_controller.dart';
 import 'package:annaluxstore/app/modules/home/repositories/home_repository.dart';
 import 'package:annaluxstore/app/modules/home/repositories/interfaces/home_repository_interface.dart';
@@ -15,7 +16,7 @@ import '../../app_module.dart';
 class HomeModule extends ChildModule {
   @override
   List<Bind> get binds => [
-        Bind((i) => CategorieController()),
+        Bind((i) => CategorieController(i.get<IHomeRepository>())),
         Bind<IHomeRepository>((i) => HomeRepository(i.get())),
         Bind((i) => HomeContentController(i.get(), i.get<IHomeRepository>())),
         Bind((i) => HomeController()),
@@ -29,7 +30,13 @@ class HomeModule extends ChildModule {
   @override
   List<Router> get routers => [
         Router(Modular.initialRoute, child: (_, args) => HomePage()),
-        Router('/categorie/:id', child: (_, args) => HomePage()),
+        Router(
+          '/categorie/:id/:title',
+          child: (_, args) => CategoriePage(
+            id: args.params['id'],
+            title: args.params['title'],
+          ),
+        )
       ];
 
   static Inject get to => Inject<HomeModule>.of();

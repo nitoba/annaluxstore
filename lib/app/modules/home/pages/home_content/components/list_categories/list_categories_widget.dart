@@ -1,4 +1,5 @@
 import 'package:annaluxstore/app/modules/home/models/categories_model.dart';
+import 'package:annaluxstore/app/modules/home/pages/home_content/homeContent_page.dart';
 import 'package:annaluxstore/app/modules/shared/consttants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,9 @@ class ListCategories extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(right: 10.0, top: 32),
-                      child: Container(
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(16),
+                        child: Container(
                           height: 160,
                           width: 120,
                           decoration: BoxDecoration(
@@ -52,7 +55,14 @@ class ListCategories extends StatelessWidget {
                               ),
                             ),
                             imageUrl: categories[index].image,
-                          )),
+                          ),
+                        ),
+                        onTap: () {
+                          Modular.to.pushNamed(
+                            '/home/categorie/${categories[index].id}/${categories[index].title}',
+                          );
+                        },
+                      ),
                     ),
                     SizedBox(height: 12),
                     Text(categories[index].title)

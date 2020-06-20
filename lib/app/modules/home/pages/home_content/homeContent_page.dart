@@ -30,7 +30,6 @@ class _HomeContentPageState
       backgroundColor: Colors.white,
       appBar: AppBarWidget(
         onPress: () async {
-          controller.getProductOfCategorie('dresses');
           // await Modular.get<AuthController>().logout();
           // Modular.to.pushReplacementNamed("/");
         },

@@ -30,8 +30,4 @@ abstract class _HomeContentControllerBase with Store {
   Future<List<ProductModel>> getAllProducts() async {
     return await _homeRepository.getAllProducts();
   }
-
-  Future<List<ProductModel>> getProductOfCategorie(String categorieID) async {
-    return await _homeRepository.getProductByCategorie(categorieID);
-  }
 }

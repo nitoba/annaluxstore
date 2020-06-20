@@ -62,7 +62,6 @@ class HomeRepository implements IHomeRepository {
 
   @override
   Future<List<ProductModel>> getProductByCategorie(String categorieID) async {
-    //TODO: Fazer depois começando por aqui!!!!
     List<ProductModel> listProducts = [];
 
     String categorieName = await _getCategoriesNames(categorieID);
