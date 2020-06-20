@@ -14,7 +14,7 @@ abstract class _CategorieControllerBase with Store {
   _CategorieControllerBase(this._homeRepository);
 
   @action
-  Future<void> getProductOfCategorie(String categorieID) async {
+  Future<void> getProductByCategorie(String categorieID) async {
     products = await _homeRepository.getProductByCategorie(categorieID);
   }
 }

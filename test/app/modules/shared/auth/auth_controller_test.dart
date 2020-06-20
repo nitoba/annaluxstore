@@ -23,20 +23,23 @@ main() {
 
   AuthController authController;
   IAuthRepository authRepository;
+  ISharedLocalRepository sharedLocalRepository;
   //
   setUp(() {
     authController = AppModule.to.get<AuthController>();
-    authRepository = Modular.get<AuthRepositoryMock>();
+    authRepository = AppModule.to.get<IAuthRepository>();
+    sharedLocalRepository = AppModule.to.get<ISharedLocalRepository>();
   });
 
   group('AppController Test', () {
     test("First Test", () {
       expect(authController, isInstanceOf<AuthController>());
+      expect(sharedLocalRepository, isInstanceOf<SharedLocalStorageMock>());
     });
 
     test("When call loginWithGoogle should be return a user", () async {
       when(authRepository.getGoogleLogin()).thenAnswer((_) => Future.value(
-            UserModel(
+            authController.user = UserModel(
               id: "dasdasda",
               name: "Bruno Alves",
               email: "brukum2@gmail.com",
@@ -44,9 +47,10 @@ main() {
             ),
           ));
 
-      authController.user = await authRepository.getGoogleLogin();
+      when(sharedLocalRepository.insert('login', true))
+          .thenAnswer((_) => Future.value(true));
 
-      //await authController.loginWithGoogle();
+      await authController.loginWithGoogle();
 
       expect(authController.user, isNot(null));
       expect(authController.user.id, "dasdasda");

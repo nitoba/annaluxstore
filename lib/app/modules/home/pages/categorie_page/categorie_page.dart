@@ -20,7 +20,7 @@ class _CategoriePageState
   //use 'controller' variable to access controller
   @override
   void initState() {
-    controller.getProductOfCategorie(widget.id);
+    controller.getProductByCategorie(widget.id);
     super.initState();
   }
 

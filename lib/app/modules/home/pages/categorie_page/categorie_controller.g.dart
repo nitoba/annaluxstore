@@ -24,13 +24,13 @@ mixin _$CategorieController on _CategorieControllerBase, Store {
     });
   }
 
-  final _$getProductOfCategorieAsyncAction =
-      AsyncAction('_CategorieControllerBase.getProductOfCategorie');
+  final _$getProductByCategorieAsyncAction =
+      AsyncAction('_CategorieControllerBase.getProductByCategorie');
 
   @override
-  Future<void> getProductOfCategorie(String categorieID) {
-    return _$getProductOfCategorieAsyncAction
-        .run(() => super.getProductOfCategorie(categorieID));
+  Future<void> getProductByCategorie(String categorieID) {
+    return _$getProductByCategorieAsyncAction
+        .run(() => super.getProductByCategorie(categorieID));
   }
 
   @override

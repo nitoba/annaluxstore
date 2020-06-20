@@ -11,23 +11,25 @@ class HomeContentController = _HomeContentControllerBase
     with _$HomeContentController;
 
 abstract class _HomeContentControllerBase with Store {
-  AuthController _authController;
+  //AuthController _authController;
   IHomeRepository _homeRepository;
-  _HomeContentControllerBase(this._authController, this._homeRepository);
+  _HomeContentControllerBase(/*this._authController,*/ this._homeRepository);
 
-  // List<CategoriesModel> categories = [];
-  List<ProductModel> products = [];
+  List<ProductModel> allProducts = [];
+  List<CategoriesModel> categories = [];
 
-  @action
-  Future logout() async {
-    await _authController.logout();
-  }
+  // @action
+  // Future logout() async {
+  //   await _authController.logout();
+  // }
 
   Future<List<CategoriesModel>> getCategories() async {
-    return await _homeRepository.getCategories();
+    categories = await _homeRepository.getCategories();
+    return categories;
   }
 
   Future<List<ProductModel>> getAllProducts() async {
-    return await _homeRepository.getAllProducts();
+    allProducts = await _homeRepository.getAllProducts();
+    return allProducts;
   }
 }
