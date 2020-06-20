@@ -15,7 +15,9 @@ abstract class _HomeContentControllerBase with Store {
   IHomeRepository _homeRepository;
   _HomeContentControllerBase(/*this._authController,*/ this._homeRepository);
 
+  @observable
   List<ProductModel> allProducts = [];
+  @observable
   List<CategoriesModel> categories = [];
 
   // @action
@@ -23,13 +25,11 @@ abstract class _HomeContentControllerBase with Store {
   //   await _authController.logout();
   // }
 
-  Future<List<CategoriesModel>> getCategories() async {
+  Future<void> getCategories() async {
     categories = await _homeRepository.getCategories();
-    return categories;
   }
 
-  Future<List<ProductModel>> getAllProducts() async {
+  Future<void> getAllProducts() async {
     allProducts = await _homeRepository.getAllProducts();
-    return allProducts;
   }
 }

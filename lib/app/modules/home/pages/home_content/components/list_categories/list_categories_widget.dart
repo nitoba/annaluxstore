@@ -2,6 +2,7 @@ import 'package:annaluxstore/app/modules/home/models/categories_model.dart';
 import 'package:annaluxstore/app/modules/shared/consttants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../home_content_controller.dart';
@@ -13,13 +14,14 @@ class ListCategories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Modular.get<HomeContentController>().getCategories();
     return Container(
       height: 250,
-      child: FutureBuilder<List<CategoriesModel>>(
-        future: Modular.get<HomeContentController>().getCategories(),
-        builder: (context, snapshot) {
-          List<CategoriesModel> categories = snapshot.data;
-          if (categories == null) {
+      child: Observer(
+        builder: (_) {
+          List<CategoriesModel> categories =
+              Modular.get<HomeContentController>().categories;
+          if (categories.isEmpty) {
             return Center(
               child: CircularProgressIndicator(
                 valueColor: AlwaysStoppedAnimation<Color>(thirdColor),

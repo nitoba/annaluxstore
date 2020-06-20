@@ -2,6 +2,7 @@ import 'package:annaluxstore/app/modules/home/models/product_model.dart';
 import 'package:annaluxstore/app/modules/shared/consttants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../home_content_controller.dart';
@@ -13,14 +14,15 @@ class GridViewItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Modular.get<HomeContentController>().getAllProducts();
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: FutureBuilder<List<ProductModel>>(
-          future: Modular.get<HomeContentController>().getAllProducts(),
-          builder: (context, snapshot) {
-            List<ProductModel> products = snapshot.data;
-            if (products == null) {
+        child: Observer(
+          builder: (_) {
+            List<ProductModel> products =
+                Modular.get<HomeContentController>().allProducts;
+            if (products.isEmpty) {
               return Center(
                 child: CircularProgressIndicator(
                   valueColor: AlwaysStoppedAnimation<Color>(thirdColor),
