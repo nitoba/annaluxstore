@@ -31,7 +31,19 @@ void main() {
       expect(homeContentController, isInstanceOf<HomeContentController>());
       expect(homeRepositoryMock, isInstanceOf<HomeRepositoryMock>());
     });
+    test(
+      "When called the function getCategories should be return categories empty",
+      () async {
+        expect(homeContentController.categories, isEmpty);
+        when(homeRepositoryMock.getCategories()).thenAnswer(
+          (_) => Future.value(homeContentController.categories = []),
+        );
 
+        await homeContentController.getCategories();
+        expect(homeContentController.categories, isEmpty);
+        expect(homeContentController.categories.length, 0);
+      },
+    );
     test(
       "When called the function getCategories should be return all categories of the database",
       () async {
@@ -46,18 +58,6 @@ void main() {
         await homeContentController.getCategories();
         expect(homeContentController.categories, isNotEmpty);
         expect(homeContentController.categories.length, 3);
-      },
-    );
-    test(
-      "When called the function getCategories should be return categories empty",
-      () async {
-        expect(homeContentController.categories, isEmpty);
-        when(homeRepositoryMock.getCategories()).thenAnswer(
-            (_) => Future.value(homeContentController.categories = []));
-
-        await homeContentController.getCategories();
-        expect(homeContentController.categories, isEmpty);
-        expect(homeContentController.categories.length, 0);
       },
     );
 
