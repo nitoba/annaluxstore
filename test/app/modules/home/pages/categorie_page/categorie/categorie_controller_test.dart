@@ -1,7 +1,6 @@
 import 'package:flutter_modular/flutter_modular_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:annaluxstore/app/modules/home/pages/categorie_page/categorie/categorie_controller.dart';
 import 'package:annaluxstore/app/modules/home/home_module.dart';
 
 void main() {

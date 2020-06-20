@@ -1,4 +1,3 @@
-import 'package:annaluxstore/app/modules/home/models/categories_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProductModel {

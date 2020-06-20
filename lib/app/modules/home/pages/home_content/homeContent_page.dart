@@ -1,4 +1,3 @@
-import 'package:annaluxstore/app/modules/shared/auth/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 

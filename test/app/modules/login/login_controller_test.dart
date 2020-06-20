@@ -1,5 +1,4 @@
 import 'package:annaluxstore/app/app_module.dart';
-import 'package:annaluxstore/app/modules/shared/auth/auth_controller.dart';
 import 'package:annaluxstore/app/modules/shared/auth/repositories/auth_interface.dart';
 import 'package:annaluxstore/app/modules/shared/models/user_model.dart';
 import 'package:flutter_modular/flutter_modular.dart';

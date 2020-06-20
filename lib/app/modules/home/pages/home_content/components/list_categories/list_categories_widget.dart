@@ -1,5 +1,4 @@
 import 'package:annaluxstore/app/modules/home/models/categories_model.dart';
-import 'package:annaluxstore/app/modules/home/pages/home_content/homeContent_page.dart';
 import 'package:annaluxstore/app/modules/shared/consttants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';

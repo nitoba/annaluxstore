@@ -1,6 +1,5 @@
 import 'package:annaluxstore/app/modules/home/repositories/interfaces/home_repository_interface.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
 
 void main() {
   IHomeRepository repository;
@@ -8,7 +7,7 @@ void main() {
 
   setUp(() {
     // client = MockClient();
-    // repository = CategorieRepository(client);
+    //repository = CategorieRepository();
   });
 
   group('CategorieRepository Test', () {
