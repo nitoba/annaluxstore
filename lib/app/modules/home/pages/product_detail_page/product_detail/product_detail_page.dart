@@ -29,9 +29,12 @@ class _ProductDetailPageState
       backgroundColor: Colors.grey[100],
       body: Stack(
         children: [
-          ImagesCarousel(
-            controller: controller,
-            images: widget.product.images,
+          Hero(
+            tag: '${widget.product.id}',
+            child: ImagesCarousel(
+              controller: controller,
+              images: widget.product.images,
+            ),
           ),
           _buildIconArrowBack(),
           DetailProduct(

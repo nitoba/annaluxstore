@@ -62,22 +62,26 @@ class _CategoriePageState
                         children: [
                           ClipRRect(
                             borderRadius: BorderRadius.circular(16),
-                            child: Container(
-                              height: 200,
-                              width: MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                                //color: Colors.blue,
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                              child: CachedNetworkImage(
-                                placeholder: (_, url) => Center(
-                                  child: CircularProgressIndicator(
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                        thirdColor),
-                                  ),
+                            child: Hero(
+                              tag: '${controller.products[index].id}',
+                              child: Container(
+                                height: 200,
+                                width: MediaQuery.of(context).size.width,
+                                decoration: BoxDecoration(
+                                  //color: Colors.blue,
+                                  borderRadius: BorderRadius.circular(16),
                                 ),
-                                imageUrl: controller.products[index].images[0],
-                                fit: BoxFit.cover,
+                                child: CachedNetworkImage(
+                                  placeholder: (_, url) => Center(
+                                    child: CircularProgressIndicator(
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                          thirdColor),
+                                    ),
+                                  ),
+                                  imageUrl:
+                                      controller.products[index].images[0],
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           ),
