@@ -37,22 +37,30 @@ class HomeRepository implements IHomeRepository {
   Future<List<ProductModel>> getAllProducts() async {
     List<ProductModel> products = [];
 
+    String categorieName;
+
+    categorieName = await _getCategoriesNames('mask');
+
     var masks = await _getProductsInsideCollection('mask');
+
+    masks.documents.map((product) {
+      products.add(ProductModel.fromDocument(product, categorieName));
+    }).toList();
+
+    categorieName = await _getCategoriesNames('dresses');
 
     var dresses = await _getProductsInsideCollection('dresses');
 
+    dresses.documents.map((product) {
+      products.add(ProductModel.fromDocument(product, categorieName));
+    }).toList();
+
+    categorieName = await _getCategoriesNames('baby_clothes');
+
     var babyClothes = await _getProductsInsideCollection('baby_clothes');
 
-    masks.documents.map((product) {
-      products.add(ProductModel.fromDocument(product));
-    }).toList();
-
-    dresses.documents.map((product) {
-      products.add(ProductModel.fromDocument(product));
-    }).toList();
-
     babyClothes.documents.map((product) {
-      products.add(ProductModel.fromDocument(product));
+      products.add(ProductModel.fromDocument(product, categorieName));
     }).toList();
 
     //print(products[0].id);
