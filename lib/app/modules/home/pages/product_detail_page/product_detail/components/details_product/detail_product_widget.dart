@@ -14,16 +14,18 @@ class DetailProduct extends StatelessWidget {
   final double price;
   final String categorie;
   final String description;
-  final Function onPress;
+  final Function onPressToBuy;
+  final Function onTapToAddCar;
   const DetailProduct({
     Key key,
     @required this.title,
     @required this.price,
     @required this.categorie,
     @required this.description,
-    @required this.onPress,
     @required this.controller,
     @required this.id,
+    @required this.onPressToBuy,
+    @required this.onTapToAddCar,
   }) : super(key: key);
 
   final ProductDetailController controller;
@@ -104,14 +106,12 @@ class DetailProduct extends StatelessWidget {
             ButtonWidget(
               title: "Comprar",
               icon: FontAwesomeIcons.shoppingBag,
-              onPress: onPress,
+              onPress: onPressToBuy,
             ),
             SizedBox(height: 12),
             AddtoCarBtn(
               controller: controller,
-              onTap: () {
-                controller.addToShoppingCar(id);
-              },
+              onTap: onTapToAddCar,
             )
           ],
         ),

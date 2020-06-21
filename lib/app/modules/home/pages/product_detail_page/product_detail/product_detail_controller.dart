@@ -1,4 +1,5 @@
 import 'package:annaluxstore/app/modules/home/home_controller.dart';
+import 'package:annaluxstore/app/modules/home/models/product_model.dart';
 import 'package:annaluxstore/app/modules/shared/consttants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
@@ -27,12 +28,12 @@ abstract class _ProductDetailControllerBase with Store {
 
   _ProductDetailControllerBase(this._homeController);
   @action
-  addToShoppingCar(String idProduct) {
-    var idFound = _homeController.productsIdsToCar.indexOf(idProduct);
+  addToShoppingCar(ProductModel product) {
+    var productFound = _homeController.productsToCar.indexOf(product);
 
-    if (idFound == -1) {
-      _homeController.productsIdsToCar.add(idProduct);
-      print(_homeController.productsIdsToCar.length);
+    if (productFound == -1) {
+      _homeController.productsToCar.add(product);
+      //print(_homeController.productsIdsToCar.length);
       icon = FontAwesomeIcons.check;
       color = Colors.green;
       isAdd = true;

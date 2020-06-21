@@ -9,17 +9,17 @@ abstract class _HomeControllerBase with Store {
   @observable
   int currentIndex = 0;
 
-  List<String> productsIdsToCar = [];
+  List<ProductModel> productsToCar = [];
 
   @action
   void updateCurrentIndex(int index) {
     this.currentIndex = index;
   }
 
-  void addProductToShoppingCar(String idProduct) {
-    if (idProduct != null) {
-      productsIdsToCar.add(idProduct);
+  void addProductToShoppingCar(ProductModel product) {
+    if (product != null) {
+      productsToCar.add(product);
     }
-    print(productsIdsToCar.length);
+    //print(productsToCar.length);
   }
 }

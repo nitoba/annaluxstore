@@ -42,8 +42,11 @@ class _ProductDetailPageState
             price: widget.product.price,
             description: widget.product.description,
             controller: controller,
-            onPress: () {
-              controller.addToShoppingCar(widget.product.id);
+            onTapToAddCar: () {
+              controller.addToShoppingCar(widget.product);
+            },
+            onPressToBuy: () {
+              controller.addToShoppingCar(widget.product);
               Modular.to
                   .pushReplacementNamed('/buy', arguments: widget.product);
             },

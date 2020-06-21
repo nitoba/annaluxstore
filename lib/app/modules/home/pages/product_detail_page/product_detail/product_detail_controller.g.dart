@@ -74,11 +74,11 @@ mixin _$ProductDetailController on _ProductDetailControllerBase, Store {
       ActionController(name: '_ProductDetailControllerBase');
 
   @override
-  dynamic addToShoppingCar(String idProduct) {
+  dynamic addToShoppingCar(ProductModel product) {
     final _$actionInfo = _$_ProductDetailControllerBaseActionController
         .startAction(name: '_ProductDetailControllerBase.addToShoppingCar');
     try {
-      return super.addToShoppingCar(idProduct);
+      return super.addToShoppingCar(product);
     } finally {
       _$_ProductDetailControllerBaseActionController.endAction(_$actionInfo);
     }
