@@ -38,7 +38,7 @@ class ListCategories extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(right: 10.0, top: 32),
+                      padding: const EdgeInsets.only(right: 10.0, top: 18),
                       child: InkWell(
                         borderRadius: BorderRadius.circular(16),
                         child: Container(
