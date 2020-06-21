@@ -6,10 +6,26 @@ class BuyController = _BuyControllerBase with _$BuyController;
 
 abstract class _BuyControllerBase with Store {
   @observable
-  int value = 0;
+  double totalPrice = 0;
+
+  @observable
+  int quantity = 1;
 
   @action
-  void increment() {
-    value++;
+  void calcPriceByQuantityPlus(double price) {
+    quantity++;
+    totalPrice = price * quantity;
+    print(totalPrice);
+  }
+
+  @action
+  void calcPriceByQuantitySub(double price) {
+    if (quantity == 1) {
+      return;
+    } else {
+      quantity--;
+      totalPrice = price * quantity;
+      print(totalPrice);
+    }
   }
 }

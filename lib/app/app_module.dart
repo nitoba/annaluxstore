@@ -6,6 +6,7 @@ import 'package:annaluxstore/app/app_widget.dart';
 import 'package:annaluxstore/app/modules/home/home_module.dart';
 
 import 'first_page.dart';
+import 'modules/buy/buy_module.dart';
 import 'modules/login/login_module.dart';
 import 'modules/shared/auth/repositories/auth_interface.dart';
 
@@ -31,6 +32,7 @@ class AppModule extends MainModule {
         Router(Modular.initialRoute, child: (_, args) => FirstPage()),
         Router("/login", module: LoginModule()),
         Router("/home", module: HomeModule()),
+        Router('/buy', module: BuyModule())
       ];
 
   @override

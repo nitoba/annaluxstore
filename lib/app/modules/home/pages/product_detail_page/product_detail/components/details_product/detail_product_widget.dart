@@ -8,12 +8,14 @@ class DetailProduct extends StatelessWidget {
   final double price;
   final String categorie;
   final String description;
+  final Function onPress;
   const DetailProduct({
     Key key,
     this.title,
     this.price,
     this.categorie,
     this.description,
+    this.onPress,
   }) : super(key: key);
 
   @override
@@ -46,9 +48,7 @@ class DetailProduct extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                  icon: FaIcon(FontAwesomeIcons.heart),
-                  onPressed: () {},
-                )
+                    icon: FaIcon(FontAwesomeIcons.heart), onPressed: () {})
               ],
             ),
             SizedBox(height: 6),
@@ -92,7 +92,7 @@ class DetailProduct extends StatelessWidget {
             ButtonWidget(
               title: "Comprar",
               icon: FontAwesomeIcons.shoppingBag,
-              onPress: () {},
+              onPress: onPress,
             ),
           ],
         ),

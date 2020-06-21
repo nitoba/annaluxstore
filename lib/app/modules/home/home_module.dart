@@ -1,3 +1,4 @@
+import 'package:annaluxstore/app/modules/buy/buy_module.dart';
 import 'package:annaluxstore/app/modules/home/pages/product_detail_page/product_detail/product_detail_page.dart';
 
 import 'pages/product_detail_page/product_detail/product_detail_controller.dart';

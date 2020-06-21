@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:annaluxstore/app/modules/buy/pages/buy_page.dart';
 
 import 'buy_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'buy_page.dart';
 
-class BuyModule extends WidgetModule {
+class BuyModule extends ChildModule {
   @override
   List<Bind> get binds => [
         Bind((i) => BuyController()),
@@ -12,11 +11,11 @@ class BuyModule extends WidgetModule {
 
   @override
   List<Router> get routers => [
-        Router(Modular.initialRoute, child: (_, args) => BuyPage()),
+        Router(Modular.initialRoute,
+            child: (_, args) => BuyPage(
+                  product: args.data,
+                )),
       ];
 
   static Inject get to => Inject<BuyModule>.of();
-
-  @override
-  Widget get view => BuyPage();
 }
