@@ -10,9 +10,6 @@ class ProductDetailController = _ProductDetailControllerBase
     with _$ProductDetailController;
 
 abstract class _ProductDetailControllerBase with Store {
-  @observable
-  int value = 0;
-
   List<CachedNetworkImage> getProductImages(List images) {
     return images
         .map(
