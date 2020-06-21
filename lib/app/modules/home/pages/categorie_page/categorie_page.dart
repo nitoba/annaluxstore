@@ -87,7 +87,12 @@ class _CategoriePageState
                         ],
                       ),
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      Modular.to.pushNamed(
+                        '/home/product',
+                        arguments: controller.products[index],
+                      );
+                    },
                   ),
                 );
               },

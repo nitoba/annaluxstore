@@ -38,6 +38,16 @@ class _HomeContentPageState
         child: Column(
           //crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Container(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  "Categorias",
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
             ListCategories(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -45,7 +55,7 @@ class _HomeContentPageState
                 alignment: Alignment.topLeft,
                 child: Text(
                   "Últimos Itens",
-                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
               ),
             ),

@@ -8,7 +8,7 @@ class AppWidget extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       navigatorKey: Modular.navigatorKey,
-      title: 'Flutter Slidy',
+      title: 'AnnaluxStore',
       theme: ThemeData(
         fontFamily: "Montserrat",
         primaryColor: primaryColor,

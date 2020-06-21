@@ -2,11 +2,15 @@ import 'package:annaluxstore/app/modules/shared/consttants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class LoginButton extends StatelessWidget {
+class ButtonWidget extends StatelessWidget {
+  final IconData icon;
+  final String title;
   final Function onPress;
-  const LoginButton({
+  const ButtonWidget({
     Key key,
     this.onPress,
+    this.icon,
+    this.title,
   }) : super(key: key);
 
   @override
@@ -24,13 +28,13 @@ class LoginButton extends StatelessWidget {
             //mainAxisSize: MainAxisSize.min,
             children: [
               FaIcon(
-                FontAwesomeIcons.google,
+                icon,
                 color: Colors.white,
                 size: 24,
               ),
               SizedBox(width: 16),
               Text(
-                "Login com Google",
+                title,
                 style:
                     TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),

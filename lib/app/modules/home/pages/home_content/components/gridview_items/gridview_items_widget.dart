@@ -44,23 +44,33 @@ class GridViewItems extends StatelessWidget {
                   children: [
                     ClipRRect(
                       borderRadius: BorderRadius.circular(16),
-                      child: Container(
-                        height: 220,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                          //color: Colors.blue,
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: CachedNetworkImage(
-                          placeholder: (_, url) => Center(
-                            child: CircularProgressIndicator(
-                              valueColor:
-                                  AlwaysStoppedAnimation<Color>(thirdColor),
-                            ),
+                      child: InkWell(
+                        highlightColor: thirdColor,
+                        borderRadius: BorderRadius.circular(16),
+                        child: Container(
+                          height: 220,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                            //color: Colors.blue,
+                            borderRadius: BorderRadius.circular(16),
                           ),
-                          imageUrl: products[index].images[0],
-                          fit: BoxFit.cover,
+                          child: CachedNetworkImage(
+                            placeholder: (_, url) => Center(
+                              child: CircularProgressIndicator(
+                                valueColor:
+                                    AlwaysStoppedAnimation<Color>(thirdColor),
+                              ),
+                            ),
+                            imageUrl: products[index].images[0],
+                            fit: BoxFit.cover,
+                          ),
                         ),
+                        onTap: () {
+                          Modular.to.pushNamed(
+                            '/home/product',
+                            arguments: products[index],
+                          );
+                        },
                       ),
                     ),
                     SizedBox(height: 8),
