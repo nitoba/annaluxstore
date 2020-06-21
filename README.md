@@ -1,16 +1,73 @@
-# annaluxstore
+# AnnaluxStore
 
-A new Flutter project.
+Aplicativo de ecomerce para estudos desenvolvido com Flutter.
 
-## Getting Started
+Loja:  @analuxstore
 
-This project is a starting point for a Flutter application.
+[Login * Instagram](https://www.instagram.com/analuxstore/)
 
-A few resources to get you started if this is your first Flutter project:
+---
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Construção
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Tipografia/Fontes
+
+- Montserrat
+
+### Paleta de cores
+
+- Branco
+- Preto
+- Rosa
+
+### Tecnologias a serem utilizadas
+
+- Injeção de dependências
+    - Modular
+- Gerência de estado
+    - Mobx
+    - SetState
+- Banco de dados
+    - Firebase - Firestore
+    - Firebase - Storage
+- Dados locais
+    - SharedPreferences
+- Geração de arquivos CLI
+    - Slidy
+
+### CI/CD e Testes automatizados
+
+- [x]  Github Actions
+    - Pull request para as branches master e developer
+- Fazer testes locais
+- [x]  Seguir o Gitflow
+    - Branch master para versão estável
+    - Branch Developer para desenvolvimento
+    - Criar branch para cada feature
+        - Ex: "feature/login"
+    - Fazer Merge e excluir a branch quando concluída
+
+### Funcionalidades do App
+
+- [x]  Login com Google
+- [x]  Listar categoria de produtos
+    - Roupas de bebê
+    - Vestidos
+    - Máscaras
+- [x]  Dashboard com todos os produtos
+- [x]  Selecionar um produto de uma categoria
+- [x]  Tela de detalhes do produto
+    - Foto
+    - Preço
+    - Descrição
+    - Botão de adicionar ao carrinho
+    - Botão de comprar
+- [ ]  Perfil do usuário
+    - Mostrar a foto e nome
+    - Acompanhar pedido por status
+    - Ver os pedidos feitos
+    - Deslogar da conta
+- [ ]  Produto pode ser colocado num carrinho
+- [ ]  Produto pode ser removido do carrinho
+- [ ]  Ver preço final da compra no carrinho
+- [ ]  Finalizar compra do produto
