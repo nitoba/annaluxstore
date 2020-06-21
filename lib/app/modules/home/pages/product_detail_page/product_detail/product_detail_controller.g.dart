@@ -24,20 +24,6 @@ mixin _$ProductDetailController on _ProductDetailControllerBase, Store {
     });
   }
 
-  final _$_ProductDetailControllerBaseActionController =
-      ActionController(name: '_ProductDetailControllerBase');
-
-  @override
-  void increment() {
-    final _$actionInfo = _$_ProductDetailControllerBaseActionController
-        .startAction(name: '_ProductDetailControllerBase.increment');
-    try {
-      return super.increment();
-    } finally {
-      _$_ProductDetailControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
   @override
   String toString() {
     return '''
