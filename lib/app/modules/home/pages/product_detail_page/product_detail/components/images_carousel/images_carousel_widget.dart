@@ -23,7 +23,7 @@ class ImagesCarousel extends StatelessWidget {
         dotBgColor: Colors.transparent,
         dotSize: 6,
         dotColor: thirdColor,
-        dotVerticalPadding: 20,
+        dotVerticalPadding: 30,
         dotIncreasedColor: Colors.pinkAccent,
         images: controller.getProductImages(images),
       ),

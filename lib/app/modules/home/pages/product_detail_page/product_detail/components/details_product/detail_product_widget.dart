@@ -21,7 +21,7 @@ class DetailProduct extends StatelessWidget {
     return Expanded(
       child: Container(
         width: MediaQuery.of(context).size.width,
-        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 2.1),
+        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 2.15),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
@@ -34,13 +34,22 @@ class DetailProduct extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //SizedBox(height: 32),
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  IconButton(
+                    icon: FaIcon(FontAwesomeIcons.heart),
+                    onPressed: () {},
+                  )
+                ],
               ),
               SizedBox(height: 6),
               Text(

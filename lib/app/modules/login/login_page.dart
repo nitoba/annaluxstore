@@ -1,8 +1,9 @@
+import 'package:annaluxstore/app/modules/shared/components/buttom_widget.dart';
 import 'package:annaluxstore/app/modules/shared/consttants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'components/login_button.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'login_controller.dart';
 
 class LoginPage extends StatefulWidget {
@@ -61,7 +62,9 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                             valueColor:
                                 AlwaysStoppedAnimation<Color>(thirdColor)),
                       )
-                    : LoginButton(
+                    : ButtonWidget(
+                        title: "Login com Google",
+                        icon: FontAwesomeIcons.google,
                         onPress: () async {
                           await controller.loginWithGoogle();
                           Modular.to.pushReplacementNamed("home",
