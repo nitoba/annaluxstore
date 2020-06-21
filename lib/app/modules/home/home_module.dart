@@ -1,3 +1,6 @@
+import 'package:annaluxstore/app/modules/home/pages/product_detail_page/product_detail/product_detail_page.dart';
+
+import 'pages/product_detail_page/product_detail/product_detail_controller.dart';
 import 'package:annaluxstore/app/modules/home/home_controller.dart';
 import 'package:annaluxstore/app/modules/home/pages/categorie_page/categorie_controller.dart';
 import 'package:annaluxstore/app/modules/home/pages/categorie_page/categorie_page.dart';
@@ -16,6 +19,7 @@ import '../../app_module.dart';
 class HomeModule extends ChildModule {
   @override
   List<Bind> get binds => [
+        Bind((i) => ProductDetailController()),
         Bind((i) => CategorieController(i.get<IHomeRepository>())),
         Bind<IHomeRepository>((i) => HomeRepository(i.get())),
         Bind((i) =>
@@ -37,7 +41,9 @@ class HomeModule extends ChildModule {
             id: args.params['id'],
             title: args.params['title'],
           ),
-        )
+        ),
+        Router('/product',
+            child: (_, args) => ProductDetailPage(product: args.data)),
       ];
 
   static Inject get to => Inject<HomeModule>.of();
