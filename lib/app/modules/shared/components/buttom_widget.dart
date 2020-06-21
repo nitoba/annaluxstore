@@ -15,34 +15,33 @@ class ButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: RaisedButton(
-        color: thirdColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            //mainAxisSize: MainAxisSize.min,
-            children: [
-              FaIcon(
-                icon,
-                color: Colors.white,
-                size: 24,
-              ),
-              SizedBox(width: 16),
-              Text(
-                title,
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-        ),
-        onPressed: onPress,
+    return RaisedButton(
+      color: thirdColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
       ),
+      child: Container(
+        height: 60,
+        //color: Colors.blue,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          //mainAxisSize: MainAxisSize.min,
+          children: [
+            FaIcon(
+              icon,
+              color: Colors.white,
+              size: 24,
+            ),
+            SizedBox(width: 16),
+            Text(
+              title,
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+      ),
+      onPressed: onPress,
     );
   }
 }

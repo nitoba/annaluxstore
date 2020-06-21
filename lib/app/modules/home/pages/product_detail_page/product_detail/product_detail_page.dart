@@ -40,6 +40,7 @@ class _ProductDetailPageState
             categorie: widget.product.categorie,
             price: widget.product.price,
             description: widget.product.description,
+            controller: controller,
             onPress: () {
               Modular.to
                   .pushReplacementNamed('/buy', arguments: widget.product);

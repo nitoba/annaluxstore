@@ -1,7 +1,12 @@
+import 'package:annaluxstore/app/modules/home/pages/product_detail_page/product_detail/components/btn_add_to_car/addtocar_widget.dart';
 import 'package:annaluxstore/app/modules/shared/components/buttom_widget.dart';
 import 'package:annaluxstore/app/modules/shared/consttants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import '../../product_detail_controller.dart';
 
 class DetailProduct extends StatelessWidget {
   final String title;
@@ -16,7 +21,10 @@ class DetailProduct extends StatelessWidget {
     this.categorie,
     this.description,
     this.onPress,
+    this.controller,
   }) : super(key: key);
+
+  final ProductDetailController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +56,9 @@ class DetailProduct extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                    icon: FaIcon(FontAwesomeIcons.heart), onPressed: () {})
+                  icon: FaIcon(FontAwesomeIcons.heart),
+                  onPressed: () {},
+                ),
               ],
             ),
             SizedBox(height: 6),
@@ -94,6 +104,8 @@ class DetailProduct extends StatelessWidget {
               icon: FontAwesomeIcons.shoppingBag,
               onPress: onPress,
             ),
+            SizedBox(height: 12),
+            AddtoCarBtn(controller: controller)
           ],
         ),
       ),

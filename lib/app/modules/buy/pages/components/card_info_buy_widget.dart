@@ -41,7 +41,7 @@ class CardInfoBuy extends StatelessWidget {
                         children: [
                           ListTile(
                             title: Text(product.title),
-                            subtitle: Text(product.categorie),
+                            subtitle: Text('Categoria: ${product.categorie}'),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left: 16.0),

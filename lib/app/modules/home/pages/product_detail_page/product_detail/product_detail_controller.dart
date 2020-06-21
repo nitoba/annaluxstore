@@ -10,6 +10,16 @@ class ProductDetailController = _ProductDetailControllerBase
     with _$ProductDetailController;
 
 abstract class _ProductDetailControllerBase with Store {
+  @observable
+  Color color = thirdColor;
+  @observable
+  bool isAdd = false;
+  @action
+  addToShoppingCart() {
+    color = Colors.green;
+    isAdd = true;
+  }
+
   List<CachedNetworkImage> getProductImages(List images) {
     return images
         .map(

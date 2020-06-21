@@ -1,13 +1,9 @@
 import 'package:annaluxstore/app/modules/buy/buy_controller.dart';
 import 'package:annaluxstore/app/modules/home/models/product_model.dart';
-import 'package:annaluxstore/app/modules/shared/consttants.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'components/card_info_buy_widget.dart';
-import 'components/image_preview_widget.dart';
 
 class BuyPage extends StatefulWidget {
   final String title;
