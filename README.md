@@ -2,13 +2,11 @@
 
 Aplicativo de ecomerce para estudos desenvolvido com Flutter.
 
-Loja:  @analuxstore
-
-[Login * Instagram](https://www.instagram.com/analuxstore/)
+Loja: [@analuxstore](https://www.instagram.com/analuxstore/)
 
 ---
 
-## Construção
+# Construção
 
 ### Tipografia/Fontes
 
@@ -19,6 +17,8 @@ Loja:  @analuxstore
 - Branco
 - Preto
 - Rosa
+
+---
 
 ### Tecnologias a serem utilizadas
 
@@ -34,6 +34,8 @@ Loja:  @analuxstore
     - SharedPreferences
 - Geração de arquivos CLI
     - Slidy
+    
+ ---
 
 ### CI/CD e Testes automatizados
 
@@ -46,6 +48,8 @@ Loja:  @analuxstore
     - Criar branch para cada feature
         - Ex: "feature/login"
     - Fazer Merge e excluir a branch quando concluída
+ 
+---
 
 ### Funcionalidades do App
 
