@@ -6,16 +6,16 @@ import 'package:annaluxstore/app/modules/home/home_module.dart';
 
 void main() {
   initModule(HomeModule());
-  // ProductDetailController productdetail;
+  ProductDetailController productdetail;
   //
   setUp(() {
-    //     productdetail = HomeModule.to.get<ProductDetailController>();
+    productdetail = HomeModule.to.get<ProductDetailController>();
   });
 
   group('ProductDetailController Test', () {
-    //   test("First Test", () {
-    //     expect(productdetail, isInstanceOf<ProductDetailController>());
-    //   });
+    test("First Test", () {
+      expect(productdetail, isInstanceOf<ProductDetailController>());
+    });
 
     //   test("Set Value", () {
     //     expect(productdetail.value, equals(0));

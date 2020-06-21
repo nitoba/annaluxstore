@@ -24,7 +24,7 @@ abstract class _BuyControllerBase with Store {
       return;
     } else {
       quantity--;
-      totalPrice = price * quantity;
+      totalPrice = price * quantity; //90 = 30 * 3 soma// //60 = 30 * 2
       print(totalPrice);
     }
   }
