@@ -36,12 +36,14 @@ class _ProductDetailPageState
           ),
           _buildIconArrowBack(),
           DetailProduct(
+            id: widget.product.id,
             title: widget.product.title,
             categorie: widget.product.categorie,
             price: widget.product.price,
             description: widget.product.description,
             controller: controller,
             onPress: () {
+              controller.addToShoppingCar(widget.product.id);
               Modular.to
                   .pushReplacementNamed('/buy', arguments: widget.product);
             },

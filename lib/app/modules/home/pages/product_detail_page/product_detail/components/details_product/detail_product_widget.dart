@@ -9,6 +9,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../product_detail_controller.dart';
 
 class DetailProduct extends StatelessWidget {
+  final String id;
   final String title;
   final double price;
   final String categorie;
@@ -16,12 +17,13 @@ class DetailProduct extends StatelessWidget {
   final Function onPress;
   const DetailProduct({
     Key key,
-    this.title,
-    this.price,
-    this.categorie,
-    this.description,
-    this.onPress,
-    this.controller,
+    @required this.title,
+    @required this.price,
+    @required this.categorie,
+    @required this.description,
+    @required this.onPress,
+    @required this.controller,
+    @required this.id,
   }) : super(key: key);
 
   final ProductDetailController controller;
@@ -105,7 +107,12 @@ class DetailProduct extends StatelessWidget {
               onPress: onPress,
             ),
             SizedBox(height: 12),
-            AddtoCarBtn(controller: controller)
+            AddtoCarBtn(
+              controller: controller,
+              onTap: () {
+                controller.addToShoppingCar(id);
+              },
+            )
           ],
         ),
       ),

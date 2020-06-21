@@ -7,9 +7,11 @@ class AddtoCarBtn extends StatelessWidget {
   const AddtoCarBtn({
     Key key,
     @required this.controller,
+    this.onTap,
   }) : super(key: key);
 
   final ProductDetailController controller;
+  final Function onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -36,17 +38,13 @@ class AddtoCarBtn extends StatelessWidget {
             //mainAxisSize: MainAxisSize.min,
             children: [
               FaIcon(
-                controller.isAdd
-                    ? FontAwesomeIcons.check
-                    : FontAwesomeIcons.shoppingCart,
+                controller.icon,
                 color: Colors.white,
                 size: 24,
               ),
               SizedBox(width: 16),
               Text(
-                controller.isAdd
-                    ? "Adicionado ao carrinho"
-                    : "Adicionar ao carrinho",
+                controller.messageBtn,
                 style:
                     TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),
@@ -54,9 +52,7 @@ class AddtoCarBtn extends StatelessWidget {
           ),
         );
       }),
-      onTap: () {
-        controller.addToShoppingCart();
-      },
+      onTap: onTap,
     );
   }
 }

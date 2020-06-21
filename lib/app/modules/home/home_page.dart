@@ -24,6 +24,13 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
   ];
 
   @override
+  void dispose() {
+    //print("HomeDisposed");
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,

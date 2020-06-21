@@ -9,6 +9,37 @@ part of 'product_detail_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ProductDetailController on _ProductDetailControllerBase, Store {
+  final _$messageBtnAtom =
+      Atom(name: '_ProductDetailControllerBase.messageBtn');
+
+  @override
+  String get messageBtn {
+    _$messageBtnAtom.reportRead();
+    return super.messageBtn;
+  }
+
+  @override
+  set messageBtn(String value) {
+    _$messageBtnAtom.reportWrite(value, super.messageBtn, () {
+      super.messageBtn = value;
+    });
+  }
+
+  final _$iconAtom = Atom(name: '_ProductDetailControllerBase.icon');
+
+  @override
+  IconData get icon {
+    _$iconAtom.reportRead();
+    return super.icon;
+  }
+
+  @override
+  set icon(IconData value) {
+    _$iconAtom.reportWrite(value, super.icon, () {
+      super.icon = value;
+    });
+  }
+
   final _$colorAtom = Atom(name: '_ProductDetailControllerBase.color');
 
   @override
@@ -43,11 +74,11 @@ mixin _$ProductDetailController on _ProductDetailControllerBase, Store {
       ActionController(name: '_ProductDetailControllerBase');
 
   @override
-  dynamic addToShoppingCart() {
+  dynamic addToShoppingCar(String idProduct) {
     final _$actionInfo = _$_ProductDetailControllerBaseActionController
-        .startAction(name: '_ProductDetailControllerBase.addToShoppingCart');
+        .startAction(name: '_ProductDetailControllerBase.addToShoppingCar');
     try {
-      return super.addToShoppingCart();
+      return super.addToShoppingCar(idProduct);
     } finally {
       _$_ProductDetailControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -56,6 +87,8 @@ mixin _$ProductDetailController on _ProductDetailControllerBase, Store {
   @override
   String toString() {
     return '''
+messageBtn: ${messageBtn},
+icon: ${icon},
 color: ${color},
 isAdd: ${isAdd}
     ''';
