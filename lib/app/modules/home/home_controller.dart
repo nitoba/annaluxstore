@@ -15,11 +15,4 @@ abstract class _HomeControllerBase with Store {
   void updateCurrentIndex(int index) {
     this.currentIndex = index;
   }
-
-  void addProductToShoppingCar(ProductModel product) {
-    if (product != null) {
-      productsToCar.add(product);
-    }
-    //print(productsToCar.length);
-  }
 }

@@ -39,26 +39,30 @@ mixin _$BuyController on _BuyControllerBase, Store {
     });
   }
 
+  final _$productsAtom = Atom(name: '_BuyControllerBase.products');
+
+  @override
+  ObservableList<ProductModelStore> get products {
+    _$productsAtom.reportRead();
+    return super.products;
+  }
+
+  @override
+  set products(ObservableList<ProductModelStore> value) {
+    _$productsAtom.reportWrite(value, super.products, () {
+      super.products = value;
+    });
+  }
+
   final _$_BuyControllerBaseActionController =
       ActionController(name: '_BuyControllerBase');
 
   @override
-  void calcPriceByQuantityPlus(double price) {
+  dynamic getProductsInCar() {
     final _$actionInfo = _$_BuyControllerBaseActionController.startAction(
-        name: '_BuyControllerBase.calcPriceByQuantityPlus');
+        name: '_BuyControllerBase.getProductsInCar');
     try {
-      return super.calcPriceByQuantityPlus(price);
-    } finally {
-      _$_BuyControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void calcPriceByQuantitySub(double price) {
-    final _$actionInfo = _$_BuyControllerBaseActionController.startAction(
-        name: '_BuyControllerBase.calcPriceByQuantitySub');
-    try {
-      return super.calcPriceByQuantitySub(price);
+      return super.getProductsInCar();
     } finally {
       _$_BuyControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -68,7 +72,8 @@ mixin _$BuyController on _BuyControllerBase, Store {
   String toString() {
     return '''
 totalPrice: ${totalPrice},
-quantity: ${quantity}
+quantity: ${quantity},
+products: ${products}
     ''';
   }
 }

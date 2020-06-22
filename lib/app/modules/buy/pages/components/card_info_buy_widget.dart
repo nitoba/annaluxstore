@@ -1,4 +1,4 @@
-import 'package:annaluxstore/app/modules/home/models/product_model.dart';
+import 'package:annaluxstore/app/modules/buy/models/product_store_model.dart';
 import 'package:annaluxstore/app/modules/shared/consttants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -17,7 +17,7 @@ class CardInfoBuy extends StatelessWidget {
   }) : super(key: key);
 
   final BuyController controller;
-  final ProductModel product;
+  final ProductModelStore product;
   final Function addQuantity;
   final Function subQuantity;
 
@@ -90,11 +90,7 @@ class CardInfoBuy extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("Preço:"),
-                      Text(
-                        controller.totalPrice == 0
-                            ? "R\$ ${product.price}"
-                            : "R\$ ${controller.totalPrice.toStringAsFixed(2)}",
-                      ),
+                      Text("${controller.totalPrice}"),
                     ],
                   ),
                 ),

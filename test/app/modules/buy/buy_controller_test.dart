@@ -23,7 +23,7 @@ void main() {
       expect(buyController.quantity, 1);
       expect(buyController.totalPrice, 0);
 
-      buyController.calcPriceByQuantityPlus(30);
+      //buyController.calcPriceByQuantityPlus(30);
 
       expect(buyController.quantity, 2);
       expect(buyController.totalPrice, 60);
@@ -35,7 +35,7 @@ void main() {
       expect(buyController.quantity, 1);
       expect(buyController.totalPrice, 0);
 
-      buyController.calcPriceByQuantitySub(30);
+      //buyController.calcPriceByQuantitySub(30);
 
       expect(buyController.quantity, 1);
       expect(buyController.totalPrice, 0);
@@ -47,15 +47,15 @@ void main() {
       expect(buyController.quantity, 1);
       expect(buyController.totalPrice, 0);
 
-      buyController.calcPriceByQuantityPlus(30);
-      buyController.calcPriceByQuantityPlus(30);
-      buyController.calcPriceByQuantityPlus(30);
+      // buyController.calcPriceByQuantityPlus(30);
+      // buyController.calcPriceByQuantityPlus(30);
+      // buyController.calcPriceByQuantityPlus(30);
 
       expect(buyController.quantity, 4);
 
       expect(buyController.totalPrice, 120);
 
-      buyController.calcPriceByQuantitySub(30);
+      // buyController.calcPriceByQuantitySub(30);
 
       expect(buyController.quantity, 3);
       expect(buyController.totalPrice, 90);
