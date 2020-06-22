@@ -1,10 +1,13 @@
 import 'package:annaluxstore/app/modules/buy/buy_controller.dart';
 import 'package:annaluxstore/app/modules/home/models/product_model.dart';
+import 'package:annaluxstore/app/modules/shared/consttants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'components/card_info_buy_widget.dart';
+import 'components/coupom_widget.dart';
+import 'components/finish_buy_btn_widget.dart';
 
 class BuyPage extends StatefulWidget {
   final String title;
@@ -24,7 +27,9 @@ class _BuyPageState extends ModularState<BuyPage, BuyController> {
     controller.getProductsInCar();
     super.initState();
   }
+
   //use 'controller' variable to access controller
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -63,11 +68,41 @@ class _BuyPageState extends ModularState<BuyPage, BuyController> {
               padding: const EdgeInsets.all(8.0),
               child: Card(
                 child: Container(
-                  height: MediaQuery.of(context).size.height * 0.22,
+                  height: MediaQuery.of(context).size.height * 0.3,
                   width: MediaQuery.of(context).size.width,
-                  color: Colors.blue,
-                  child: Text(
-                      "R\$ ${controller.totalPriceOfAllProducts.toStringAsFixed(2)}"),
+                  color: Colors.white,
+                  child: Column(
+                    children: [
+                      Text(
+                        "Preço total:",
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 12),
+                      Text(
+                        "R\$ ${controller.totalPriceOfAllProducts.toStringAsFixed(2)}",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 25),
+                      CoupomWidget(
+                        formKey: _formKey,
+                        applyCupom: () {
+                          if (_formKey.currentState.validate()) {
+                            print("Texto válido");
+                          } else {
+                            print("texto inválido");
+                          }
+                        },
+                      ),
+                      Spacer(),
+                      FinishBuyBtn(controller: controller, onPress: () {})
+                    ],
+                  ),
                 ),
               ),
             )

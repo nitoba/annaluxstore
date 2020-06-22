@@ -10,6 +10,7 @@ class AppWidget extends StatelessWidget {
       navigatorKey: Modular.navigatorKey,
       title: 'AnnaluxStore',
       theme: ThemeData(
+        cursorColor: thirdColor,
         fontFamily: "Montserrat",
         primaryColor: primaryColor,
       ),
