@@ -33,17 +33,20 @@ abstract class _ProductModelStoreBase with Store {
 
   @action
   calcTotalPricePlus() {
+    totalPrice = price;
+    //print(totalPrice);
     quantity++;
-    totalPrice = price * quantity;
+    totalPrice = totalPrice * quantity;
   }
 
   @action
   calcTotalPriceSub() {
+    totalPrice = price;
     if (quantity == 1) {
       return;
     }
     quantity--;
-    totalPrice = price * quantity;
+    totalPrice = totalPrice * quantity;
   }
 
   ProductModelStore transformModel(ProductModel productModel) {

@@ -12,6 +12,9 @@ abstract class _BuyControllerBase with Store {
   @observable
   ObservableList<ProductModelStore> products;
 
+  @observable
+  double totalPriceOfAllProducts = 0;
+
   _BuyControllerBase(this._homeController);
 
   @action
@@ -24,6 +27,7 @@ abstract class _BuyControllerBase with Store {
         .asObservable();
 
     ///print(products);
+    _calcPriceOfAllProducts();
   }
 
   @action
@@ -33,5 +37,23 @@ abstract class _BuyControllerBase with Store {
 
       _homeController.removeProductToCar(productModelStore.id);
     }
+  }
+
+  @action
+  _calcPriceOfAllProducts() {
+    products.map((product) {
+      totalPriceOfAllProducts = totalPriceOfAllProducts + product.price;
+    }).toList();
+
+    print(totalPriceOfAllProducts);
+  }
+
+  @action
+  calcPriceTotalByQuantity() {
+    totalPriceOfAllProducts = 0.0;
+
+    products.map((product) {
+      totalPriceOfAllProducts += product.quantity * product.price;
+    }).toList();
   }
 }

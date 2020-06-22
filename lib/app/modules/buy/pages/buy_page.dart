@@ -45,15 +45,30 @@ class _BuyPageState extends ModularState<BuyPage, BuyController> {
                       product: controller.products[index],
                       addQuantity: () {
                         controller.products[index].calcTotalPricePlus();
+                        controller.calcPriceTotalByQuantity();
                       },
                       subQuantity: () {
                         controller.products[index].calcTotalPriceSub();
+                        controller.calcPriceTotalByQuantity();
                       },
                       removeProduct: () {
                         controller.removeProductOfShoppingCar(
                             controller.products[index]);
+                        controller.calcPriceTotalByQuantity();
                       });
                 },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.22,
+                  width: MediaQuery.of(context).size.width,
+                  color: Colors.blue,
+                  child: Text(
+                      "R\$ ${controller.totalPriceOfAllProducts.toStringAsFixed(2)}"),
+                ),
               ),
             )
           ],
