@@ -89,16 +89,19 @@ class _BuyPageState extends ModularState<BuyPage, BuyController> {
                         ),
                       ),
                       SizedBox(height: 25),
-                      CoupomWidget(
-                        formKey: _formKey,
-                        applyCupom: () {
-                          if (_formKey.currentState.validate()) {
-                            print("Texto válido");
-                          } else {
-                            print("texto inválido");
-                          }
-                        },
-                      ),
+                      !controller.isBusy
+                          ? CoupomWidget(
+                              formKey: _formKey,
+                              controller: controller,
+                            )
+                          : Text(
+                              controller.onSucess,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                       Spacer(),
                       FinishBuyBtn(controller: controller, onPress: () {})
                     ],

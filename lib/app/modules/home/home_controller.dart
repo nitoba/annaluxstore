@@ -13,6 +13,21 @@ abstract class _HomeControllerBase with Store {
 
   List<ProductModel> productsToCar = [];
 
+  List<Map<String, dynamic>> coupons = [
+    {
+      "title": "ANNA10",
+      'discount': 10.0,
+    },
+    {
+      "title": "ANNA5",
+      'discount': 5.0,
+    },
+    {
+      "title": "ANNA2",
+      'discount': 2.0,
+    }
+  ];
+
   @action
   void updateCurrentIndex(int index) {
     this.currentIndex = index;

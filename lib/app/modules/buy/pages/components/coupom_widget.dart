@@ -1,14 +1,21 @@
+import 'package:annaluxstore/app/modules/buy/buy_controller.dart';
 import 'package:annaluxstore/app/modules/shared/consttants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CoupomWidget extends StatelessWidget {
-  final Function applyCupom;
+  //final Function applyCupom;
+  final TextEditingController textEditingController = TextEditingController();
+  final BuyController controller;
   final GlobalKey<FormState> formKey;
-  const CoupomWidget({
+
+  CoupomWidget({
     Key key,
-    @required this.applyCupom,
+    //@required this.applyCupom,
     this.formKey,
+    this.controller,
+    //this.textEditingController,
   }) : super(key: key);
 
   @override
@@ -17,6 +24,7 @@ class CoupomWidget extends StatelessWidget {
       key: formKey,
       child: ListTile(
         title: TextFormField(
+          controller: textEditingController,
           validator: (value) {
             if (value.isEmpty) {
               return "Por favor ensira um cupom válido";
@@ -53,7 +61,14 @@ class CoupomWidget extends StatelessWidget {
             FontAwesomeIcons.check,
             color: thirdColor,
           ),
-          onPressed: applyCupom,
+          onPressed: () {
+            if (formKey.currentState.validate()) {
+              //print(textEditingController.text);
+              controller.applyCoupomDiscount(textEditingController.text);
+            } else {
+              print("texto inválido");
+            }
+          },
         ),
       ),
     );

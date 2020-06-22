@@ -15,7 +15,23 @@ abstract class _BuyControllerBase with Store {
   @observable
   double totalPriceOfAllProducts = 0;
 
-  _BuyControllerBase(this._homeController);
+  @observable
+  bool isBusy = false;
+
+  @observable
+  String onSucess = '';
+
+  List<Map<String, dynamic>> coupomFounded = [{}];
+
+  List<Map<String, dynamic>> coupons;
+
+  _BuyControllerBase(this._homeController) {
+    _getCoupons();
+  }
+
+  _getCoupons() {
+    coupons = _homeController.coupons;
+  }
 
   @action
   getProductsInCar() {
@@ -55,5 +71,43 @@ abstract class _BuyControllerBase with Store {
     products.map((product) {
       totalPriceOfAllProducts += product.quantity * product.price;
     }).toList();
+  }
+
+  @action
+  applyCoupomDiscount(String text) {
+    if (!isBusy) {
+      coupomFounded = coupons.where((cupom) => cupom['title'] == text).toList();
+
+      print(coupomFounded);
+
+      if (coupomFounded.isNotEmpty) {
+        if (totalPriceOfAllProducts <= coupomFounded[0]['discount']) {
+          isBusy = true;
+          onSucess = "Aumente a quantidade de produtos";
+          print(onSucess);
+          Future.delayed(Duration(seconds: 2), () {
+            isBusy = false;
+          });
+
+          return;
+        }
+
+        totalPriceOfAllProducts =
+            totalPriceOfAllProducts - coupomFounded[0]['discount'];
+        isBusy = true;
+        //print(isBusy);
+        onSucess = "Seu Cupom foi aplicado!";
+        _homeController.coupons.removeWhere(
+            (cupom) => cupom['title'] == coupomFounded[0]['title']);
+      } else {
+        isBusy = true;
+        onSucess = "Esse cupom já foi aplicado!";
+        Future.delayed(Duration(seconds: 2), () {
+          isBusy = false;
+        });
+
+        return;
+      }
+    }
   }
 }

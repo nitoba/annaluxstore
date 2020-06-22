@@ -41,6 +41,36 @@ mixin _$BuyController on _BuyControllerBase, Store {
     });
   }
 
+  final _$isBusyAtom = Atom(name: '_BuyControllerBase.isBusy');
+
+  @override
+  bool get isBusy {
+    _$isBusyAtom.reportRead();
+    return super.isBusy;
+  }
+
+  @override
+  set isBusy(bool value) {
+    _$isBusyAtom.reportWrite(value, super.isBusy, () {
+      super.isBusy = value;
+    });
+  }
+
+  final _$onSucessAtom = Atom(name: '_BuyControllerBase.onSucess');
+
+  @override
+  String get onSucess {
+    _$onSucessAtom.reportRead();
+    return super.onSucess;
+  }
+
+  @override
+  set onSucess(String value) {
+    _$onSucessAtom.reportWrite(value, super.onSucess, () {
+      super.onSucess = value;
+    });
+  }
+
   final _$_BuyControllerBaseActionController =
       ActionController(name: '_BuyControllerBase');
 
@@ -89,10 +119,23 @@ mixin _$BuyController on _BuyControllerBase, Store {
   }
 
   @override
+  dynamic applyCoupomDiscount(String text) {
+    final _$actionInfo = _$_BuyControllerBaseActionController.startAction(
+        name: '_BuyControllerBase.applyCoupomDiscount');
+    try {
+      return super.applyCoupomDiscount(text);
+    } finally {
+      _$_BuyControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 products: ${products},
-totalPriceOfAllProducts: ${totalPriceOfAllProducts}
+totalPriceOfAllProducts: ${totalPriceOfAllProducts},
+isBusy: ${isBusy},
+onSucess: ${onSucess}
     ''';
   }
 }
