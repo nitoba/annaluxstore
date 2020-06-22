@@ -41,12 +41,10 @@ class _BuyPageState extends ModularState<BuyPage, BuyController> {
                     controller: controller,
                     product: controller.products[index],
                     addQuantity: () {
-                      // controller
-                      //     .calcPriceByQuantityPlus(controller.products[index]);
+                      controller.products[index].calcTotalPricePlus();
                     },
                     subQuantity: () {
-                      // controller.calcPriceByQuantitySub(
-                      //     controller.products[index].price);
+                      controller.products[index].calcTotalPriceSub();
                     },
                   );
                 },

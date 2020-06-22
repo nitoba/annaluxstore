@@ -99,6 +99,61 @@ mixin _$ProductModelStore on _ProductModelStoreBase, Store {
     });
   }
 
+  final _$quantityAtom = Atom(name: '_ProductModelStoreBase.quantity');
+
+  @override
+  int get quantity {
+    _$quantityAtom.reportRead();
+    return super.quantity;
+  }
+
+  @override
+  set quantity(int value) {
+    _$quantityAtom.reportWrite(value, super.quantity, () {
+      super.quantity = value;
+    });
+  }
+
+  final _$totalPriceAtom = Atom(name: '_ProductModelStoreBase.totalPrice');
+
+  @override
+  double get totalPrice {
+    _$totalPriceAtom.reportRead();
+    return super.totalPrice;
+  }
+
+  @override
+  set totalPrice(double value) {
+    _$totalPriceAtom.reportWrite(value, super.totalPrice, () {
+      super.totalPrice = value;
+    });
+  }
+
+  final _$_ProductModelStoreBaseActionController =
+      ActionController(name: '_ProductModelStoreBase');
+
+  @override
+  dynamic calcTotalPricePlus() {
+    final _$actionInfo = _$_ProductModelStoreBaseActionController.startAction(
+        name: '_ProductModelStoreBase.calcTotalPricePlus');
+    try {
+      return super.calcTotalPricePlus();
+    } finally {
+      _$_ProductModelStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic calcTotalPriceSub() {
+    final _$actionInfo = _$_ProductModelStoreBaseActionController.startAction(
+        name: '_ProductModelStoreBase.calcTotalPriceSub');
+    try {
+      return super.calcTotalPriceSub();
+    } finally {
+      _$_ProductModelStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
@@ -107,7 +162,9 @@ title: ${title},
 description: ${description},
 images: ${images},
 price: ${price},
-categorie: ${categorie}
+categorie: ${categorie},
+quantity: ${quantity},
+totalPrice: ${totalPrice}
     ''';
   }
 }

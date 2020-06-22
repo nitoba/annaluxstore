@@ -17,6 +17,10 @@ abstract class _ProductModelStoreBase with Store {
   double price;
   @observable
   String categorie;
+  @observable
+  int quantity = 1;
+  @observable
+  double totalPrice = 0;
 
   _ProductModelStoreBase({
     this.id,
@@ -26,6 +30,18 @@ abstract class _ProductModelStoreBase with Store {
     this.price,
     this.categorie,
   });
+
+  @action
+  calcTotalPricePlus() {
+    quantity++;
+    totalPrice = price * quantity;
+  }
+
+  @action
+  calcTotalPriceSub() {
+    quantity--;
+    totalPrice = price * quantity;
+  }
 
   ProductModelStore transformModel(ProductModel productModel) {
     return ProductModelStore(

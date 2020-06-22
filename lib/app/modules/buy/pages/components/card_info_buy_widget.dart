@@ -45,7 +45,7 @@ class CardInfoBuy extends StatelessWidget {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left: 16.0),
-                            child: Text("Quantidade: ${controller.quantity}"),
+                            child: Text("Quantidade: ${product.quantity}"),
                           )
                         ],
                       ),
@@ -90,7 +90,9 @@ class CardInfoBuy extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("Preço:"),
-                      Text("${controller.totalPrice}"),
+                      product.totalPrice == 0
+                          ? Text("${product.price}")
+                          : Text("${product.totalPrice.toStringAsFixed(2)}"),
                     ],
                   ),
                 ),
