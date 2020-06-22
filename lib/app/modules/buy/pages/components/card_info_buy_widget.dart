@@ -14,12 +14,14 @@ class CardInfoBuy extends StatelessWidget {
     @required this.controller,
     this.addQuantity,
     this.subQuantity,
+    this.removeProduct,
   }) : super(key: key);
 
   final BuyController controller;
   final ProductModelStore product;
   final Function addQuantity;
   final Function subQuantity;
+  final Function removeProduct;
 
   @override
   Widget build(BuildContext context) {
@@ -91,12 +93,36 @@ class CardInfoBuy extends StatelessWidget {
                     children: [
                       Text("Preço:"),
                       product.totalPrice == 0
-                          ? Text("${product.price}")
-                          : Text("${product.totalPrice.toStringAsFixed(2)}"),
+                          ? Text("R\$ ${product.price}")
+                          : Text(
+                              "R\$ ${product.totalPrice.toStringAsFixed(2)}"),
                     ],
                   ),
                 ),
-              )
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  //height: 30,
+                  //color: Colors.green,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Remover produto"),
+                      Container(
+                        color: thirdColor,
+                        child: IconButton(
+                          icon: Icon(
+                            FontAwesomeIcons.times,
+                            color: Colors.white,
+                          ),
+                          onPressed: removeProduct,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         ),

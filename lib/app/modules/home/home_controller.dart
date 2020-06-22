@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:annaluxstore/app/modules/home/models/product_model.dart';
 import 'package:mobx/mobx.dart';
 
@@ -14,5 +16,14 @@ abstract class _HomeControllerBase with Store {
   @action
   void updateCurrentIndex(int index) {
     this.currentIndex = index;
+  }
+
+  List<ProductModel> addProductToCar(ProductModel productModel) {
+    productsToCar.add(productModel);
+    return productsToCar;
+  }
+
+  removeProductToCar(String id) {
+    productsToCar.removeWhere((element) => element.id == id);
   }
 }

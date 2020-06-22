@@ -14,10 +14,7 @@ class BuyModule extends ChildModule {
 
   @override
   List<Router> get routers => [
-        Router(Modular.initialRoute,
-            child: (_, args) => BuyPage(
-                  product: args.data,
-                )),
+        Router(Modular.initialRoute, child: (_, args) => BuyPage()),
       ];
 
   static Inject get to => Inject<BuyModule>.of();

@@ -39,6 +39,9 @@ abstract class _ProductModelStoreBase with Store {
 
   @action
   calcTotalPriceSub() {
+    if (quantity == 1) {
+      return;
+    }
     quantity--;
     totalPrice = price * quantity;
   }

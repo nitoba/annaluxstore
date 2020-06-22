@@ -47,8 +47,7 @@ class _ProductDetailPageState
             },
             onPressToBuy: () {
               controller.addToShoppingCar(widget.product);
-              Modular.to
-                  .pushReplacementNamed('/buy', arguments: widget.product);
+              Modular.to.pushReplacementNamed('/buy');
             },
           )
         ],

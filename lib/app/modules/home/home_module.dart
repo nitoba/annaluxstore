@@ -20,7 +20,8 @@ import '../../app_module.dart';
 class HomeModule extends ChildModule {
   @override
   List<Bind> get binds => [
-        Bind((i) => ProductDetailController(i.get())),
+        Bind((i) => ProductDetailController(
+            i.get(), AppModule.to.get<ISharedLocalRepository>())),
         Bind((i) => CategorieController(i.get<IHomeRepository>())),
         Bind<IHomeRepository>((i) => HomeRepository(i.get())),
         Bind((i) =>

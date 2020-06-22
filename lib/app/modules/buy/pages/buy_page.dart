@@ -8,8 +8,11 @@ import 'components/card_info_buy_widget.dart';
 
 class BuyPage extends StatefulWidget {
   final String title;
-  final ProductModel product;
-  const BuyPage({Key key, this.title = "Buy", this.product}) : super(key: key);
+
+  const BuyPage({
+    Key key,
+    this.title = "Buy",
+  }) : super(key: key);
 
   @override
   _BuyPageState createState() => _BuyPageState();
@@ -38,15 +41,18 @@ class _BuyPageState extends ModularState<BuyPage, BuyController> {
                 itemCount: controller.products.length,
                 itemBuilder: (context, index) {
                   return CardInfoBuy(
-                    controller: controller,
-                    product: controller.products[index],
-                    addQuantity: () {
-                      controller.products[index].calcTotalPricePlus();
-                    },
-                    subQuantity: () {
-                      controller.products[index].calcTotalPriceSub();
-                    },
-                  );
+                      controller: controller,
+                      product: controller.products[index],
+                      addQuantity: () {
+                        controller.products[index].calcTotalPricePlus();
+                      },
+                      subQuantity: () {
+                        controller.products[index].calcTotalPriceSub();
+                      },
+                      removeProduct: () {
+                        controller.removeProductOfShoppingCar(
+                            controller.products[index]);
+                      });
                 },
               ),
             )
