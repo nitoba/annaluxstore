@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class CoupomWidget extends StatelessWidget {
+class CoupomFormField extends StatelessWidget {
   //final Function applyCupom;
   final TextEditingController textEditingController = TextEditingController();
   final BuyController controller;
   final GlobalKey<FormState> formKey;
 
-  CoupomWidget({
+  CoupomFormField({
     Key key,
     //@required this.applyCupom,
     this.formKey,

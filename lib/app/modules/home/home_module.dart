@@ -26,7 +26,7 @@ class HomeModule extends ChildModule {
         Bind<IHomeRepository>((i) => HomeRepository(i.get())),
         Bind((i) =>
             HomeContentController(/*i.get(),*/ i.get<IHomeRepository>())),
-        Bind((i) => HomeController()),
+        Bind((i) => HomeController(i.get<IHomeRepository>())),
         Bind((i) => Firestore.instance),
         Bind((i) => AuthController(
               AppModule.to.get<IAuthRepository>(),

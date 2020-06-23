@@ -71,6 +71,36 @@ mixin _$BuyController on _BuyControllerBase, Store {
     });
   }
 
+  final _$iconAtom = Atom(name: '_BuyControllerBase.icon');
+
+  @override
+  IconData get icon {
+    _$iconAtom.reportRead();
+    return super.icon;
+  }
+
+  @override
+  set icon(IconData value) {
+    _$iconAtom.reportWrite(value, super.icon, () {
+      super.icon = value;
+    });
+  }
+
+  final _$colorAtom = Atom(name: '_BuyControllerBase.color');
+
+  @override
+  Color get color {
+    _$colorAtom.reportRead();
+    return super.color;
+  }
+
+  @override
+  set color(Color value) {
+    _$colorAtom.reportWrite(value, super.color, () {
+      super.color = value;
+    });
+  }
+
   final _$_BuyControllerBaseActionController =
       ActionController(name: '_BuyControllerBase');
 
@@ -135,7 +165,9 @@ mixin _$BuyController on _BuyControllerBase, Store {
 products: ${products},
 totalPriceOfAllProducts: ${totalPriceOfAllProducts},
 isBusy: ${isBusy},
-onSucess: ${onSucess}
+onSucess: ${onSucess},
+icon: ${icon},
+color: ${color}
     ''';
   }
 }

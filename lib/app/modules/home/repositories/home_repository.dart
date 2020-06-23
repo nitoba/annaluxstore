@@ -1,3 +1,4 @@
+import 'package:annaluxstore/app/modules/buy/models/coupom_model.dart';
 import 'package:annaluxstore/app/modules/home/models/categories_model.dart';
 import 'package:annaluxstore/app/modules/home/models/product_model.dart';
 import 'package:annaluxstore/app/modules/home/repositories/interfaces/home_repository_interface.dart';
@@ -95,5 +96,17 @@ class HomeRepository implements IHomeRepository {
     }).toList();
 
     return categorieMap[categorieID];
+  }
+
+  @override
+  Future<List<CoupomModel>> getCoupons() async {
+    List<CoupomModel> coupons = [];
+    var documents = await _instance.collection("coupons").getDocuments();
+
+    coupons = documents.documents
+        .map((coupom) => CoupomModel.fromDocument(coupom))
+        .toList();
+
+    return coupons;
   }
 }

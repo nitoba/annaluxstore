@@ -4,10 +4,12 @@ import 'package:annaluxstore/app/modules/shared/consttants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'components/card_info_buy_widget.dart';
 import 'components/coupom_widget.dart';
 import 'components/finish_buy_btn_widget.dart';
+import 'components/message_widget.dart';
 
 class BuyPage extends StatefulWidget {
   final String title;
@@ -90,18 +92,11 @@ class _BuyPageState extends ModularState<BuyPage, BuyController> {
                       ),
                       SizedBox(height: 25),
                       !controller.isBusy
-                          ? CoupomWidget(
+                          ? CoupomFormField(
                               formKey: _formKey,
                               controller: controller,
                             )
-                          : Text(
-                              controller.onSucess,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
+                          : MessageWidget(controller: controller),
                       Spacer(),
                       FinishBuyBtn(controller: controller, onPress: () {})
                     ],
