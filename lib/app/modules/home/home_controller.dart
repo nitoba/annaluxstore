@@ -18,7 +18,9 @@ abstract class _HomeControllerBase with Store {
 
   List<CoupomModel> coupons = [];
 
-  _HomeControllerBase(this._homeRepository);
+  _HomeControllerBase(this._homeRepository) {
+    getCupons();
+  }
 
   @action
   void updateCurrentIndex(int index) {
@@ -34,8 +36,7 @@ abstract class _HomeControllerBase with Store {
     productsToCar.removeWhere((element) => element.id == id);
   }
 
-  Future<List<CoupomModel>> getCupons() async {
+  getCupons() async {
     coupons = await _homeRepository.getCoupons();
-    return coupons;
   }
 }

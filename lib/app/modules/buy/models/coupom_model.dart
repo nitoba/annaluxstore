@@ -14,5 +14,19 @@ class CoupomModel {
     );
   }
 
-  Map<String, dynamic> toJson() => {};
+  factory CoupomModel.fromJson(Map<String, dynamic> coupom) {
+    return CoupomModel(
+      id: coupom['documentID'],
+      title: coupom['title'],
+      discount: coupom['discount'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> coupom = Map<String, dynamic>();
+    coupom['documentID'] = this.id;
+    coupom['title'] = this.title;
+    coupom['discount'] = this.discount;
+    return coupom;
+  }
 }

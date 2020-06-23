@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:annaluxstore/app/modules/buy/models/coupom_model.dart';
 import 'package:annaluxstore/app/modules/buy/models/product_store_model.dart';
 import 'package:annaluxstore/app/modules/home/home_controller.dart';
@@ -38,8 +40,8 @@ abstract class _BuyControllerBase with Store {
     _getCoupons();
   }
 
-  Future _getCoupons() async {
-    coupons = await _homeController.getCupons();
+  _getCoupons() {
+    coupons = _homeController.coupons;
   }
 
   @action
@@ -96,7 +98,14 @@ abstract class _BuyControllerBase with Store {
       /*Se o cupom digitado for igual ao do banco de dados e estiver salvo offline é por que
       o cupom ja foi usado.
       */
-      print(coupomFounded);
+      //print(coupomFounded);
+      // var encoded = jsonEncode(coupomFounded[0]);
+
+      // print(encoded);
+
+      // Map<String, dynamic> decoded = jsonDecode(encoded);
+
+      // print(decoded);
 
       if (coupomFounded.isNotEmpty) {
         if (totalPriceOfAllProducts <= coupomFounded[0].discount) {
@@ -123,7 +132,7 @@ abstract class _BuyControllerBase with Store {
 
         _homeController.coupons.removeWhere(
           (cupom) => cupom.id == coupomFounded[0].id,
-          //TODO:Salvar offline os cupons já usados
+          //TODO:Salvar offline os cupons já usado
         );
       } else {
         _setMessage(
