@@ -1,4 +1,3 @@
-import 'package:annaluxstore/app/modules/shared/auth/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -29,9 +28,8 @@ class _HomeContentPageState
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBarWidget(
-        onPress: () async {
-          await Modular.get<AuthController>().logout();
-          Modular.to.pushReplacementNamed("/");
+        onPress: () {
+          Modular.to.pushNamed("/buy");
         },
       ),
       body: Container(
