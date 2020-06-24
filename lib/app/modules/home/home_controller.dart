@@ -21,7 +21,7 @@ abstract class _HomeControllerBase with Store {
   List<CoupomModel> coupons = [];
 
   _HomeControllerBase(this._homeRepository, this._sharedLocalRepository) {
-    getCupons();
+    // getCupons();
   }
 
   @action
@@ -38,49 +38,49 @@ abstract class _HomeControllerBase with Store {
     productsToCar.removeWhere((element) => element.id == id);
   }
 
-  getCupons() async {
-    coupons = await _homeRepository.getCoupons();
-  }
+  // getCupons() async {
+  //   coupons = await _homeRepository.getCoupons();
+  // }
 
-  saveCupons(CoupomModel cupomModel) async {
-    var encondedCupom = jsonEncode(cupomModel);
+  // saveCupons(CoupomModel cupomModel) async {
+  //   var encondedCupom = jsonEncode(cupomModel);
 
-    List<String> cuponsLoaded =
-        await _sharedLocalRepository.get('coupons') ?? [];
+  //   List<String> cuponsLoaded =
+  //       await _sharedLocalRepository.get('coupons') ?? [];
 
-    var isMatch =
-        cuponsLoaded.where((cupom) => cupom == encondedCupom).toList();
+  //   var isMatch =
+  //       cuponsLoaded.where((cupom) => cupom == encondedCupom).toList();
 
-    if (isMatch.isNotEmpty) {
-      //print("Já existe esse cupom salvo");
-      return;
-    } else {
-      //print("Não existe esse cupom salvo");
+  //   if (isMatch.isNotEmpty) {
+  //     //print("Já existe esse cupom salvo");
+  //     return;
+  //   } else {
+  //     //print("Não existe esse cupom salvo");
 
-      cuponsLoaded.add(encondedCupom);
+  //     cuponsLoaded.add(encondedCupom);
 
-      await _sharedLocalRepository.insert('coupons', cuponsLoaded);
-    }
-  }
+  //     await _sharedLocalRepository.insert('coupons', cuponsLoaded);
+  //   }
+  // }
 
-  Future<List<CoupomModel>> loadCoupons() async {
-    List cupons = await _sharedLocalRepository.get('coupons');
+  // Future<List<CoupomModel>> loadCoupons() async {
+  //   List cupons = await _sharedLocalRepository.get('coupons');
 
-    List<CoupomModel> coupons = [];
+  //   List<CoupomModel> coupons = [];
 
-    Map<String, dynamic> cuponsDecoded = {};
+  //   Map<String, dynamic> cuponsDecoded = {};
 
-    if (cupons != null) {
-      cupons.forEach((cupom) {
-        cuponsDecoded = jsonDecode(cupom);
-      });
+  //   if (cupons != null) {
+  //     cupons.forEach((cupom) {
+  //       cuponsDecoded = jsonDecode(cupom);
+  //     });
 
-      coupons =
-          cupons.map((cupom) => CoupomModel.fromJson(cuponsDecoded)).toList();
-    }
+  //     coupons =
+  //         cupons.map((cupom) => CoupomModel.fromJson(cuponsDecoded)).toList();
+  //   }
 
-    return coupons;
-  }
+  //   return coupons;
+  // }
 
   remove() async {
     await _sharedLocalRepository.remove('coupons');

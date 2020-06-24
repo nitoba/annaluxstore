@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:annaluxstore/app/modules/buy/models/coupom_model.dart';
 import 'package:annaluxstore/app/modules/buy/models/product_store_model.dart';
+import 'package:annaluxstore/app/modules/buy/repositories/interfaces/buy_repository_interface.dart';
 import 'package:annaluxstore/app/modules/home/home_controller.dart';
+import 'package:annaluxstore/app/modules/shared/localstorage/interfaces/local_storage_repository_inteface.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mobx/mobx.dart';
@@ -13,6 +15,8 @@ class BuyController = _BuyControllerBase with _$BuyController;
 
 abstract class _BuyControllerBase with Store {
   final HomeController _homeController;
+  final ISharedLocalRepository _sharedLocalRepository;
+  final IBuyRepository _buyRepository;
 
   @observable
   ObservableList<ProductModelStore> products;
@@ -36,12 +40,13 @@ abstract class _BuyControllerBase with Store {
 
   List<CoupomModel> coupomFounded = [];
 
-  _BuyControllerBase(this._homeController) {
+  _BuyControllerBase(
+      this._homeController, this._sharedLocalRepository, this._buyRepository) {
     _getCoupons();
   }
 
-  _getCoupons() {
-    coupons = _homeController.coupons;
+  _getCoupons() async {
+    coupons = await _buyRepository.getCoupons();
   }
 
   @action
@@ -94,22 +99,16 @@ abstract class _BuyControllerBase with Store {
   applyCoupomDiscount(String text) async {
     if (!isBusy) {
       coupomFounded = coupons.where((cupom) => cupom.title == text).toList();
-      //TODO: Verificar se o cupom bate com o cupom salvo offline
-      /*Se o cupom digitado for igual ao do banco de dados e estiver salvo offline é por que
-      o cupom ja foi usado.
-      */
 
       if (coupomFounded.isNotEmpty) {
-        bool isMatched = await _verifyCupom();
-
-        //print(teste);
+        bool isMatched = await _verifyCupomInLocalStorage();
 
         if (isMatched) {
           _setMessage(
             isBusy: true,
             icon: FontAwesomeIcons.times,
             color: Colors.red,
-            message: "Cupom já foi aplicado ou inválido",
+            message: "Cupom já foi aplicado",
           );
           return;
         } else {
@@ -120,7 +119,6 @@ abstract class _BuyControllerBase with Store {
               color: Colors.red,
               message: "Preço total inferior ao desconto",
             );
-            //print(onSucess);
 
             return;
           }
@@ -135,20 +133,14 @@ abstract class _BuyControllerBase with Store {
             message: "Seu Cupom foi aplicado!",
           );
 
-          _homeController.saveCupons(coupomFounded[0]);
+          saveCupons(coupomFounded[0]);
         }
-
-        // _homeController.coupons.removeWhere(
-        //   (cupom) => cupom.id == coupomFounded[0].id,
-        // );
-
-        //
       } else {
         _setMessage(
           isBusy: true,
           icon: FontAwesomeIcons.times,
           color: Colors.red,
-          message: "Cupom já foi aplicado ou inválido",
+          message: "Cupom inválido, tente outro",
         );
 
         return;
@@ -169,19 +161,16 @@ abstract class _BuyControllerBase with Store {
     });
   }
 
-  Future<bool> _verifyCupom() async {
+  Future<bool> _verifyCupomInLocalStorage() async {
     bool isMatch = false;
 
-    var couponsSaved = await _homeController.loadCoupons();
-
-    //print(couponsSaved);
+    var couponsSaved = await loadCoupons();
 
     if (couponsSaved.isNotEmpty) {
       var matchCupons = couponsSaved
           .where((cupom) => coupomFounded[0].id == cupom.id)
           .toList();
 
-      //print(matchCupons);
       if (matchCupons.isNotEmpty) {
         isMatch = true;
       } else {
@@ -189,6 +178,50 @@ abstract class _BuyControllerBase with Store {
       }
     }
     return isMatch;
+  }
+
+  saveCupons(CoupomModel cupomModel) async {
+    var encondedCupom = jsonEncode(cupomModel);
+
+    List cuponsLoaded = await _sharedLocalRepository.get('coupons') ?? [];
+
+    List<String> listStrings = cuponsLoaded.map((e) => e.toString()).toList();
+
+    print(listStrings);
+
+    var isMatch = listStrings.where((cupom) => cupom == encondedCupom).toList();
+
+    if (isMatch.isNotEmpty) {
+      //print("Já existe esse cupom salvo");
+      return;
+    } else {
+      //print("Não existe esse cupom salvo");
+
+      listStrings.add(encondedCupom);
+
+      await _sharedLocalRepository.insert('coupons', listStrings);
+    }
+  }
+
+  Future<List<CoupomModel>> loadCoupons() async {
+    List cupons = await _sharedLocalRepository.get('coupons');
+
+    List<CoupomModel> coupons = [];
+
+    //print(cupons);
+
+    Map<String, dynamic> cuponsDecoded = {};
+
+    if (cupons != null) {
+      cupons.forEach((cupom) {
+        cuponsDecoded = jsonDecode(cupom);
+      });
+
+      coupons =
+          cupons.map((cupom) => CoupomModel.fromJson(cuponsDecoded)).toList();
+    }
+
+    return coupons;
   }
 
   remove() {
