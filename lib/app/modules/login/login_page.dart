@@ -73,6 +73,31 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                       ),
                 SizedBox(height: 32),
                 Divider(),
+                Spacer(),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(
+                            FontAwesomeIcons.instagram,
+                            color: Colors.grey,
+                            size: 15,
+                          ),
+                          Text(
+                            "@analuxstore",
+                            style: TextStyle(color: thirdColor),
+                          )
+                        ],
+                      ),
+                      SizedBox(height: 8),
+                      Text("App by nito_b.a")
+                    ],
+                  ),
+                )
               ],
             ),
           ),
