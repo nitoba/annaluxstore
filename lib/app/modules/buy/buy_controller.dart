@@ -164,9 +164,8 @@ abstract class _BuyControllerBase with Store {
     this.icon = icon;
     this.color = color;
     this.onSucess = message;
-    if (color == Colors.green) {
-      return;
-    }
+    if (color == Colors.green) return;
+
     Future.delayed(Duration(seconds: 2), () {
       this.isBusy = false;
     });
