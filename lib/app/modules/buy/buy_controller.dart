@@ -93,11 +93,15 @@ abstract class _BuyControllerBase with Store {
         totalPriceOfAllProducts += product.quantity * product.price;
       }).toList();
     }
+    if (totalPriceOfAllProducts < 0) {
+      print(totalPriceOfAllProducts);
+      totalPriceOfAllProducts = 0.0;
+    }
   }
 
   @action
   applyCoupomDiscount(String text) async {
-    if (!isBusy) {
+    if (!isBusy && products.isNotEmpty) {
       coupomFounded = coupons.where((cupom) => cupom.title == text).toList();
 
       if (coupomFounded.isNotEmpty) {
@@ -145,6 +149,13 @@ abstract class _BuyControllerBase with Store {
 
         return;
       }
+    } else {
+      _setMessage(
+        isBusy: true,
+        icon: FontAwesomeIcons.times,
+        color: Colors.red,
+        message: "Sem produtos no carrinho",
+      );
     }
   }
 
@@ -224,7 +235,9 @@ abstract class _BuyControllerBase with Store {
     return coupons;
   }
 
-  remove() {
-    _homeController.remove();
+  remove() async {
+    await _sharedLocalRepository.remove('coupons');
+    List cupons = await _sharedLocalRepository.get('coupons');
+    print(cupons);
   }
 }

@@ -11,7 +11,6 @@ import 'package:annaluxstore/app/modules/home/repositories/interfaces/home_repos
 import 'package:annaluxstore/app/modules/shared/auth/auth_controller.dart';
 import 'package:annaluxstore/app/modules/shared/auth/repositories/auth_interface.dart';
 import 'package:annaluxstore/app/modules/shared/localstorage/interfaces/local_storage_repository_inteface.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:annaluxstore/app/modules/home/home_page.dart';
 
@@ -34,10 +33,7 @@ class HomeModule extends ChildModule {
           ),
         ),
         Bind(
-          (i) => HomeController(
-            i.get<IHomeRepository>(),
-            AppModule.to.get<ISharedLocalRepository>(),
-          ),
+          (i) => HomeController(),
         ),
         Bind((i) => AuthController(
               AppModule.to.get<IAuthRepository>(),

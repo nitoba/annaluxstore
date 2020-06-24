@@ -20,7 +20,7 @@ class FinishBuyBtn extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         duration: Duration(milliseconds: 300),
         decoration: BoxDecoration(
-          color: thirdColor,
+          color: controller.products.isEmpty ? Colors.grey : thirdColor,
           borderRadius: BorderRadius.circular(8),
           boxShadow: [
             BoxShadow(
@@ -35,7 +35,7 @@ class FinishBuyBtn extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
-          onPressed: onPress,
+          onPressed: controller.products.isEmpty ? null : onPress,
           child: Center(
             child: Text(
               "Finalizar Pedido",
