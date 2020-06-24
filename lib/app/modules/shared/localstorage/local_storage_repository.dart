@@ -22,6 +22,8 @@ class SharedRepository implements ISharedLocalRepository {
       prefs.setInt(key, value);
     } else if (value is List<String>) {
       prefs.setStringList(key, value);
+    } else if (value is List<dynamic>) {
+      prefs.setStringList(key, value);
     }
   }
 

@@ -20,14 +20,25 @@ import '../../app_module.dart';
 class HomeModule extends ChildModule {
   @override
   List<Bind> get binds => [
-        Bind((i) => ProductDetailController(
-            i.get(), AppModule.to.get<ISharedLocalRepository>())),
+        Bind(
+          (i) => ProductDetailController(
+            i.get(),
+            AppModule.to.get<ISharedLocalRepository>(),
+          ),
+        ),
         Bind((i) => CategorieController(i.get<IHomeRepository>())),
-        Bind<IHomeRepository>((i) => HomeRepository(i.get())),
-        Bind((i) =>
-            HomeContentController(/*i.get(),*/ i.get<IHomeRepository>())),
-        Bind((i) => HomeController(i.get<IHomeRepository>())),
-        Bind((i) => Firestore.instance),
+        Bind<IHomeRepository>((i) => HomeRepository()),
+        Bind(
+          (i) => HomeContentController(
+            /*i.get(),*/ i.get<IHomeRepository>(),
+          ),
+        ),
+        Bind(
+          (i) => HomeController(
+            i.get<IHomeRepository>(),
+            AppModule.to.get<ISharedLocalRepository>(),
+          ),
+        ),
         Bind((i) => AuthController(
               AppModule.to.get<IAuthRepository>(),
               AppModule.to.get<ISharedLocalRepository>(),

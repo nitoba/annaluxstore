@@ -101,6 +101,15 @@ mixin _$BuyController on _BuyControllerBase, Store {
     });
   }
 
+  final _$applyCoupomDiscountAsyncAction =
+      AsyncAction('_BuyControllerBase.applyCoupomDiscount');
+
+  @override
+  Future applyCoupomDiscount(String text) {
+    return _$applyCoupomDiscountAsyncAction
+        .run(() => super.applyCoupomDiscount(text));
+  }
+
   final _$_BuyControllerBaseActionController =
       ActionController(name: '_BuyControllerBase');
 
@@ -143,17 +152,6 @@ mixin _$BuyController on _BuyControllerBase, Store {
         name: '_BuyControllerBase.calcPriceTotalByQuantity');
     try {
       return super.calcPriceTotalByQuantity();
-    } finally {
-      _$_BuyControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic applyCoupomDiscount(String text) {
-    final _$actionInfo = _$_BuyControllerBaseActionController.startAction(
-        name: '_BuyControllerBase.applyCoupomDiscount');
-    try {
-      return super.applyCoupomDiscount(text);
     } finally {
       _$_BuyControllerBaseActionController.endAction(_$actionInfo);
     }

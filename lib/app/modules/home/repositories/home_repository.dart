@@ -5,8 +5,7 @@ import 'package:annaluxstore/app/modules/home/repositories/interfaces/home_repos
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomeRepository implements IHomeRepository {
-  final Firestore _instance;
-  HomeRepository(this._instance);
+  final Firestore _instance = Firestore.instance;
 
   //dispose will be called automatically
   @override

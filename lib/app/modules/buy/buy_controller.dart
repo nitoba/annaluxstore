@@ -91,49 +91,58 @@ abstract class _BuyControllerBase with Store {
   }
 
   @action
-  applyCoupomDiscount(String text) {
+  applyCoupomDiscount(String text) async {
     if (!isBusy) {
       coupomFounded = coupons.where((cupom) => cupom.title == text).toList();
       //TODO: Verificar se o cupom bate com o cupom salvo offline
       /*Se o cupom digitado for igual ao do banco de dados e estiver salvo offline é por que
       o cupom ja foi usado.
       */
-      //print(coupomFounded);
-      // var encoded = jsonEncode(coupomFounded[0]);
-
-      // print(encoded);
-
-      // Map<String, dynamic> decoded = jsonDecode(encoded);
-
-      // print(decoded);
 
       if (coupomFounded.isNotEmpty) {
-        if (totalPriceOfAllProducts <= coupomFounded[0].discount) {
+        bool isMatched = await _verifyCupom();
+
+        //print(teste);
+
+        if (isMatched) {
           _setMessage(
             isBusy: true,
             icon: FontAwesomeIcons.times,
             color: Colors.red,
-            message: "Preço total inferior ao desconto",
+            message: "Cupom já foi aplicado ou inválido",
           );
-          print(onSucess);
-
           return;
+        } else {
+          if (totalPriceOfAllProducts <= coupomFounded[0].discount) {
+            _setMessage(
+              isBusy: true,
+              icon: FontAwesomeIcons.times,
+              color: Colors.red,
+              message: "Preço total inferior ao desconto",
+            );
+            //print(onSucess);
+
+            return;
+          }
+
+          totalPriceOfAllProducts =
+              totalPriceOfAllProducts - coupomFounded[0].discount;
+
+          _setMessage(
+            isBusy: true,
+            icon: FontAwesomeIcons.check,
+            color: Colors.green,
+            message: "Seu Cupom foi aplicado!",
+          );
+
+          _homeController.saveCupons(coupomFounded[0]);
         }
 
-        totalPriceOfAllProducts =
-            totalPriceOfAllProducts - coupomFounded[0].discount;
+        // _homeController.coupons.removeWhere(
+        //   (cupom) => cupom.id == coupomFounded[0].id,
+        // );
 
-        _setMessage(
-          isBusy: true,
-          icon: FontAwesomeIcons.check,
-          color: Colors.green,
-          message: "Seu Cupom foi aplicado!",
-        );
-
-        _homeController.coupons.removeWhere(
-          (cupom) => cupom.id == coupomFounded[0].id,
-          //TODO:Salvar offline os cupons já usado
-        );
+        //
       } else {
         _setMessage(
           isBusy: true,
@@ -158,5 +167,31 @@ abstract class _BuyControllerBase with Store {
     Future.delayed(Duration(seconds: 2), () {
       this.isBusy = false;
     });
+  }
+
+  Future<bool> _verifyCupom() async {
+    bool isMatch = false;
+
+    var couponsSaved = await _homeController.loadCoupons();
+
+    //print(couponsSaved);
+
+    if (couponsSaved.isNotEmpty) {
+      var matchCupons = couponsSaved
+          .where((cupom) => coupomFounded[0].id == cupom.id)
+          .toList();
+
+      //print(matchCupons);
+      if (matchCupons.isNotEmpty) {
+        isMatch = true;
+      } else {
+        isMatch = false;
+      }
+    }
+    return isMatch;
+  }
+
+  remove() {
+    _homeController.remove();
   }
 }
