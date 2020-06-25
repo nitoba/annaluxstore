@@ -40,6 +40,17 @@ mixin _$FavoritesController on _FavoritesControllerBase, Store {
   }
 
   @override
+  dynamic removeFavoriteProducts(ProductModelStore productModelStore) {
+    final _$actionInfo = _$_FavoritesControllerBaseActionController.startAction(
+        name: '_FavoritesControllerBase.removeFavoriteProducts');
+    try {
+      return super.removeFavoriteProducts(productModelStore);
+    } finally {
+      _$_FavoritesControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 favoriteProducts: ${favoriteProducts}

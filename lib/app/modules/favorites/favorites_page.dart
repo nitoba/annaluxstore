@@ -36,7 +36,6 @@ class _FavoritesPageState
           if (controller.favoriteProducts.isNotEmpty) {
             return FavoriteList(
               controller: controller,
-              removeFavorite: () {},
             );
           } else if (controller.favoriteProducts.isNotEmpty &&
               controller.favoriteProducts != null) {

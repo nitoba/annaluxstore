@@ -41,4 +41,8 @@ abstract class _HomeControllerBase with Store {
   removeProductToCar(String id) {
     productsToCar.removeWhere((product) => product.id == id);
   }
+
+  removeFavoriteProducts(String id) {
+    favoriteProducts.removeWhere((favoriteProduct) => favoriteProduct.id == id);
+  }
 }

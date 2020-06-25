@@ -1,5 +1,7 @@
+import 'package:annaluxstore/app/app_module.dart';
 import 'package:annaluxstore/app/modules/home/home_controller.dart';
 import 'package:annaluxstore/app/modules/home/home_module.dart';
+import 'package:annaluxstore/app/modules/shared/localstorage/interfaces/local_storage_repository_inteface.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 import 'favorites_controller.dart';
@@ -9,8 +11,11 @@ import 'favorites_page.dart';
 class FavoritesModule extends WidgetModule {
   @override
   List<Bind> get binds => [
-        Bind((i) => FavoritesController(i.get())),
+        Bind((i) =>
+            FavoritesController(i.get(), i.get<ISharedLocalRepository>())),
         Bind((i) => HomeModule.to.get<HomeController>()),
+        Bind<ISharedLocalRepository>(
+            (i) => AppModule.to.get<ISharedLocalRepository>()),
       ];
 
   @override
