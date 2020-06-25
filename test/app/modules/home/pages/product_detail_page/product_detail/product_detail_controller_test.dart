@@ -1,4 +1,6 @@
 import 'package:annaluxstore/app/app_module.dart';
+import 'package:annaluxstore/app/modules/home/home_controller.dart';
+import 'package:annaluxstore/app/modules/home/models/product_model.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_modular/flutter_modular_test.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -15,21 +17,57 @@ void main() {
     Bind<ISharedLocalRepository>((i) => SharedLocalMock()),
   ]);
   initModule(HomeModule());
-  ProductDetailController productdetail;
+  ProductDetailController productDetailController;
+  HomeController homeController;
   //
   setUp(() {
-    productdetail = HomeModule.to.get<ProductDetailController>();
+    homeController = HomeModule.to.get<HomeController>();
+    productDetailController = HomeModule.to.get<ProductDetailController>();
   });
 
   group('ProductDetailController Test', () {
     test("First Test", () {
-      expect(productdetail, isInstanceOf<ProductDetailController>());
+      expect(productDetailController, isInstanceOf<ProductDetailController>());
     });
+    test(
+        "When call the function addToShoppingCar and list empty shold be return more one product in ShoppingCart",
+        () {
+      var productModel = ProductModel(
+        id: "123456",
+        title: "Roupa de bebe",
+        description: "Uma bela roupa de bebe",
+        price: 10,
+        categorie: "Roupas bebes",
+        images: ["imagem1", "image2", "image3"],
+      );
 
-    //   test("Set Value", () {
-    //     expect(productdetail.value, equals(0));
-    //     productdetail.increment();
-    //     expect(productdetail.value, equals(1));
-    //   });
+      productDetailController.addToShoppingCar(productModel);
+
+      expect(homeController.productsToCar, isNotEmpty);
+      expect(homeController.productsToCar.length, 1);
+      expect(productDetailController.messageBtn, "Adicionado ao carrinho");
+    });
+    test(
+        "When call the function addToShoppingCar and list IsNotEmpty shold be return more one product in ShoppingCart",
+        () {
+      homeController.productsToCar = [];
+      var productModel = ProductModel(
+        id: "123456",
+        title: "Roupa de bebe",
+        description: "Uma bela roupa de bebe",
+        price: 10,
+        categorie: "Roupas bebes",
+        images: ["imagem1", "image2", "image3"],
+      );
+
+      productDetailController.addToShoppingCar(productModel);
+
+      expect(homeController.productsToCar, isNotEmpty);
+      expect(homeController.productsToCar.length, 1);
+      expect(productDetailController.messageBtn, "Adicionado ao carrinho");
+
+      productDetailController.addToShoppingCar(productModel);
+      expect(productDetailController.messageBtn, "Item já adicionado");
+    });
   });
 }
