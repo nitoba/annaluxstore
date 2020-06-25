@@ -104,11 +104,7 @@ class _BuyPageState extends ModularState<BuyPage, BuyController> {
                             )
                           : MessageWidget(controller: controller),
                       Spacer(),
-                      FinishBuyBtn(
-                          controller: controller,
-                          onPress: () {
-                            controller.remove();
-                          })
+                      FinishBuyBtn(controller: controller, onPress: () {})
                     ],
                   ),
                 ),

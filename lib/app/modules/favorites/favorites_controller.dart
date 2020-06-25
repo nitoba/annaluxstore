@@ -9,11 +9,10 @@ class FavoritesController = _FavoritesControllerBase with _$FavoritesController;
 
 abstract class _FavoritesControllerBase with Store {
   final HomeController _homeController;
-  final ISharedLocalRepository _sharedLocalRepository;
   @observable
   ObservableList<ProductModelStore> favoriteProducts;
 
-  _FavoritesControllerBase(this._homeController, this._sharedLocalRepository);
+  _FavoritesControllerBase(this._homeController);
 
   @action
   getFavoriteProducts() {
@@ -38,12 +37,5 @@ abstract class _FavoritesControllerBase with Store {
 
       _homeController.removeFavoriteProducts(productModelStore.id);
     }
-  }
-
-  remove(ObservableList<ProductModelStore> favoriteProducts) async {
-    List<String> listStrings =
-        favoriteProducts.map((e) => e.toString()).toList();
-
-    await _sharedLocalRepository.insert('favorites', listStrings);
   }
 }

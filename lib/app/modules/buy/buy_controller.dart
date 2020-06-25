@@ -234,10 +234,4 @@ abstract class _BuyControllerBase with Store {
 
     return coupons;
   }
-
-  remove() async {
-    await _sharedLocalRepository.remove('coupons');
-    List cupons = await _sharedLocalRepository.get('coupons');
-    print(cupons);
-  }
 }
