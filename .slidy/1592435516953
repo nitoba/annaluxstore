@@ -1,0 +1,5 @@
+lib/app/modules/profile/profile_module.dart
+lib/app/modules/profile/profile_page.dart
+test/app/modules/profile/profile_page_test.dart
+lib/app/modules/profile/profile_controller.dart
+test/app/modules/profile/profile_controller_test.dart
