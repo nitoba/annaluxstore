@@ -38,8 +38,9 @@ main() {
   setUp(() {
     sharedLocalRepository = AppModule.to.get<ISharedLocalRepository>();
     buyRepository = BuyModule.to.get<IBuyRepository>();
-    homeController = HomeModule.to.get<HomeController>();
-    buyController = BuyModule.to.get<BuyController>();
+    homeController = HomeController(sharedLocalRepository);
+    buyController =
+        BuyController(homeController, sharedLocalRepository, buyRepository);
     //homeController.productsToCar = [];
   });
   test("Firt Step", () {
@@ -85,7 +86,7 @@ main() {
       'When call function removeProductOfShoppingCar should be removed a product of list',
       () {
     buyController.products = null;
-    buyController.totalPriceOfAllProducts = 0;
+
     expect(buyController.products, null);
 
     var product = ProductModelStore(
