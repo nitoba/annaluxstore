@@ -1,4 +1,5 @@
 import 'package:annaluxstore/app/modules/buy/buy_controller.dart';
+import 'package:annaluxstore/app/modules/home/home_controller.dart';
 import 'package:annaluxstore/app/modules/home/models/product_model.dart';
 import 'package:annaluxstore/app/modules/shared/consttants.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,12 @@ class _BuyPageState extends ModularState<BuyPage, BuyController> {
   void initState() {
     controller.getProductsInCar();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    Modular.get<HomeController>().saveProductsInCart();
+    super.dispose();
   }
 
   //use 'controller' variable to access controller

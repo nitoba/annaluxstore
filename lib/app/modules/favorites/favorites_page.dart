@@ -26,7 +26,7 @@ class _FavoritesPageState
 
   @override
   void dispose() {
-    print("pagina fechada");
+    //print("pagina fechada");
     Modular.get<HomeController>().saveFavoriteProducts();
     // TODO: implement dispose
     super.dispose();

@@ -18,6 +18,7 @@ abstract class _HomeControllerBase with Store {
 
   _HomeControllerBase(this._sharedLocalRepository) {
     loadFavoriteProducts();
+    loadShoppingCartProducts();
   }
 
   @action
@@ -52,7 +53,7 @@ abstract class _HomeControllerBase with Store {
 
     Map<String, dynamic> favoritesDecoded = {};
 
-    print(favorites);
+    //print(favorites);
 
     if (favorites != null) {
       favorites.forEach((element) {
@@ -63,12 +64,37 @@ abstract class _HomeControllerBase with Store {
     }
   }
 
+  loadShoppingCartProducts() async {
+    List productsInShopingCart = await _sharedLocalRepository.get('cart');
+
+    Map<String, dynamic> productsInCartDecoded = {};
+
+    //print(favorites);
+
+    if (productsInShopingCart != null) {
+      productsInShopingCart.forEach((element) {
+        productsInCartDecoded = jsonDecode(element);
+
+        productsToCar.add(ProductModel.fromJson(productsInCartDecoded));
+      });
+    }
+  }
+
   saveFavoriteProducts() async {
     var jsonList = favoriteProducts.map((e) => e.toJson()).toList();
 
     var list = jsonList.map((e) => jsonEncode(e)).toList();
 
     await _sharedLocalRepository.insert("favorites", list);
+    //print(list);
+  }
+
+  saveProductsInCart() async {
+    var jsonList = productsToCar.map((e) => e.toJson()).toList();
+
+    var list = jsonList.map((e) => jsonEncode(e)).toList();
+
+    await _sharedLocalRepository.insert("cart", list);
     //print(list);
   }
 }
