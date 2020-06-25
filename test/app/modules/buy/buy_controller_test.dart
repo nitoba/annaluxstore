@@ -21,14 +21,6 @@ class BuyRepositoryMock extends Mock implements IBuyRepository {}
 
 main() {
   WidgetsFlutterBinding.ensureInitialized();
-  initModule(AppModule(), changeBinds: [
-    Bind<ISharedLocalRepository>((i) => SharedLocalMock()),
-  ]);
-  initModule(HomeModule());
-
-  initModule(BuyModule(), changeBinds: [
-    Bind<IBuyRepository>((i) => BuyRepositoryMock()),
-  ]);
 
   BuyController buyController;
   ISharedLocalRepository sharedLocalRepository;
@@ -36,6 +28,14 @@ main() {
   HomeController homeController;
 
   setUp(() {
+    initModule(AppModule(), changeBinds: [
+      Bind<ISharedLocalRepository>((i) => SharedLocalMock()),
+    ]);
+    initModule(HomeModule());
+
+    initModule(BuyModule(), changeBinds: [
+      Bind<IBuyRepository>((i) => BuyRepositoryMock()),
+    ]);
     sharedLocalRepository = AppModule.to.get<ISharedLocalRepository>();
     buyRepository = BuyModule.to.get<IBuyRepository>();
     homeController = HomeController(sharedLocalRepository);
