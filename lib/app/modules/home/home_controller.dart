@@ -15,6 +15,8 @@ abstract class _HomeControllerBase with Store {
 
   List<ProductModel> productsToCar = [];
 
+  List<ProductModel> favoriteProducts = [];
+
   _HomeControllerBase(this._sharedLocalRepository);
 
   @action
@@ -24,6 +26,10 @@ abstract class _HomeControllerBase with Store {
 
   List<ProductModel> getProductsToCar() {
     return productsToCar;
+  }
+
+  List<ProductModel> getFavoriteProducts() {
+    return favoriteProducts;
   }
 
   List<ProductModel> addProductToCar(ProductModel productModel) {

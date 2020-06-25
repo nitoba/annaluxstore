@@ -40,6 +40,22 @@ mixin _$ProductDetailController on _ProductDetailControllerBase, Store {
     });
   }
 
+  final _$iconFavoriteAtom =
+      Atom(name: '_ProductDetailControllerBase.iconFavorite');
+
+  @override
+  IconData get iconFavorite {
+    _$iconFavoriteAtom.reportRead();
+    return super.iconFavorite;
+  }
+
+  @override
+  set iconFavorite(IconData value) {
+    _$iconFavoriteAtom.reportWrite(value, super.iconFavorite, () {
+      super.iconFavorite = value;
+    });
+  }
+
   final _$colorAtom = Atom(name: '_ProductDetailControllerBase.color');
 
   @override
@@ -85,10 +101,22 @@ mixin _$ProductDetailController on _ProductDetailControllerBase, Store {
   }
 
   @override
+  dynamic addFavorites(ProductModel productModel) {
+    final _$actionInfo = _$_ProductDetailControllerBaseActionController
+        .startAction(name: '_ProductDetailControllerBase.addFavorites');
+    try {
+      return super.addFavorites(productModel);
+    } finally {
+      _$_ProductDetailControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 messageBtn: ${messageBtn},
 icon: ${icon},
+iconFavorite: ${iconFavorite},
 color: ${color},
 isAdd: ${isAdd}
     ''';

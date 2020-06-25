@@ -25,6 +25,9 @@ abstract class _ProductDetailControllerBase with Store {
   IconData icon = FontAwesomeIcons.shoppingCart;
 
   @observable
+  IconData iconFavorite = FontAwesomeIcons.heart;
+
+  @observable
   Color color = thirdColor;
   @observable
   bool isAdd = false;
@@ -34,7 +37,7 @@ abstract class _ProductDetailControllerBase with Store {
 
   @action
   addToShoppingCar(ProductModel productModel) {
-    var productFound = _filterProduct(productModel);
+    var productFound = _filterProductToCart(productModel);
 
     if (productFound.isEmpty) {
       _homeController.addProductToCar(productModel);
@@ -53,11 +56,33 @@ abstract class _ProductDetailControllerBase with Store {
     }
   }
 
-  List<ProductModel> _filterProduct(ProductModel productModel) {
+  List<ProductModel> _filterProductToCart(ProductModel productModel) {
     var productFound = _homeController.productsToCar
         .where((product) => product.id == productModel.id)
         .toList();
 
     return productFound;
+  }
+
+  List<ProductModel> _filterProductToFavorites(ProductModel productModel) {
+    var productFound = _homeController.favoriteProducts
+        .where((product) => product.id == productModel.id)
+        .toList();
+
+    return productFound;
+  }
+
+  @action
+  addFavorites(ProductModel productModel) {
+    var productFound = _filterProductToFavorites(productModel);
+
+    if (productFound.isEmpty) {
+      _homeController.favoriteProducts.add(productModel);
+      iconFavorite = FontAwesomeIcons.solidHeart;
+      print('Lista quando vazia');
+    } else {
+      print('Lista não vazia');
+      return;
+    }
   }
 }

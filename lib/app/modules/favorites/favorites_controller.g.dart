@@ -9,18 +9,19 @@ part of 'favorites_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$FavoritesController on _FavoritesControllerBase, Store {
-  final _$valueAtom = Atom(name: '_FavoritesControllerBase.value');
+  final _$favoriteProductsAtom =
+      Atom(name: '_FavoritesControllerBase.favoriteProducts');
 
   @override
-  int get value {
-    _$valueAtom.reportRead();
-    return super.value;
+  ObservableList<ProductModelStore> get favoriteProducts {
+    _$favoriteProductsAtom.reportRead();
+    return super.favoriteProducts;
   }
 
   @override
-  set value(int value) {
-    _$valueAtom.reportWrite(value, super.value, () {
-      super.value = value;
+  set favoriteProducts(ObservableList<ProductModelStore> value) {
+    _$favoriteProductsAtom.reportWrite(value, super.favoriteProducts, () {
+      super.favoriteProducts = value;
     });
   }
 
@@ -28,11 +29,11 @@ mixin _$FavoritesController on _FavoritesControllerBase, Store {
       ActionController(name: '_FavoritesControllerBase');
 
   @override
-  void increment() {
+  dynamic getFavoriteProducts() {
     final _$actionInfo = _$_FavoritesControllerBaseActionController.startAction(
-        name: '_FavoritesControllerBase.increment');
+        name: '_FavoritesControllerBase.getFavoriteProducts');
     try {
-      return super.increment();
+      return super.getFavoriteProducts();
     } finally {
       _$_FavoritesControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -41,7 +42,7 @@ mixin _$FavoritesController on _FavoritesControllerBase, Store {
   @override
   String toString() {
     return '''
-value: ${value}
+favoriteProducts: ${favoriteProducts}
     ''';
   }
 }

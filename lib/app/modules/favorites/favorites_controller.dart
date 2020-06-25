@@ -1,3 +1,5 @@
+import 'package:annaluxstore/app/modules/buy/models/product_store_model.dart';
+import 'package:annaluxstore/app/modules/home/home_controller.dart';
 import 'package:mobx/mobx.dart';
 
 part 'favorites_controller.g.dart';
@@ -5,11 +7,19 @@ part 'favorites_controller.g.dart';
 class FavoritesController = _FavoritesControllerBase with _$FavoritesController;
 
 abstract class _FavoritesControllerBase with Store {
+  final HomeController _homeController;
   @observable
-  int value = 0;
+  ObservableList<ProductModelStore> favoriteProducts;
+
+  _FavoritesControllerBase(this._homeController);
 
   @action
-  void increment() {
-    value++;
+  getFavoriteProducts() {
+    var storeProductModel = ProductModelStore();
+    var favorites = _homeController.getFavoriteProducts();
+    favoriteProducts = favorites
+        .map((product) => storeProductModel.transformModel(product))
+        .toList()
+        .asObservable();
   }
 }
