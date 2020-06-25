@@ -93,7 +93,7 @@ class CardInfoBuy extends StatelessWidget {
                     children: [
                       Text("Preço:"),
                       product.totalPrice == 0
-                          ? Text("R\$ ${product.price}")
+                          ? Text("R\$ ${product.price.toStringAsFixed(2)}")
                           : Text(
                               "R\$ ${product.totalPrice.toStringAsFixed(2)}"),
                     ],

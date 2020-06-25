@@ -61,7 +61,6 @@ class _BuyPageState extends ModularState<BuyPage, BuyController> {
                       removeProduct: () {
                         controller.removeProductOfShoppingCar(
                             controller.products[index]);
-                        controller.calcPriceTotalByQuantity();
                       });
                 },
               ),

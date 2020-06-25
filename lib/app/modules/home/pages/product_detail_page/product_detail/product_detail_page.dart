@@ -36,11 +36,7 @@ class _ProductDetailPageState
           ),
           _buildIconArrowBack(),
           DetailProduct(
-            id: widget.product.id,
-            title: widget.product.title,
-            categorie: widget.product.categorie,
-            price: widget.product.price,
-            description: widget.product.description,
+            product: widget.product,
             controller: controller,
             onTapToAddCar: () {
               controller.addToShoppingCar(widget.product);

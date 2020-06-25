@@ -87,7 +87,8 @@ class _CategoriePageState
                           ),
                           SizedBox(height: 8),
                           Text(controller.products[index].title),
-                          Text("R\$ ${controller.products[index].price}"),
+                          Text(
+                              "R\$ ${controller.products[index].price.toStringAsFixed(2)}"),
                         ],
                       ),
                     ),

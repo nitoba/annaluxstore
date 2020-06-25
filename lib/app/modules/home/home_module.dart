@@ -1,4 +1,3 @@
-import 'package:annaluxstore/app/modules/buy/buy_module.dart';
 import 'package:annaluxstore/app/modules/home/pages/product_detail_page/product_detail/product_detail_page.dart';
 
 import 'pages/product_detail_page/product_detail/product_detail_controller.dart';
@@ -22,7 +21,7 @@ class HomeModule extends ChildModule {
         Bind(
           (i) => ProductDetailController(
             i.get(),
-            AppModule.to.get<ISharedLocalRepository>(),
+            i.get<ISharedLocalRepository>(),
           ),
         ),
         Bind((i) => CategorieController(i.get<IHomeRepository>())),
@@ -33,11 +32,14 @@ class HomeModule extends ChildModule {
           ),
         ),
         Bind(
-          (i) => HomeController(),
+          (i) => HomeController(i.get<ISharedLocalRepository>()),
+        ),
+        Bind<ISharedLocalRepository>(
+          (i) => AppModule.to.get<ISharedLocalRepository>(),
         ),
         Bind((i) => AuthController(
               AppModule.to.get<IAuthRepository>(),
-              AppModule.to.get<ISharedLocalRepository>(),
+              i.get<ISharedLocalRepository>(),
             )),
       ];
 

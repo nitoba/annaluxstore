@@ -29,5 +29,17 @@ class ProductModel {
     );
   }
 
+  factory ProductModel.fromJson(Map<String, dynamic> json,
+      [String categorieID]) {
+    return ProductModel(
+      id: json['documentID'] ?? "",
+      title: json['title'] ?? "",
+      description: json['description'] ?? "",
+      images: json['images'] ?? "",
+      price: json['price'] ?? "",
+      categorie: categorieID ?? "",
+    );
+  }
+
   Map<String, dynamic> toJson() => {};
 }

@@ -15,7 +15,7 @@ class BuyModule extends ChildModule {
         Bind((i) => BuyController(i.get(), i.get(), i.get())),
         Bind((i) => HomeModule.to.get<HomeController>()),
         Bind((i) => AppModule.to.get<ISharedLocalRepository>()),
-        Bind<IBuyRepository>((i) => BuyRepository())
+        Bind<IBuyRepository>((i) => BuyRepository()),
       ];
 
   @override

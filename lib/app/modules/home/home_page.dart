@@ -1,4 +1,5 @@
 import 'package:annaluxstore/app/modules/buy/buy_module.dart';
+import 'package:annaluxstore/app/modules/favorites/favorites_module.dart';
 import 'package:annaluxstore/app/modules/home/pages/home_content/homeContent_page.dart';
 import 'package:annaluxstore/app/modules/profile/profile_module.dart';
 import 'package:annaluxstore/app/modules/shared/consttants.dart';
@@ -19,7 +20,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
   //use 'controller' variable to access controller
   List widgetOptions = [
     HomeContentPage(),
-    BuyModule(),
+    FavoritesModule(),
     ProfileModule(),
   ];
 
@@ -63,10 +64,10 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
           ),
           BottomNavigationBarItem(
             icon: FaIcon(
-              FontAwesomeIcons.shoppingCart,
+              FontAwesomeIcons.solidHeart,
               color: controller.currentIndex == 1 ? thirdColor : Colors.black,
             ),
-            title: Text("Carrinho"),
+            title: Text("Favoritos"),
           ),
           BottomNavigationBarItem(
             icon: FaIcon(

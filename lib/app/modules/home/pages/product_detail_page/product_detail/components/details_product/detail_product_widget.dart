@@ -1,31 +1,21 @@
+import 'package:annaluxstore/app/modules/home/models/product_model.dart';
 import 'package:annaluxstore/app/modules/home/pages/product_detail_page/product_detail/components/btn_add_to_car/addtocar_widget.dart';
 import 'package:annaluxstore/app/modules/shared/components/buttom_widget.dart';
 import 'package:annaluxstore/app/modules/shared/consttants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../product_detail_controller.dart';
 
 class DetailProduct extends StatelessWidget {
-  final String id;
-  final String title;
-  final double price;
-  final String categorie;
-  final String description;
+  final ProductModel product;
   final Function onPressToBuy;
   final Function onTapToAddCar;
   const DetailProduct({
     Key key,
-    @required this.title,
-    @required this.price,
-    @required this.categorie,
-    @required this.description,
-    @required this.controller,
-    @required this.id,
+   
     @required this.onPressToBuy,
-    @required this.onTapToAddCar,
+    @required this.onTapToAddCar, this.product, this.controller,
   }) : super(key: key);
 
   final ProductDetailController controller;
@@ -53,7 +43,7 @@ class DetailProduct extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  title,
+                  product.title,
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -67,7 +57,7 @@ class DetailProduct extends StatelessWidget {
             ),
             SizedBox(height: 6),
             Text(
-              categorie,
+              product.categorie,
               style: TextStyle(
                 fontSize: 14,
               ),
@@ -80,7 +70,7 @@ class DetailProduct extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Text(
-                "R\$ $price",
+                "R\$ ${product.price.toStringAsFixed(2)}",
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -97,7 +87,7 @@ class DetailProduct extends StatelessWidget {
             ),
             SizedBox(height: 12),
             Text(
-              description,
+              product.description,
               style: TextStyle(
                 fontSize: 16,
               ),

@@ -42,18 +42,18 @@ abstract class _BuyControllerBase with Store {
 
   _BuyControllerBase(
       this._homeController, this._sharedLocalRepository, this._buyRepository) {
-    _getCoupons();
+    getCoupons();
   }
 
-  _getCoupons() async {
+  getCoupons() async {
     coupons = await _buyRepository.getCoupons();
   }
 
   @action
   getProductsInCar() {
     var storeProductModel = ProductModelStore();
-
-    products = _homeController.productsToCar
+    var productsToCar = _homeController.getProductsToCar();
+    products = productsToCar
         .map((product) => storeProductModel.transformModel(product))
         .toList()
         .asObservable();
@@ -69,6 +69,7 @@ abstract class _BuyControllerBase with Store {
 
       _homeController.removeProductToCar(productModelStore.id);
     }
+    calcPriceTotalByQuantity();
   }
 
   @action
@@ -137,7 +138,7 @@ abstract class _BuyControllerBase with Store {
             message: "Seu Cupom foi aplicado!",
           );
 
-          saveCupons(coupomFounded[0]);
+          _saveCupons(coupomFounded[0]);
         }
       } else {
         _setMessage(
@@ -190,7 +191,7 @@ abstract class _BuyControllerBase with Store {
     return isMatch;
   }
 
-  saveCupons(CoupomModel cupomModel) async {
+  _saveCupons(CoupomModel cupomModel) async {
     var encondedCupom = jsonEncode(cupomModel);
 
     List cuponsLoaded = await _sharedLocalRepository.get('coupons') ?? [];
