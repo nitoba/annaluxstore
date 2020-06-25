@@ -15,6 +15,7 @@ class FavoriteList extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
       child: ListView.builder(
+        physics: BouncingScrollPhysics(),
         itemCount: controller.favoriteProducts.length,
         itemBuilder: (context, index) {
           return FavoriteProductCard(
