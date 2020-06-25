@@ -17,22 +17,33 @@ abstract class _FavoritesControllerBase with Store {
 
   @action
   getFavoriteProducts() {
+    var favorites = _homeController.favoriteProducts;
+
     var storeProductModel = ProductModelStore();
-    var favorites = _homeController.getFavoriteProducts();
+
     favoriteProducts = favorites
         .map((product) => storeProductModel.transformModel(product))
         .toList()
         .asObservable();
+
+    //print(favoriteProducts);
   }
 
   @action
-  removeFavoriteProducts(ProductModelStore productModelStore) {
+  removeFavoriteProducts(ProductModelStore productModelStore) async {
     if (favoriteProducts != null) {
       favoriteProducts.removeWhere(
-          (favoriteProduct) => favoriteProduct.id == productModelStore.id);
+        (favoriteProduct) => favoriteProduct.id == productModelStore.id,
+      );
+
       _homeController.removeFavoriteProducts(productModelStore.id);
     }
   }
 
-  saveLocalFavoriteProducts() {}
+  remove(ObservableList<ProductModelStore> favoriteProducts) async {
+    List<String> listStrings =
+        favoriteProducts.map((e) => e.toString()).toList();
+
+    await _sharedLocalRepository.insert('favorites', listStrings);
+  }
 }

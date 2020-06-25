@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:annaluxstore/app/modules/home/models/product_model.dart';
 import 'package:annaluxstore/app/modules/shared/localstorage/interfaces/local_storage_repository_inteface.dart';
 import 'package:mobx/mobx.dart';
@@ -17,7 +16,9 @@ abstract class _HomeControllerBase with Store {
 
   List<ProductModel> favoriteProducts = [];
 
-  _HomeControllerBase(this._sharedLocalRepository);
+  _HomeControllerBase(this._sharedLocalRepository) {
+    loadFavoriteProducts();
+  }
 
   @action
   void updateCurrentIndex(int index) {
@@ -44,5 +45,30 @@ abstract class _HomeControllerBase with Store {
 
   removeFavoriteProducts(String id) {
     favoriteProducts.removeWhere((favoriteProduct) => favoriteProduct.id == id);
+  }
+
+  loadFavoriteProducts() async {
+    List favorites = await _sharedLocalRepository.get('favorites');
+
+    Map<String, dynamic> favoritesDecoded = {};
+
+    print(favorites);
+
+    if (favorites != null) {
+      favorites.forEach((element) {
+        favoritesDecoded = jsonDecode(element);
+
+        favoriteProducts.add(ProductModel.fromJson(favoritesDecoded));
+      });
+    }
+  }
+
+  saveFavoriteProducts() async {
+    var jsonList = favoriteProducts.map((e) => e.toJson()).toList();
+
+    var list = jsonList.map((e) => jsonEncode(e)).toList();
+
+    await _sharedLocalRepository.insert("favorites", list);
+    //print(list);
   }
 }

@@ -86,6 +86,15 @@ mixin _$ProductDetailController on _ProductDetailControllerBase, Store {
     });
   }
 
+  final _$addFavoritesAsyncAction =
+      AsyncAction('_ProductDetailControllerBase.addFavorites');
+
+  @override
+  Future addFavorites(ProductModel productModel) {
+    return _$addFavoritesAsyncAction
+        .run(() => super.addFavorites(productModel));
+  }
+
   final _$_ProductDetailControllerBaseActionController =
       ActionController(name: '_ProductDetailControllerBase');
 
@@ -95,17 +104,6 @@ mixin _$ProductDetailController on _ProductDetailControllerBase, Store {
         .startAction(name: '_ProductDetailControllerBase.addToShoppingCar');
     try {
       return super.addToShoppingCar(productModel);
-    } finally {
-      _$_ProductDetailControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic addFavorites(ProductModel productModel) {
-    final _$actionInfo = _$_ProductDetailControllerBaseActionController
-        .startAction(name: '_ProductDetailControllerBase.addFavorites');
-    try {
-      return super.addFavorites(productModel);
     } finally {
       _$_ProductDetailControllerBaseActionController.endAction(_$actionInfo);
     }

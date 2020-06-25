@@ -25,6 +25,15 @@ mixin _$FavoritesController on _FavoritesControllerBase, Store {
     });
   }
 
+  final _$removeFavoriteProductsAsyncAction =
+      AsyncAction('_FavoritesControllerBase.removeFavoriteProducts');
+
+  @override
+  Future removeFavoriteProducts(ProductModelStore productModelStore) {
+    return _$removeFavoriteProductsAsyncAction
+        .run(() => super.removeFavoriteProducts(productModelStore));
+  }
+
   final _$_FavoritesControllerBaseActionController =
       ActionController(name: '_FavoritesControllerBase');
 
@@ -34,17 +43,6 @@ mixin _$FavoritesController on _FavoritesControllerBase, Store {
         name: '_FavoritesControllerBase.getFavoriteProducts');
     try {
       return super.getFavoriteProducts();
-    } finally {
-      _$_FavoritesControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic removeFavoriteProducts(ProductModelStore productModelStore) {
-    final _$actionInfo = _$_FavoritesControllerBaseActionController.startAction(
-        name: '_FavoritesControllerBase.removeFavoriteProducts');
-    try {
-      return super.removeFavoriteProducts(productModelStore);
     } finally {
       _$_FavoritesControllerBaseActionController.endAction(_$actionInfo);
     }

@@ -64,8 +64,11 @@ abstract class _ProductDetailControllerBase with Store {
     return productFound;
   }
 
-  List<ProductModel> _filterProductToFavorites(ProductModel productModel) {
-    var productFound = _homeController.favoriteProducts
+  Future<List<ProductModel>> _filterProductToFavorites(
+      ProductModel productModel) async {
+    var favoritesProductsLoaded = _homeController.getFavoriteProducts();
+
+    var productFound = favoritesProductsLoaded
         .where((product) => product.id == productModel.id)
         .toList();
 
@@ -73,16 +76,58 @@ abstract class _ProductDetailControllerBase with Store {
   }
 
   @action
-  addFavorites(ProductModel productModel) {
-    var productFound = _filterProductToFavorites(productModel);
-
+  addFavorites(ProductModel productModel) async {
+    var productFound = await _filterProductToFavorites(productModel);
+    //print(productFound);
     if (productFound.isEmpty) {
       _homeController.favoriteProducts.add(productModel);
       iconFavorite = FontAwesomeIcons.solidHeart;
+      //await save(productModel);
       print('Lista quando vazia');
     } else {
       print('Lista não vazia');
       return;
+    }
+  }
+
+  Future<List<ProductModel>> load() async {
+    List favorites = await _sharedLocalRepository.get('favorites');
+    List<ProductModel> favoriteProducts = [];
+    Map<String, dynamic> favoritesDecoded = {};
+
+    if (favorites != null) {
+      favorites.forEach((favoriteProduct) {
+        favoritesDecoded = jsonDecode(favoriteProduct);
+
+        favoriteProducts
+            .map((favoriteProduct) => ProductModel.fromJson(favoritesDecoded))
+            .toList();
+      });
+    }
+    return favoriteProducts;
+  }
+
+  save(ProductModel productModel) async {
+    var productEncoded = jsonEncode(productModel);
+
+    List favoritesLoaded = await _sharedLocalRepository.get('favorites') ?? [];
+
+    List<String> listStrings =
+        favoritesLoaded.map((e) => e.toString()).toList();
+
+    var isMatch = listStrings
+        .where((favoriteProduct) => favoriteProduct == productEncoded)
+        .toList();
+
+    if (isMatch.isNotEmpty) {
+      //print("Já existe esse cupom salvo");
+      return;
+    } else {
+      //print("Não existe esse cupom salvo");
+
+      listStrings.add(productEncoded);
+
+      await _sharedLocalRepository.insert('favorites', listStrings);
     }
   }
 }
