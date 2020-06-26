@@ -10,10 +10,12 @@ class FavoriteProductCard extends StatelessWidget {
     Key key,
     @required this.controller,
     this.product,
+    this.index,
   }) : super(key: key);
 
   final FavoritesController controller;
   final ProductModelStore product;
+  final int index;
   @override
   Widget build(BuildContext context) {
     return Container(
