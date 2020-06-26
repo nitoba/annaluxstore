@@ -86,7 +86,6 @@ abstract class _HomeControllerBase with Store {
     var list = jsonList.map((e) => jsonEncode(e)).toList();
 
     await _sharedLocalRepository.insert("favorites", list);
-    //print(list);
   }
 
   saveProductsInCart() async {
