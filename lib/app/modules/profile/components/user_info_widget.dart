@@ -18,7 +18,7 @@ class UserInfo extends StatelessWidget {
             padding: const EdgeInsets.only(left: 8.0, bottom: 4.0),
             alignment: Alignment.topLeft,
             child: Text(
-              "User Information",
+              "Informações do usuário",
               style: TextStyle(
                 color: Colors.black87,
                 fontWeight: FontWeight.w500,
@@ -67,9 +67,37 @@ class UserInfo extends StatelessWidget {
                                   );
                                 },
                               ),
-                            if (controller.userAdress != null) Text("Texto")
                           ],
                         ),
+                        if (controller.userAdress != null) ...[
+                          SizedBox(height: 12),
+                          Text(
+                            "Endereço",
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                          ListTile(
+                            leading: Icon(Icons.home),
+                            title: Text("Bairro"),
+                            subtitle: Text(controller.userAdress.bairro),
+                          ),
+                          ListTile(
+                            leading: Icon(Icons.hotel),
+                            title: Text("Lagradouro"),
+                            subtitle: Text(controller.userAdress.logradouro),
+                          ),
+                          ListTile(
+                            leading: Icon(Icons.comment),
+                            title: Text("Complemento"),
+                            subtitle: Text(controller.userAdress.complemento),
+                          ),
+                          ListTile(
+                            leading: Icon(Icons.local_post_office),
+                            title: Text("CEP"),
+                            subtitle: Text(controller.userAdress.cep),
+                          ),
+                        ]
                       ],
                     );
                   } else {

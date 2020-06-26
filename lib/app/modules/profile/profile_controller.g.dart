@@ -55,6 +55,14 @@ mixin _$ProfileController on _ProfileControllerBase, Store {
     return _$getUserAdressAsyncAction.run(() => super.getUserAdress(cep));
   }
 
+  final _$loadUserAdressAsyncAction =
+      AsyncAction('_ProfileControllerBase.loadUserAdress');
+
+  @override
+  Future loadUserAdress() {
+    return _$loadUserAdressAsyncAction.run(() => super.loadUserAdress());
+  }
+
   @override
   String toString() {
     return '''

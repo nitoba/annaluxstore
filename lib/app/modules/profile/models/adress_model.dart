@@ -20,5 +20,12 @@ class AdressModel {
     );
   }
 
-  Map<String, dynamic> toJson() => {};
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['cep'] = this.cep;
+    data['logradouro'] = this.logradouro;
+    data['complemento'] = this.complemento;
+    data['bairro'] = this.bairro;
+    return data;
+  }
 }
