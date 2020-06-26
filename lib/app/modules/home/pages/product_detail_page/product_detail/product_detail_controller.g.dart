@@ -40,6 +40,22 @@ mixin _$ProductDetailController on _ProductDetailControllerBase, Store {
     });
   }
 
+  final _$iconFavoriteAtom =
+      Atom(name: '_ProductDetailControllerBase.iconFavorite');
+
+  @override
+  IconData get iconFavorite {
+    _$iconFavoriteAtom.reportRead();
+    return super.iconFavorite;
+  }
+
+  @override
+  set iconFavorite(IconData value) {
+    _$iconFavoriteAtom.reportWrite(value, super.iconFavorite, () {
+      super.iconFavorite = value;
+    });
+  }
+
   final _$colorAtom = Atom(name: '_ProductDetailControllerBase.color');
 
   @override
@@ -70,6 +86,15 @@ mixin _$ProductDetailController on _ProductDetailControllerBase, Store {
     });
   }
 
+  final _$addFavoritesAsyncAction =
+      AsyncAction('_ProductDetailControllerBase.addFavorites');
+
+  @override
+  Future addFavorites(ProductModel productModel) {
+    return _$addFavoritesAsyncAction
+        .run(() => super.addFavorites(productModel));
+  }
+
   final _$_ProductDetailControllerBaseActionController =
       ActionController(name: '_ProductDetailControllerBase');
 
@@ -89,6 +114,7 @@ mixin _$ProductDetailController on _ProductDetailControllerBase, Store {
     return '''
 messageBtn: ${messageBtn},
 icon: ${icon},
+iconFavorite: ${iconFavorite},
 color: ${color},
 isAdd: ${isAdd}
     ''';
