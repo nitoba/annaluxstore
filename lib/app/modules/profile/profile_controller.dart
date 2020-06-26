@@ -1,15 +1,44 @@
+import 'package:annaluxstore/app/modules/profile/models/adress_model.dart';
+import 'package:annaluxstore/app/modules/profile/repositories/adress_repository_interface.dart';
+import 'package:annaluxstore/app/modules/shared/auth/repositories/auth_interface.dart';
+import 'package:annaluxstore/app/modules/shared/localstorage/interfaces/local_storage_repository_inteface.dart';
+import 'package:annaluxstore/app/modules/shared/models/user_model.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
 part 'profile_controller.g.dart';
 
 class ProfileController = _ProfileControllerBase with _$ProfileController;
 
-abstract class _ProfileControllerBase with Store {
+abstract class _ProfileControllerBase extends Disposable with Store {
+  final IAuthRepository _authRepository;
+  final IAdressRepository _adressRepository;
+  final ISharedLocalRepository _sharedLocalRepository;
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+  }
+
   @observable
-  int value = 0;
+  UserModel user;
+  @observable
+  AdressModel userAdress;
+
+  _ProfileControllerBase(this._authRepository, this._adressRepository,
+      this._sharedLocalRepository) {
+    getUserInfos();
+  }
+  @action
+  getUserInfos() async {
+    user = await _authRepository.getUser();
+  }
 
   @action
-  void increment() {
-    value++;
+  getUserAdress(String cep) async {
+    userAdress = await _adressRepository.getUserAdress(cep);
   }
+
+  saveUserAdress() {}
+  loadUserAdress() {}
 }

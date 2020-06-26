@@ -9,39 +9,57 @@ part of 'profile_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ProfileController on _ProfileControllerBase, Store {
-  final _$valueAtom = Atom(name: '_ProfileControllerBase.value');
+  final _$userAtom = Atom(name: '_ProfileControllerBase.user');
 
   @override
-  int get value {
-    _$valueAtom.reportRead();
-    return super.value;
+  UserModel get user {
+    _$userAtom.reportRead();
+    return super.user;
   }
 
   @override
-  set value(int value) {
-    _$valueAtom.reportWrite(value, super.value, () {
-      super.value = value;
+  set user(UserModel value) {
+    _$userAtom.reportWrite(value, super.user, () {
+      super.user = value;
     });
   }
 
-  final _$_ProfileControllerBaseActionController =
-      ActionController(name: '_ProfileControllerBase');
+  final _$userAdressAtom = Atom(name: '_ProfileControllerBase.userAdress');
 
   @override
-  void increment() {
-    final _$actionInfo = _$_ProfileControllerBaseActionController.startAction(
-        name: '_ProfileControllerBase.increment');
-    try {
-      return super.increment();
-    } finally {
-      _$_ProfileControllerBaseActionController.endAction(_$actionInfo);
-    }
+  AdressModel get userAdress {
+    _$userAdressAtom.reportRead();
+    return super.userAdress;
+  }
+
+  @override
+  set userAdress(AdressModel value) {
+    _$userAdressAtom.reportWrite(value, super.userAdress, () {
+      super.userAdress = value;
+    });
+  }
+
+  final _$getUserInfosAsyncAction =
+      AsyncAction('_ProfileControllerBase.getUserInfos');
+
+  @override
+  Future getUserInfos() {
+    return _$getUserInfosAsyncAction.run(() => super.getUserInfos());
+  }
+
+  final _$getUserAdressAsyncAction =
+      AsyncAction('_ProfileControllerBase.getUserAdress');
+
+  @override
+  Future getUserAdress(String cep) {
+    return _$getUserAdressAsyncAction.run(() => super.getUserAdress(cep));
   }
 
   @override
   String toString() {
     return '''
-value: ${value}
+user: ${user},
+userAdress: ${userAdress}
     ''';
   }
 }

@@ -1,5 +1,6 @@
 import 'package:annaluxstore/app/app_controller.dart';
 import 'package:annaluxstore/app/modules/shared/auth/repositories/auth_interface.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter/material.dart';
 import 'package:annaluxstore/app/app_widget.dart';
@@ -25,6 +26,7 @@ class AppModule extends MainModule {
             )),
         Bind<IAuthRepository>((i) => AuthRepository()),
         Bind<ISharedLocalRepository>((i) => SharedRepository()),
+        Bind((i) => Dio()),
       ];
 
   @override
