@@ -19,7 +19,6 @@ abstract class _ProfileControllerBase extends Disposable with Store {
 
   @override
   void dispose() {
-    print("saiu do perfil");
     saveUserAdress();
   }
 

@@ -24,6 +24,10 @@ class Location extends StatelessWidget {
             validator: (value) {
               if (value.isEmpty) {
                 return "Esse campo é obrigatório";
+              } else if (value.length > 8 || value.length < 8) {
+                return "Informe cep com 8 numeros";
+              } else if (value.contains("-")) {
+                return "Informe cep apenas com numeros";
               }
               return null;
             },
