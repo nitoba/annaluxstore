@@ -1,5 +1,6 @@
 import 'package:annaluxstore/app/modules/profile/components/text_form_widget.dart';
 import 'package:annaluxstore/app/modules/profile/profile_controller.dart';
+import 'package:annaluxstore/app/modules/shared/consttants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:asuka/asuka.dart' as asuka;
@@ -33,6 +34,7 @@ class UserInfo extends StatelessWidget {
                 Observer(builder: (_) {
                   if (controller.user != null) {
                     return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ...ListTile.divideTiles(
                           color: Colors.grey,
@@ -71,11 +73,32 @@ class UserInfo extends StatelessWidget {
                         ),
                         if (controller.userAdress != null) ...[
                           SizedBox(height: 12),
-                          Text(
-                            "Endereço",
-                            style: TextStyle(
-                              fontSize: 16,
-                            ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(left: 22),
+                                child: Text(
+                                  "Endereço",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+                              MaterialButton(
+                                color: thirdColor,
+                                shape: CircleBorder(),
+                                elevation: 0,
+                                child: Icon(
+                                  Icons.edit,
+                                  color: Colors.white,
+                                ),
+                                onPressed: () {
+                                  controller.editUserAdress();
+                                },
+                              )
+                            ],
                           ),
                           ListTile(
                             leading: Icon(Icons.home),

@@ -63,6 +63,20 @@ mixin _$ProfileController on _ProfileControllerBase, Store {
     return _$loadUserAdressAsyncAction.run(() => super.loadUserAdress());
   }
 
+  final _$_ProfileControllerBaseActionController =
+      ActionController(name: '_ProfileControllerBase');
+
+  @override
+  dynamic editUserAdress() {
+    final _$actionInfo = _$_ProfileControllerBaseActionController.startAction(
+        name: '_ProfileControllerBase.editUserAdress');
+    try {
+      return super.editUserAdress();
+    } finally {
+      _$_ProfileControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''

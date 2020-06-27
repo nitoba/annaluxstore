@@ -59,4 +59,9 @@ abstract class _ProfileControllerBase extends Disposable with Store {
       userAdress = AdressModel.fromJson(userDecoded);
     }
   }
+
+  @action
+  editUserAdress() {
+    userAdress = null;
+  }
 }
