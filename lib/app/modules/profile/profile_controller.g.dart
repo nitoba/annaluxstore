@@ -39,6 +39,36 @@ mixin _$ProfileController on _ProfileControllerBase, Store {
     });
   }
 
+  final _$widthAtom = Atom(name: '_ProfileControllerBase.width');
+
+  @override
+  double get width {
+    _$widthAtom.reportRead();
+    return super.width;
+  }
+
+  @override
+  set width(double value) {
+    _$widthAtom.reportWrite(value, super.width, () {
+      super.width = value;
+    });
+  }
+
+  final _$opacityAtom = Atom(name: '_ProfileControllerBase.opacity');
+
+  @override
+  double get opacity {
+    _$opacityAtom.reportRead();
+    return super.opacity;
+  }
+
+  @override
+  set opacity(double value) {
+    _$opacityAtom.reportWrite(value, super.opacity, () {
+      super.opacity = value;
+    });
+  }
+
   final _$getUserInfosAsyncAction =
       AsyncAction('_ProfileControllerBase.getUserInfos');
 
@@ -63,25 +93,21 @@ mixin _$ProfileController on _ProfileControllerBase, Store {
     return _$loadUserAdressAsyncAction.run(() => super.loadUserAdress());
   }
 
-  final _$_ProfileControllerBaseActionController =
-      ActionController(name: '_ProfileControllerBase');
+  final _$editUserAdressAsyncAction =
+      AsyncAction('_ProfileControllerBase.editUserAdress');
 
   @override
-  dynamic editUserAdress() {
-    final _$actionInfo = _$_ProfileControllerBaseActionController.startAction(
-        name: '_ProfileControllerBase.editUserAdress');
-    try {
-      return super.editUserAdress();
-    } finally {
-      _$_ProfileControllerBaseActionController.endAction(_$actionInfo);
-    }
+  Future editUserAdress() {
+    return _$editUserAdressAsyncAction.run(() => super.editUserAdress());
   }
 
   @override
   String toString() {
     return '''
 user: ${user},
-userAdress: ${userAdress}
+userAdress: ${userAdress},
+width: ${width},
+opacity: ${opacity}
     ''';
   }
 }

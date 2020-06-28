@@ -86,17 +86,47 @@ class UserInfo extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              MaterialButton(
-                                color: thirdColor,
-                                shape: CircleBorder(),
-                                elevation: 0,
-                                child: Icon(
-                                  Icons.edit,
-                                  color: Colors.white,
+                              AnimatedContainer(
+                                margin: EdgeInsets.only(right: 22),
+                                width: controller.width,
+                                duration: Duration(milliseconds: 250),
+                                child: MaterialButton(
+                                  color: thirdColor,
+                                  minWidth: controller.width,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  elevation: 2,
+                                  child: controller.width == 130
+                                      ? AnimatedOpacity(
+                                          opacity: controller.opacity,
+                                          duration: Duration(milliseconds: 150),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Icon(
+                                                Icons.edit,
+                                                color: Colors.white,
+                                              ),
+                                              Text(
+                                                "Editar",
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      : Icon(
+                                          Icons.edit,
+                                          color: Colors.white,
+                                        ),
+                                  onPressed: () {
+                                    controller.editUserAdress();
+                                  },
                                 ),
-                                onPressed: () {
-                                  controller.editUserAdress();
-                                },
                               )
                             ],
                           ),

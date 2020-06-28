@@ -5,6 +5,7 @@ import 'package:annaluxstore/app/modules/profile/repositories/adress_repository_
 import 'package:annaluxstore/app/modules/shared/auth/repositories/auth_interface.dart';
 import 'package:annaluxstore/app/modules/shared/localstorage/interfaces/local_storage_repository_inteface.dart';
 import 'package:annaluxstore/app/modules/shared/models/user_model.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
@@ -26,6 +27,10 @@ abstract class _ProfileControllerBase extends Disposable with Store {
   UserModel user;
   @observable
   AdressModel userAdress;
+  @observable
+  double width = 50;
+  @observable
+  double opacity = 0;
 
   _ProfileControllerBase(this._authRepository, this._adressRepository,
       this._sharedLocalRepository) {
@@ -60,7 +65,21 @@ abstract class _ProfileControllerBase extends Disposable with Store {
   }
 
   @action
-  editUserAdress() {
-    userAdress = null;
+  editUserAdress() async {
+    //
+    if (width == 130) {
+      userAdress = null;
+      width = 50;
+      await _sharedLocalRepository.remove("adress");
+      return;
+    }
+    width = 130;
+    Future.delayed(Duration(milliseconds: 300), () {
+      opacity = 1;
+    });
+    Future.delayed(Duration(milliseconds: 1500), () {
+      opacity = 0;
+      width = 50;
+    });
   }
 }
