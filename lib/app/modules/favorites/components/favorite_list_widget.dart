@@ -1,6 +1,7 @@
 import 'package:annaluxstore/app/modules/favorites/components/item_favorite_widget.dart';
 import 'package:annaluxstore/app/modules/favorites/favorites_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class FavoriteList extends StatelessWidget {
   const FavoriteList({
@@ -18,9 +19,16 @@ class FavoriteList extends StatelessWidget {
         physics: BouncingScrollPhysics(),
         itemCount: controller.favoriteProducts.length,
         itemBuilder: (context, index) {
-          return FavoriteProductCard(
-            controller: controller,
-            product: controller.favoriteProducts[index],
+          return GestureDetector(
+            child: FavoriteProductCard(
+              index: index,
+              controller: controller,
+              product: controller.favoriteProducts[index],
+            ),
+            onTap: () {
+              Modular.to.pushNamed("/home/product",
+                  arguments: controller.favorites[index]);
+            },
           );
         },
       ),

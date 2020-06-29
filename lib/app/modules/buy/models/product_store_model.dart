@@ -59,4 +59,13 @@ abstract class _ProductModelStoreBase with Store {
       categorie: productModel.categorie ?? "",
     );
   }
+
+  Map<String, dynamic> toOrder() {
+    return {
+      'title': this.title,
+      'price': this.price,
+      'quantity': this.quantity,
+      'totalprice': this.totalPrice == 0 ? this.price : this.totalPrice,
+    };
+  }
 }

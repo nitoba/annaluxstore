@@ -1,16 +1,88 @@
-# annaluxstore
+# AnnaluxStore
 
-A new Flutter project.
+Aplicativo de ecomerce para estudos desenvolvido com Flutter.
 
-## Getting Started
+Loja:  [@analuxstore](https://www.instagram.com/analuxstore/)
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## Construção
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### Tipografia/Fontes
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Montserrat
+
+### Paleta de cores
+
+- Branco
+- Preto
+- Rosa
+
+---
+
+### Tecnologias a serem utilizadas
+
+- Injeção de dependências
+    - Modular
+- Gerência de estado
+    - Mobx
+    - SetState
+- Banco de dados
+    - Firebase - Firestore
+    - Firebase - Storage
+- Dados locais
+    - SharedPreferences
+- Geração de arquivos CLI
+    - Slidy
+
+---
+
+### CI/CD e Testes automatizados
+
+- [x]  Github Actions
+    - Pull request para as branches master e developer
+- Fazer testes locais
+- [x]  Seguir o Gitflow
+    - Branch master para versão estável
+    - Branch Developer para desenvolvimento
+    - Criar branch para cada feature
+        - Ex: "feature/login"
+    - Fazer Merge e excluir a branch quando concluída
+
+---
+
+### Funcionalidades do App
+
+- [x]  Login com Google
+- [x]  Listar categoria de produtos
+    - Roupas de bebê
+    - Vestidos
+    - Máscaras
+- [x]  Dashboard com todos os produtos
+- [x]  Selecionar um produto de uma categoria
+- [x]  Tela de detalhes do produto
+    - [x] Foto
+    - [x] Preço
+    - [x] Descrição
+    - [x] Botão de adicionar ao carrinho
+    - [x] Botão de comprar
+- [x]  Tela de carrinho de compras
+    - [x]  Produto pode ser colocado num carrinho
+    - [x]  Produto pode ser removido do carrinho
+    - [x]  Ver preço final da compra no carrinho
+    - [x]  Salvar dados do carrinho offline
+- [x]  Aba de produtos favoritos
+    - [x] (Adicionar modelo reativo)
+    - [x] Usar o home controller para armazenar os favoritos
+    - [x] Adicionar um produto nos favoritos
+    - [x] Remover um produto dos favoritos
+    - [x] Salvar os favoritos localmente
+- [ ]  Perfil do usuário
+    - [x] Mostrar a foto e nome
+    - [x] Adicionar endereço
+    - [ ] Acompanhar pedido por status
+    - [ ] Ver os pedidos feitos
+    - [x] Deslogar da conta
+- [ ]  Tela de finalização de compras
+    - [ ] Calcular frete baseado no CEP do usuário
+    - [ ] Finalizar compra do produto

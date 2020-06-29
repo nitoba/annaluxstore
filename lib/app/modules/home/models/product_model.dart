@@ -8,6 +8,8 @@ class ProductModel {
   final List images;
   final double price;
   final String categorie;
+  final int quantity;
+  final double totalprice;
 
   ProductModel({
     this.id,
@@ -16,6 +18,8 @@ class ProductModel {
     this.images,
     this.price,
     this.categorie,
+    this.quantity,
+    this.totalprice,
   });
 
   factory ProductModel.fromDocument(DocumentSnapshot doc,
@@ -61,6 +65,15 @@ class ProductModel {
       'images': this.images,
       'price': this.price,
       'categories': this.categorie,
+    };
+  }
+
+  Map<String, dynamic> toOrder() {
+    return {
+      'title': this.title,
+      'price': this.price,
+      'quantity': this.quantity,
+      'totalprice': this.totalprice,
     };
   }
 }

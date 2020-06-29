@@ -32,15 +32,20 @@ class HomeModule extends ChildModule {
           ),
         ),
         Bind(
-          (i) => HomeController(i.get<ISharedLocalRepository>()),
+          (i) => HomeController(
+            i.get<ISharedLocalRepository>(),
+            i.get<IHomeRepository>(),
+            i.get<IAuthRepository>(),
+          ),
         ),
         Bind<ISharedLocalRepository>(
           (i) => AppModule.to.get<ISharedLocalRepository>(),
         ),
         Bind((i) => AuthController(
-              AppModule.to.get<IAuthRepository>(),
+              i.get<IAuthRepository>(),
               i.get<ISharedLocalRepository>(),
             )),
+        Bind<IAuthRepository>((i) => AppModule.to.get<IAuthRepository>())
       ];
 
   @override

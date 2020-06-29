@@ -33,12 +33,11 @@ class AuthRepository extends Disposable implements IAuthRepository {
   @override
   Future<UserModel> getUser() async {
     final user = await _auth.currentUser();
-
+    var userModel;
     if (user != null) {
-      final userModel = UserModel.fromJson(user);
-      return userModel;
+      userModel = UserModel.fromJson(user);
     }
-    return null;
+    return userModel;
   }
 
   @override
