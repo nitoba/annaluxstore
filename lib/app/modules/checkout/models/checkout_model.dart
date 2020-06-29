@@ -1,13 +1,20 @@
 import 'package:annaluxstore/app/modules/buy/models/product_store_model.dart';
 import 'package:annaluxstore/app/modules/profile/models/adress_model.dart';
-import 'package:annaluxstore/app/modules/shared/models/user_model.dart';
 
 class CheckoutModel {
-  UserModel user;
+  String userId;
+  String userName;
+  String userEmail;
   AdressModel adress;
   List<ProductModelStore> products;
 
-  CheckoutModel({this.user, this.adress, this.products});
+  CheckoutModel({
+    this.adress,
+    this.products,
+    this.userId,
+    this.userName,
+    this.userEmail,
+  });
 
   // factory CheckoutModel.fromJson(DocumentSnapshot doc) {
   //   return CheckoutModel(
@@ -26,9 +33,11 @@ class CheckoutModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.user != null) {
-      data['user'] = this.user.toJson();
-    }
+
+    data['userID'] = this.userId;
+    data['userName'] = this.userName;
+    data['userEmail'] = this.userEmail;
+
     if (this.adress != null) {
       data['adress'] = this.adress.toJson();
     }

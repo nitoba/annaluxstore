@@ -30,7 +30,9 @@ abstract class _CheckoutControllerBase with Store {
     AdressModel adress = await _getUserAdress();
     if (adress != null && products != null) {
       var orderModel = CheckoutModel(
-        user: user,
+        userId: user.id,
+        userName: user.name,
+        userEmail: user.email,
         products: products,
         adress: adress,
       );
