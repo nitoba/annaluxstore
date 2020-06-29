@@ -1,7 +1,9 @@
 import 'package:annaluxstore/app/modules/home/models/product_model.dart';
+import 'package:annaluxstore/app/modules/shared/auth/repositories/auth_interface.dart';
 import 'package:annaluxstore/app/modules/shared/localstorage/interfaces/local_storage_repository_inteface.dart';
 import 'package:annaluxstore/app/modules/home/home_controller.dart';
 import 'package:annaluxstore/app/modules/home/home_module.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_modular/flutter_modular_test.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -9,9 +11,13 @@ import 'package:mockito/mockito.dart';
 
 class SharedLocalMock extends Mock implements ISharedLocalRepository {}
 
+class AuthRepositoryMock extends Mock implements IAuthRepository {}
+
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   initModule(HomeModule(), changeBinds: [
     Bind<ISharedLocalRepository>((i) => SharedLocalMock()),
+    Bind<IAuthRepository>((i) => AuthRepositoryMock())
   ]);
   HomeController homeController;
   ISharedLocalRepository sharedLocalRepository;

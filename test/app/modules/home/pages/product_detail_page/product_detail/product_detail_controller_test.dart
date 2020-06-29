@@ -1,6 +1,8 @@
 import 'package:annaluxstore/app/app_module.dart';
 import 'package:annaluxstore/app/modules/home/home_controller.dart';
 import 'package:annaluxstore/app/modules/home/models/product_model.dart';
+import 'package:annaluxstore/app/modules/shared/auth/repositories/auth_interface.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_modular/flutter_modular_test.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -12,11 +14,15 @@ import 'package:mockito/mockito.dart';
 
 class SharedLocalMock extends Mock implements ISharedLocalRepository {}
 
+class AuthRepositoryMock extends Mock implements IAuthRepository {}
+
 void main() {
-  initModule(AppModule(), changeBinds: [
+  TestWidgetsFlutterBinding.ensureInitialized();
+
+  initModule(HomeModule(), changeBinds: [
     Bind<ISharedLocalRepository>((i) => SharedLocalMock()),
+    Bind<IAuthRepository>((i) => AuthRepositoryMock())
   ]);
-  initModule(HomeModule());
   ProductDetailController productDetailController;
   HomeController homeController;
   //
@@ -31,7 +37,7 @@ void main() {
     });
     test(
         "When call the function addToShoppingCar and list empty shold be return more one product in ShoppingCart",
-        () {
+        () async {
       var productModel = ProductModel(
         id: "123456",
         title: "Roupa de bebe",
@@ -49,7 +55,7 @@ void main() {
     });
     test(
         "When call the function addToShoppingCar and list IsNotEmpty shold be return more one product in ShoppingCart",
-        () {
+        () async {
       homeController.productsToCar = [];
       var productModel = ProductModel(
         id: "123456",
