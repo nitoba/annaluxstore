@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:annaluxstore/app/modules/home/models/product_model.dart';
+import 'package:annaluxstore/app/modules/home/repositories/interfaces/home_repository_interface.dart';
+import 'package:annaluxstore/app/modules/shared/auth/repositories/auth_interface.dart';
 import 'package:annaluxstore/app/modules/shared/localstorage/interfaces/local_storage_repository_inteface.dart';
 import 'package:mobx/mobx.dart';
 
@@ -9,6 +11,8 @@ class HomeController = _HomeControllerBase with _$HomeController;
 
 abstract class _HomeControllerBase with Store {
   final ISharedLocalRepository _sharedLocalRepository;
+  final IHomeRepository _homeRepository;
+  final IAuthRepository _authRepository;
   @observable
   int currentIndex = 0;
 
@@ -16,7 +20,9 @@ abstract class _HomeControllerBase with Store {
 
   List<ProductModel> favoriteProducts = [];
 
-  _HomeControllerBase(this._sharedLocalRepository) {
+  _HomeControllerBase(
+      this._sharedLocalRepository, this._homeRepository, this._authRepository) {
+    addUserInsideDatabase();
     loadFavoriteProducts();
     loadShoppingCartProducts();
   }
@@ -24,6 +30,12 @@ abstract class _HomeControllerBase with Store {
   @action
   void updateCurrentIndex(int index) {
     this.currentIndex = index;
+  }
+
+  addUserInsideDatabase() async {
+    var user = await _authRepository.getUser();
+    if (user == null) return;
+    await _homeRepository.addUserInsidedatabse(user);
   }
 
   List<ProductModel> getProductsToCar() {

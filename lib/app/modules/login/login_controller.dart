@@ -31,4 +31,6 @@ abstract class _LoginControllerBase with Store {
 
     return null;
   }
+
+  addUserInsideDatabase() {}
 }

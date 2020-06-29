@@ -7,6 +7,8 @@ import 'package:annaluxstore/app/modules/home/home_controller.dart';
 import 'package:annaluxstore/app/modules/home/home_module.dart';
 import 'package:annaluxstore/app/modules/buy/repositories/interfaces/buy_repository_interface.dart';
 import 'package:annaluxstore/app/modules/home/models/product_model.dart';
+import 'package:annaluxstore/app/modules/home/repositories/interfaces/home_repository_interface.dart';
+import 'package:annaluxstore/app/modules/shared/auth/repositories/auth_interface.dart';
 
 import 'package:annaluxstore/app/modules/shared/localstorage/interfaces/local_storage_repository_inteface.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +20,10 @@ import 'package:mockito/mockito.dart';
 class SharedLocalMock extends Mock implements ISharedLocalRepository {}
 
 class BuyRepositoryMock extends Mock implements IBuyRepository {}
+
+class AuthRepositoryMock extends Mock implements IAuthRepository {}
+
+class HomeRepositortyMock extends Mock implements IHomeRepository {}
 
 main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,14 +37,20 @@ main() {
     initModule(AppModule(), changeBinds: [
       Bind<ISharedLocalRepository>((i) => SharedLocalMock()),
     ]);
-    initModule(HomeModule());
+    initModule(HomeModule(), changeBinds: [
+      Bind<IAuthRepository>((i) => AuthRepositoryMock()),
+      Bind<IHomeRepository>((i) => HomeRepositortyMock()),
+    ]);
 
     initModule(BuyModule(), changeBinds: [
       Bind<IBuyRepository>((i) => BuyRepositoryMock()),
     ]);
     sharedLocalRepository = AppModule.to.get<ISharedLocalRepository>();
     buyRepository = BuyModule.to.get<IBuyRepository>();
-    homeController = HomeController(sharedLocalRepository);
+    homeController = HomeController(
+        sharedLocalRepository,
+        HomeModule.to.get<IHomeRepository>(),
+        HomeModule.to.get<IAuthRepository>());
     buyController =
         BuyController(homeController, sharedLocalRepository, buyRepository);
     //homeController.productsToCar = [];

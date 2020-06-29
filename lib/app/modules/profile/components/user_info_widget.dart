@@ -87,6 +87,7 @@ class UserInfo extends StatelessWidget {
                                 ),
                               ),
                               AnimatedContainer(
+                                alignment: Alignment.center,
                                 margin: EdgeInsets.only(right: 22),
                                 width: controller.width,
                                 duration: Duration(milliseconds: 250),

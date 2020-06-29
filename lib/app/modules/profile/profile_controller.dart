@@ -5,7 +5,6 @@ import 'package:annaluxstore/app/modules/profile/repositories/adress_repository_
 import 'package:annaluxstore/app/modules/shared/auth/repositories/auth_interface.dart';
 import 'package:annaluxstore/app/modules/shared/localstorage/interfaces/local_storage_repository_inteface.dart';
 import 'package:annaluxstore/app/modules/shared/models/user_model.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
@@ -35,11 +34,11 @@ abstract class _ProfileControllerBase extends Disposable with Store {
   _ProfileControllerBase(this._authRepository, this._adressRepository,
       this._sharedLocalRepository) {
     getUserInfos();
-    loadUserAdress();
   }
   @action
   getUserInfos() async {
     user = await _authRepository.getUser();
+    loadUserAdress();
   }
 
   @action
@@ -49,19 +48,26 @@ abstract class _ProfileControllerBase extends Disposable with Store {
 
   saveUserAdress() async {
     if (userAdress != null) {
-      var userAdressEncoded = jsonEncode(userAdress.toJson());
-      await _sharedLocalRepository.insert("adress", userAdressEncoded);
+      // var userAdressEncoded = jsonEncode(userAdress.toJson());
+      //await _sharedLocalRepository.insert("adress", userAdressEncoded);
+      await _adressRepository.saveUserAdressInDatabase(userAdress, user);
     }
   }
 
   @action
   loadUserAdress() async {
-    var userDecoded;
-    var adressLoaded = await _sharedLocalRepository.get("adress");
-    if (adressLoaded != null) {
-      userDecoded = jsonDecode(adressLoaded);
-      userAdress = AdressModel.fromJson(userDecoded);
-    }
+    // var userDecoded;
+    // var adressLoaded = await _sharedLocalRepository.get("adress");
+    // if (adressLoaded != null) {
+    //   userDecoded = jsonDecode(adressLoaded);
+    //   userAdress = AdressModel.fromJson(userDecoded);
+    // }
+
+    var adressDatabase = await _adressRepository.getUserAdressInDatabase(user);
+
+    if (adressDatabase == null) return;
+
+    userAdress = adressDatabase;
   }
 
   @action
@@ -70,7 +76,7 @@ abstract class _ProfileControllerBase extends Disposable with Store {
     if (width == 130) {
       userAdress = null;
       width = 50;
-      await _sharedLocalRepository.remove("adress");
+      //await _sharedLocalRepository.remove("adress");
       return;
     }
     width = 130;
@@ -81,5 +87,14 @@ abstract class _ProfileControllerBase extends Disposable with Store {
       opacity = 0;
       width = 50;
     });
+  }
+
+  logout() async {
+    userAdress = null;
+    // await _sharedLocalRepository.remove("adress");
+    await _sharedLocalRepository.remove("login");
+    await _sharedLocalRepository.remove("favorites");
+    await _sharedLocalRepository.remove("cart");
+    await _authRepository.logout();
   }
 }

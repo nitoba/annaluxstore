@@ -1,4 +1,5 @@
 import 'package:annaluxstore/app/app_controller.dart';
+import 'package:annaluxstore/app/modules/checkout/checkout_module.dart';
 import 'package:annaluxstore/app/modules/shared/auth/repositories/auth_interface.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -34,7 +35,8 @@ class AppModule extends MainModule {
         Router(Modular.initialRoute, child: (_, args) => FirstPage()),
         Router("/login", module: LoginModule()),
         Router("/home", module: HomeModule()),
-        Router('/buy', module: BuyModule())
+        Router('/buy', module: BuyModule()),
+        Router('/checkout', module: CheckoutModule())
       ];
 
   @override

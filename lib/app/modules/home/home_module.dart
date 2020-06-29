@@ -1,4 +1,5 @@
 import 'package:annaluxstore/app/modules/home/pages/product_detail_page/product_detail/product_detail_page.dart';
+import 'package:annaluxstore/app/modules/shared/auth/repositories/auth_repository.dart';
 
 import 'pages/product_detail_page/product_detail/product_detail_controller.dart';
 import 'package:annaluxstore/app/modules/home/home_controller.dart';
@@ -32,7 +33,11 @@ class HomeModule extends ChildModule {
           ),
         ),
         Bind(
-          (i) => HomeController(i.get<ISharedLocalRepository>()),
+          (i) => HomeController(
+            i.get<ISharedLocalRepository>(),
+            i.get<IHomeRepository>(),
+            AppModule.to.get<IAuthRepository>(),
+          ),
         ),
         Bind<ISharedLocalRepository>(
           (i) => AppModule.to.get<ISharedLocalRepository>(),
@@ -41,6 +46,7 @@ class HomeModule extends ChildModule {
               AppModule.to.get<IAuthRepository>(),
               i.get<ISharedLocalRepository>(),
             )),
+        Bind<IAuthRepository>((i) => AuthRepository())
       ];
 
   @override

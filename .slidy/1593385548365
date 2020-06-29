@@ -1,0 +1,5 @@
+lib/app/modules/checkout/checkout_module.dart
+lib/app/modules/checkout/checkout_page.dart
+test/app/modules/checkout/checkout_page_test.dart
+lib/app/modules/checkout/checkout_controller.dart
+test/app/modules/checkout/checkout_controller_test.dart

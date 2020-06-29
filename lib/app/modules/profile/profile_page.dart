@@ -1,3 +1,4 @@
+import 'package:annaluxstore/app/modules/shared/consttants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -26,6 +27,21 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileController> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        actions: [
+          MaterialButton(
+            color: thirdColor,
+            shape: CircleBorder(),
+            elevation: 5,
+            child: Icon(
+              Icons.exit_to_app,
+              color: Colors.white,
+            ),
+            onPressed: () async {
+              await controller.logout();
+              Modular.to.pushReplacementNamed("/");
+            },
+          )
+        ],
       ),
       body: SingleChildScrollView(
         child: Observer(builder: (_) {
