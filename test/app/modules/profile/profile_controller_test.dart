@@ -19,8 +19,8 @@ class AdressRepositoryMock extends Mock implements IAdressRepository {}
 void main() {
   initModule(ProfileModule(), changeBinds: [
     Bind<IAuthRepository>((i) => AuthRepositoryMock()),
+    Bind<ISharedLocalRepository>((i) => SharedRepositoryMock()),
     Bind<IAdressRepository>((i) => AdressRepositoryMock()),
-    Bind<ISharedLocalRepository>((i) => SharedRepositoryMock())
   ]);
   ProfileController profileController;
   IAuthRepository authRepository;
@@ -84,16 +84,24 @@ void main() {
     test("When called the loadUserAdress should be return user adress saved",
         () async {
       profileController.userAdress = null;
-      when(sharedLocalRepository.get("adress")).thenAnswer(
-        (_) => Future.value(
-          """{
-            "cep": "64010110",
-            "logradouro": "Quadra Mocambinho - Setor A",
-            "complemento": "de 31/32 a 32/33",
-            "bairro": "Mocambinho"
-            }""",
-        ),
+      var user = UserModel(
+        id: "123456",
+        name: "Bruno Alves",
+        email: "brukum2@gmail.com",
       );
+
+      var adress = AdressModel(
+        cep: "64010110",
+        logradouro: "Quadra Mocambinho - Setor A",
+        complemento: "de 31/32 a 32/33",
+        bairro: "Mocambinho",
+      );
+
+      when(adressRepository.getUserAdressInDatabase(user))
+          .thenAnswer((_) => Future.value(adress));
+
+      profileController.userAdress =
+          await adressRepository.getUserAdressInDatabase(user);
 
       await profileController.loadUserAdress();
 
@@ -105,10 +113,42 @@ void main() {
       expect(profileController.userAdress.complemento, "de 31/32 a 32/33");
     });
 
-    test("When called editUserAdress should be setted userAdress as null", () {
+    test(
+        "When called editUserAdress with one touch userAdress should be make animation",
+        () {
+      expect(profileController.width, 50);
+      expect(profileController.opacity, 0);
       profileController.editUserAdress();
 
+      expect(profileController.width, 130);
+
+      Future.delayed(Duration(milliseconds: 300), () {
+        expect(profileController.opacity, 1);
+      });
+
+      Future.delayed(Duration(milliseconds: 1500), () {
+        expect(profileController.opacity, 0);
+        expect(profileController.width, 50);
+      });
+    });
+
+    test(
+        "When called editUserAdress with two touchs userAdress should be return null",
+        () {
+      profileController.width = 50;
+      expect(profileController.width, 50);
+      expect(profileController.opacity, 0);
+      profileController.editUserAdress();
+
+      expect(profileController.width, 130);
+
+      Future.delayed(Duration(milliseconds: 300), () {
+        expect(profileController.opacity, 1);
+      });
+
+      profileController.editUserAdress();
       expect(profileController.userAdress, null);
+      expect(profileController.width, 50);
     });
   });
 }
