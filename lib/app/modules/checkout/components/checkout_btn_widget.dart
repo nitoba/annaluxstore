@@ -1,11 +1,12 @@
-import 'package:annaluxstore/app/modules/buy/buy_controller.dart';
 import 'package:annaluxstore/app/modules/shared/consttants.dart';
 import 'package:flutter/material.dart';
 
-class FinishBuyBtn extends StatelessWidget {
-  final BuyController controller;
+import '../checkout_controller.dart';
+
+class CheckoutBtn extends StatelessWidget {
+  final CheckoutController controller;
   final Function onPress;
-  const FinishBuyBtn({
+  const CheckoutBtn({
     Key key,
     @required this.onPress,
     @required this.controller,
@@ -20,7 +21,7 @@ class FinishBuyBtn extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         duration: Duration(milliseconds: 300),
         decoration: BoxDecoration(
-          color: controller.products.isEmpty ? Colors.grey : thirdColor,
+          color: thirdColor,
           borderRadius: BorderRadius.circular(8),
           boxShadow: [
             BoxShadow(
@@ -35,10 +36,10 @@ class FinishBuyBtn extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
-          onPressed: controller.products.isEmpty ? null : onPress,
+          onPressed: onPress,
           child: Center(
             child: Text(
-              "Pagamento",
+              controller.btnMessage,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18,
