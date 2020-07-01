@@ -27,14 +27,14 @@ class CardNumber extends StatelessWidget {
           }
           return null;
         },
-        maxLength: 16,
-        keyboardType: TextInputType.number,
+        maxLength: 19,
+        //keyboardType: TextInputType.number,
         enableInteractiveSelection: false,
         decoration: InputDecoration(
           helperText: "Número cartão",
           focusColor: thirdColor,
           suffixIcon: Icon(FontAwesomeIcons.creditCard, color: thirdColor),
-          hintText: "Ex: 1234456778901234",
+          hintText: "Ex: 1234 4567 7890 1234",
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
             borderSide: BorderSide(

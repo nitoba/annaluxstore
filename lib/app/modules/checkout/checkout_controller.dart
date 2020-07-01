@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:annaluxstore/app/modules/buy/models/product_store_model.dart';
 import 'package:annaluxstore/app/modules/checkout/models/checkout_model.dart';
 import 'package:annaluxstore/app/modules/checkout/repositories/order_repository_interface.dart';
@@ -44,17 +42,21 @@ abstract class _CheckoutControllerBase with Store {
   }
 
   createNewOrder(List<ProductModelStore> products) async {
-    AdressModel adress = await _getUserAdress();
-    if (adress != null && products != null) {
-      var orderModel = CheckoutModel(
-        userId: user.id,
-        userName: user.name,
-        userEmail: user.email,
-        products: products,
-        adress: adress,
-        status: "",
-      );
-      await _orderRepository.createNewOrder(orderModel);
+    if (btnMessage == "Finalizar Pedido") {
+      AdressModel adress = await _getUserAdress();
+      if (adress != null && products != null) {
+        var orderModel = CheckoutModel(
+          userId: user.id,
+          userName: user.name,
+          userEmail: user.email,
+          products: products,
+          adress: adress,
+          status: "",
+        );
+        await _orderRepository.createNewOrder(orderModel);
+      }
+    } else {
+      return;
     }
   }
 
@@ -82,19 +84,25 @@ abstract class _CheckoutControllerBase with Store {
 
       return;
     }
+    if (cardHeigth == 200) return;
+
     Future.delayed(Duration(milliseconds: 250), () {
       opacity = 0;
       cardHeigth = 100;
-      //TODO: FInalizar Compra e enviar pedido pro firebase;
     });
   }
 
   @action
-  checkout(
-      {String cardNumber, String cardHolder, String expDate, String secCode}) {
+  checkout({
+    String cardNumber,
+    String cardHolder,
+    String expDate,
+    String secCode,
+  }) {
     this.cardNumber = cardNumber;
     this.cardHolder = cardHolder;
     this.cardExp = expDate;
+    initCreditCard();
     if (cardNumber.startsWith("5")) {
       iconCard = FontAwesomeIcons.ccMastercard;
     } else if (cardNumber.startsWith("4")) {

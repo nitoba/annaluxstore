@@ -189,7 +189,8 @@ class _CheckoutPageState
                           expDate: expereDateController.text,
                           secCode: secureCodeController.text,
                         );
-                        controller.initCreditCard();
+
+                        controller.createNewOrder(widget.productsToCar);
                       }
                     },
                   ),
