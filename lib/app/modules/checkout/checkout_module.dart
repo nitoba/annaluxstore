@@ -1,4 +1,3 @@
-import 'package:annaluxstore/app/app_module.dart';
 import 'package:annaluxstore/app/modules/checkout/repositories/order_repository.dart';
 import 'package:annaluxstore/app/modules/checkout/repositories/order_repository_interface.dart';
 import 'package:annaluxstore/app/modules/shared/auth/repositories/auth_interface.dart';

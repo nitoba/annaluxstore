@@ -114,6 +114,21 @@ mixin _$CheckoutController on _CheckoutControllerBase, Store {
     });
   }
 
+  final _$orderFinishAtom = Atom(name: '_CheckoutControllerBase.orderFinish');
+
+  @override
+  bool get orderFinish {
+    _$orderFinishAtom.reportRead();
+    return super.orderFinish;
+  }
+
+  @override
+  set orderFinish(bool value) {
+    _$orderFinishAtom.reportWrite(value, super.orderFinish, () {
+      super.orderFinish = value;
+    });
+  }
+
   final _$_CheckoutControllerBaseActionController =
       ActionController(name: '_CheckoutControllerBase');
 
@@ -164,7 +179,8 @@ cardHolder: ${cardHolder},
 cardExp: ${cardExp},
 iconCard: ${iconCard},
 opacity: ${opacity},
-btnMessage: ${btnMessage}
+btnMessage: ${btnMessage},
+orderFinish: ${orderFinish}
     ''';
   }
 }

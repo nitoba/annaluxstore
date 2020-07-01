@@ -6,6 +6,7 @@ import 'package:annaluxstore/app/modules/profile/models/adress_model.dart';
 import 'package:annaluxstore/app/modules/shared/auth/repositories/auth_interface.dart';
 import 'package:annaluxstore/app/modules/shared/models/user_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mobx/mobx.dart';
 
@@ -36,6 +37,8 @@ abstract class _CheckoutControllerBase with Store {
   double opacity = 0;
   @observable
   String btnMessage = "Checar cartão";
+  @observable
+  bool orderFinish = false;
 
   getUserInfos() async {
     user = await _authRepository.getUser();
@@ -53,7 +56,10 @@ abstract class _CheckoutControllerBase with Store {
           adress: adress,
           status: "",
         );
-        await _orderRepository.createNewOrder(orderModel);
+        orderFinish = await _orderRepository.createNewOrder(orderModel);
+        Future.delayed(Duration(seconds: 2), () {
+          Modular.to.popUntil(ModalRoute.withName("/home"));
+        });
       }
     } else {
       return;
