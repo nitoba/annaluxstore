@@ -55,6 +55,7 @@ abstract class _CheckoutControllerBase with Store {
           products: products,
           adress: adress,
           status: "",
+          date: DateTime.now(),
         );
         orderFinish = await _orderRepository.createNewOrder(orderModel);
         Future.delayed(Duration(seconds: 2), () {

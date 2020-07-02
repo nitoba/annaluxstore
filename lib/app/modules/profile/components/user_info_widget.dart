@@ -1,9 +1,11 @@
 import 'package:annaluxstore/app/modules/profile/components/text_form_widget.dart';
+import 'package:annaluxstore/app/modules/profile/pages/myorder/myorder_page.dart';
 import 'package:annaluxstore/app/modules/profile/profile_controller.dart';
 import 'package:annaluxstore/app/modules/shared/consttants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:asuka/asuka.dart' as asuka;
+import 'package:flutter_modular/flutter_modular.dart';
 
 class UserInfo extends StatelessWidget {
   final ProfileController controller;
@@ -151,7 +153,7 @@ class UserInfo extends StatelessWidget {
                             title: Text("CEP"),
                             subtitle: Text(controller.userAdress.cep),
                           ),
-                        ]
+                        ],
                       ],
                     );
                   } else {
@@ -159,6 +161,21 @@ class UserInfo extends StatelessWidget {
                   }
                 }),
               ],
+            ),
+          ),
+          SizedBox(height: 32),
+          Card(
+            child: ListTile(
+              leading: Icon(Icons.shop_two),
+              title: Text("Meus Pedidos"),
+              subtitle: Text("Toque aqui para ver seus pedidos"),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            MyorderPage(user: controller.user)));
+              },
             ),
           ),
         ],

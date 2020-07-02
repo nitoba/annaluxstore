@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:lottie/lottie.dart';
 
 class CategoriePage extends StatefulWidget {
   final String title;
@@ -104,9 +105,8 @@ class _CategoriePageState
             );
           } else {
             return Center(
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(thirdColor),
-              ),
+              child: Lottie.asset("assets/animation/loading.json",
+                  height: 150, width: 150),
             );
           }
         }),

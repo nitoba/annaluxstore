@@ -7,6 +7,7 @@ class CheckoutModel {
   String userEmail;
   String status;
   AdressModel adress;
+  DateTime date;
   List<ProductModelStore> products;
 
   CheckoutModel({
@@ -16,6 +17,7 @@ class CheckoutModel {
     this.userName,
     this.userEmail,
     this.status,
+    this.date,
   });
 
   // factory CheckoutModel.fromJson(DocumentSnapshot doc) {
@@ -40,6 +42,7 @@ class CheckoutModel {
     data['userName'] = this.userName;
     data['userEmail'] = this.userEmail;
     data['orderStatus'] = this.status;
+    data['orderDate'] = this.date;
 
     if (this.adress != null) {
       data['adress'] = this.adress.toJson();

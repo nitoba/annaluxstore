@@ -83,6 +83,6 @@ Loja:  [@analuxstore](https://www.instagram.com/analuxstore/)
     - [ ] Acompanhar pedido por status
     - [ ] Ver os pedidos feitos
     - [x] Deslogar da conta
-- [ ]  Tela de finalização de compras
-    - [ ] Calcular frete baseado no CEP do usuário
-    - [ ] Finalizar compra do produto
+- [x]  Tela de finalização de compras
+    - [x] Finalizar compra do produto
+    - [x] Animação de pedido concluído

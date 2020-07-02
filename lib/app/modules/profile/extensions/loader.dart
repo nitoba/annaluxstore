@@ -1,6 +1,7 @@
 import 'package:annaluxstore/app/modules/shared/consttants.dart';
 import 'package:flutter/material.dart';
 import 'package:asuka/asuka.dart' as asuka;
+import 'package:lottie/lottie.dart';
 
 extension LoaderStateless on StatelessWidget {
   showLoader(BuildContext context) {
@@ -15,9 +16,8 @@ extension LoaderStateless on StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Center(
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(thirdColor),
-                ),
+                child: Lottie.asset("assets/animation/loading.json",
+                    height: 150, width: 150),
               ),
               SizedBox(height: 20),
               Text("Buscando...."),
