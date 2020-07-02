@@ -83,10 +83,9 @@ abstract class _CheckoutControllerBase with Store {
   initCreditCard() {
     if (cardHeigth == 100) {
       cardHeigth = 200;
-
+      btnMessage = "Finalizar Pedido";
       Future.delayed(Duration(milliseconds: 370), () {
         opacity = 1;
-        btnMessage = "Finalizar Pedido";
       });
 
       return;
