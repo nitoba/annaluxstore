@@ -22,7 +22,7 @@ class BuyRepository implements IBuyRepository {
 
   @override
   Future<RateModel> getDelireryRate(UserModel userModel) async {
-    var rate;
+    RateModel rate;
 
     var user = await _instance
         .collection("users")
@@ -39,7 +39,9 @@ class BuyRepository implements IBuyRepository {
           .where('title', isEqualTo: adressUser['bairro'])
           .getDocuments();
 
-      rate = RateModel.fromDocument(bairros.documents[0]);
+      if (bairros.documents.isNotEmpty) {
+        rate = RateModel.fromDocument(bairros.documents[0]);
+      }
     }
 
     return rate;

@@ -250,6 +250,11 @@ abstract class _BuyControllerBase with Store {
 
     deliveryRate = await _buyRepository.getDelireryRate(user);
 
-    totalPriceOfAllProducts = totalPriceOfAllProducts + deliveryRate.rate;
+    if (deliveryRate != null) {
+      totalPriceOfAllProducts = totalPriceOfAllProducts + deliveryRate.rate;
+    } else {
+      deliveryRate =
+          RateModel(title: "Endereço fora do\nraio de entrega", rate: 0);
+    }
   }
 }

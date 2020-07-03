@@ -65,7 +65,7 @@ abstract class _ProfileControllerBase extends Disposable with Store {
 
     var adressDatabase = await _adressRepository.getUserAdressInDatabase(user);
 
-    if (adressDatabase == null) return;
+    if (adressDatabase.cep == null) return;
 
     userAdress = adressDatabase;
   }

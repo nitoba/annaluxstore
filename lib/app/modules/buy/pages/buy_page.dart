@@ -158,9 +158,8 @@ class _BuyPageState extends ModularState<BuyPage, BuyController> {
                         FinishBuyBtn(
                           controller: controller,
                           onPress: () {
-                            controller.applyDeliveryRate();
-                            // Modular.to.pushNamed("/checkout",
-                            //     arguments: controller.products);
+                            Modular.to.pushNamed("/checkout",
+                                arguments: controller.products);
                           },
                         )
                       ],
