@@ -95,6 +95,7 @@ abstract class _ProfileControllerBase extends Disposable with Store {
     await _sharedLocalRepository.remove("login");
     await _sharedLocalRepository.remove("favorites");
     await _sharedLocalRepository.remove("cart");
+    await _sharedLocalRepository.remove("coupons");
     await _authRepository.logout();
   }
 }
