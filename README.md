@@ -94,6 +94,6 @@ Loja:  [@analuxstore](https://www.instagram.com/analuxstore/)
 
 ### Outras funcionalidades
 
-- [ ]  SplashScreen personalizada
-- [ ]  OnboardScreen
-- [ ]  Ícone do aplicativo
+- [x]  SplashScreen personalizada
+- [x]  OnboardScreen
+- [x]  Ícone do aplicativo
