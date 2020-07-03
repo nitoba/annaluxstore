@@ -3,6 +3,7 @@ import 'package:annaluxstore/app/modules/home/models/product_model.dart';
 import 'package:annaluxstore/app/modules/home/repositories/interfaces/home_repository_interface.dart';
 import 'package:annaluxstore/app/modules/shared/auth/repositories/auth_interface.dart';
 import 'package:annaluxstore/app/modules/shared/localstorage/interfaces/local_storage_repository_inteface.dart';
+import 'package:annaluxstore/app/modules/shared/models/user_model.dart';
 import 'package:mobx/mobx.dart';
 
 part 'home_controller.g.dart';
@@ -107,5 +108,9 @@ abstract class _HomeControllerBase with Store {
 
     await _sharedLocalRepository.insert("cart", list);
     //print(list);
+  }
+
+  Future<UserModel> getUser() async {
+    return await _authRepository.getUser();
   }
 }

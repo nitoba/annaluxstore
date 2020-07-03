@@ -65,7 +65,7 @@ abstract class _ProfileControllerBase extends Disposable with Store {
 
     var adressDatabase = await _adressRepository.getUserAdressInDatabase(user);
 
-    if (adressDatabase == null) return;
+    if (adressDatabase.cep == null) return;
 
     userAdress = adressDatabase;
   }
@@ -95,6 +95,7 @@ abstract class _ProfileControllerBase extends Disposable with Store {
     await _sharedLocalRepository.remove("login");
     await _sharedLocalRepository.remove("favorites");
     await _sharedLocalRepository.remove("cart");
+    await _sharedLocalRepository.remove("coupons");
     await _authRepository.logout();
   }
 }

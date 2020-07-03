@@ -28,6 +28,8 @@ class _BuyPageState extends ModularState<BuyPage, BuyController> {
   @override
   void initState() {
     controller.getProductsInCar();
+    controller.applyDeliveryRate();
+
     super.initState();
   }
 
@@ -76,42 +78,92 @@ class _BuyPageState extends ModularState<BuyPage, BuyController> {
               padding: const EdgeInsets.all(8.0),
               child: Card(
                 child: Container(
-                  height: MediaQuery.of(context).size.height * 0.3,
+                  height: MediaQuery.of(context).size.height * 0.35,
                   width: MediaQuery.of(context).size.width,
                   color: Colors.white,
-                  child: Column(
-                    children: [
-                      Text(
-                        "Preço total:",
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Taxa de entrega:\nBairro: ${controller.deliveryRate.title}",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              "R\$ ${controller.deliveryRate.rate.toStringAsFixed(2)}",
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                      SizedBox(height: 12),
-                      Text(
-                        "R\$ ${controller.totalPriceOfAllProducts.toStringAsFixed(2)}",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                        SizedBox(height: 12),
+                        if (controller.cupomApply)
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Cupom de desconto:",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                "R\$ ${controller.coupomFounded[0].discount.toStringAsFixed(2)}",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        SizedBox(height: 12),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Preço total:",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              "R\$ ${controller.totalPriceOfAllProducts.toStringAsFixed(2)}",
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                      SizedBox(height: 25),
-                      !controller.isBusy
-                          ? CoupomFormField(
-                              formKey: _formKey,
-                              controller: controller,
-                            )
-                          : MessageWidget(controller: controller),
-                      Spacer(),
-                      FinishBuyBtn(
-                        controller: controller,
-                        onPress: () {
-                          Modular.to.pushNamed("/checkout",
-                              arguments: controller.products);
-                        },
-                      )
-                    ],
+                        SizedBox(height: 25),
+                        !controller.isBusy
+                            ? CoupomFormField(
+                                formKey: _formKey,
+                                controller: controller,
+                              )
+                            : Center(
+                                child: MessageWidget(controller: controller)),
+                        Spacer(),
+                        FinishBuyBtn(
+                          controller: controller,
+                          onPress: () {
+                            Modular.to.pushNamed("/checkout",
+                                arguments: controller.products);
+                          },
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),

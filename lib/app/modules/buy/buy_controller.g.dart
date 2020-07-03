@@ -56,6 +56,21 @@ mixin _$BuyController on _BuyControllerBase, Store {
     });
   }
 
+  final _$cupomApplyAtom = Atom(name: '_BuyControllerBase.cupomApply');
+
+  @override
+  bool get cupomApply {
+    _$cupomApplyAtom.reportRead();
+    return super.cupomApply;
+  }
+
+  @override
+  set cupomApply(bool value) {
+    _$cupomApplyAtom.reportWrite(value, super.cupomApply, () {
+      super.cupomApply = value;
+    });
+  }
+
   final _$onSucessAtom = Atom(name: '_BuyControllerBase.onSucess');
 
   @override
@@ -98,6 +113,21 @@ mixin _$BuyController on _BuyControllerBase, Store {
   set color(Color value) {
     _$colorAtom.reportWrite(value, super.color, () {
       super.color = value;
+    });
+  }
+
+  final _$deliveryRateAtom = Atom(name: '_BuyControllerBase.deliveryRate');
+
+  @override
+  RateModel get deliveryRate {
+    _$deliveryRateAtom.reportRead();
+    return super.deliveryRate;
+  }
+
+  @override
+  set deliveryRate(RateModel value) {
+    _$deliveryRateAtom.reportWrite(value, super.deliveryRate, () {
+      super.deliveryRate = value;
     });
   }
 
@@ -163,9 +193,11 @@ mixin _$BuyController on _BuyControllerBase, Store {
 products: ${products},
 totalPriceOfAllProducts: ${totalPriceOfAllProducts},
 isBusy: ${isBusy},
+cupomApply: ${cupomApply},
 onSucess: ${onSucess},
 icon: ${icon},
-color: ${color}
+color: ${color},
+deliveryRate: ${deliveryRate}
     ''';
   }
 }

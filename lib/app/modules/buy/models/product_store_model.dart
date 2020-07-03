@@ -66,6 +66,7 @@ abstract class _ProductModelStoreBase with Store {
       'price': this.price,
       'quantity': this.quantity,
       'totalprice': this.totalPrice == 0 ? this.price : this.totalPrice,
+      'image': this.images[0],
     };
   }
 }

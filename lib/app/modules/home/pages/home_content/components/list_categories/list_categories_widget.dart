@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../home_content_controller.dart';
 
@@ -23,9 +24,8 @@ class ListCategories extends StatelessWidget {
               Modular.get<HomeContentController>().categories;
           if (categories.isEmpty) {
             return Center(
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(thirdColor),
-              ),
+              child: Lottie.asset("assets/animation/loading.json",
+                  height: 150, width: 150),
             );
           } else {
             return ListView.builder(
