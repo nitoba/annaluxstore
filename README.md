@@ -49,6 +49,7 @@ Loja:  [@analuxstore](https://www.instagram.com/analuxstore/)
         - Ex: "feature/login"
     - Fazer Merge e excluir a branch quando concluída
 
+
 ---
 
 ### Funcionalidades do App
@@ -71,18 +72,28 @@ Loja:  [@analuxstore](https://www.instagram.com/analuxstore/)
     - [x]  Produto pode ser removido do carrinho
     - [x]  Ver preço final da compra no carrinho
     - [x]  Salvar dados do carrinho offline
+    - [x]  Mostrar taxa de entrega por bairro
+    - [x]  Aplicar cupons de desconto
 - [x]  Aba de produtos favoritos
     - [x] (Adicionar modelo reativo)
     - [x] Usar o home controller para armazenar os favoritos
     - [x] Adicionar um produto nos favoritos
     - [x] Remover um produto dos favoritos
     - [x] Salvar os favoritos localmente
-- [ ]  Perfil do usuário
+- [x]  Perfil do usuário
     - [x] Mostrar a foto e nome
     - [x] Adicionar endereço
-    - [ ] Acompanhar pedido por status
-    - [ ] Ver os pedidos feitos
+    - [x] Acompanhar pedido por status
+    - [x] Ver os pedidos feitos
     - [x] Deslogar da conta
 - [x]  Tela de finalização de compras
     - [x] Finalizar compra do produto
     - [x] Animação de pedido concluído
+
+---
+
+### Outras funcionalidades
+
+- [ ]  SplashScreen personalizada
+- [ ]  OnboardScreen
+- [ ]  Ícone do aplicativo
