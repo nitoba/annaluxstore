@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:annaluxstore/app/modules/buy/models/coupom_model.dart';
 import 'package:annaluxstore/app/modules/buy/models/product_store_model.dart';
+import 'package:annaluxstore/app/modules/buy/models/rate_model.dart';
 import 'package:annaluxstore/app/modules/buy/repositories/interfaces/buy_repository_interface.dart';
 import 'package:annaluxstore/app/modules/home/home_controller.dart';
 import 'package:annaluxstore/app/modules/shared/localstorage/interfaces/local_storage_repository_inteface.dart';
@@ -28,6 +29,9 @@ abstract class _BuyControllerBase with Store {
   bool isBusy = false;
 
   @observable
+  bool cupomApply = false;
+
+  @observable
   String onSucess = '';
 
   @observable
@@ -35,6 +39,9 @@ abstract class _BuyControllerBase with Store {
 
   @observable
   Color color = Colors.red;
+
+  @observable
+  RateModel deliveryRate = RateModel(title: "", rate: 0);
 
   List<CoupomModel> coupons;
 
@@ -86,12 +93,14 @@ abstract class _BuyControllerBase with Store {
     totalPriceOfAllProducts = 0.0;
     if (isBusy) {
       products.map((product) {
-        totalPriceOfAllProducts += product.quantity * product.price;
+        totalPriceOfAllProducts +=
+            (product.quantity * product.price) + deliveryRate.rate;
       }).toList();
       totalPriceOfAllProducts -= coupomFounded[0].discount;
     } else {
       products.map((product) {
-        totalPriceOfAllProducts += product.quantity * product.price;
+        totalPriceOfAllProducts +=
+            (product.quantity * product.price) + deliveryRate.rate;
       }).toList();
     }
     if (totalPriceOfAllProducts < 0) {
@@ -137,6 +146,7 @@ abstract class _BuyControllerBase with Store {
             color: Colors.green,
             message: "Seu Cupom foi aplicado!",
           );
+          cupomApply = true;
 
           _saveCupons(coupomFounded[0]);
         }
@@ -235,9 +245,16 @@ abstract class _BuyControllerBase with Store {
     return coupons;
   }
 
-  remove() async {
-    await _sharedLocalRepository.remove('coupons');
-    List cupons = await _sharedLocalRepository.get('coupons');
-    print(cupons);
+  applyDeliveryRate() async {
+    var user = await _homeController.getUser();
+
+    deliveryRate = await _buyRepository.getDelireryRate(user);
+
+    if (deliveryRate != null) {
+      totalPriceOfAllProducts = totalPriceOfAllProducts + deliveryRate.rate;
+    } else {
+      deliveryRate =
+          RateModel(title: "Endereço fora do\nraio de entrega", rate: 0);
+    }
   }
 }

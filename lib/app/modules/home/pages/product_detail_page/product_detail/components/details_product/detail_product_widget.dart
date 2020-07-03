@@ -3,6 +3,7 @@ import 'package:annaluxstore/app/modules/home/pages/product_detail_page/product_
 import 'package:annaluxstore/app/modules/shared/components/buttom_widget.dart';
 import 'package:annaluxstore/app/modules/shared/consttants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../product_detail_controller.dart';
@@ -13,9 +14,10 @@ class DetailProduct extends StatelessWidget {
   final Function onTapToAddCar;
   const DetailProduct({
     Key key,
-   
     @required this.onPressToBuy,
-    @required this.onTapToAddCar, this.product, this.controller,
+    @required this.onTapToAddCar,
+    this.product,
+    this.controller,
   }) : super(key: key);
 
   final ProductDetailController controller;
@@ -49,10 +51,25 @@ class DetailProduct extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                IconButton(
-                  icon: FaIcon(FontAwesomeIcons.heart),
-                  onPressed: () {},
-                ),
+                Observer(builder: (_) {
+                  return GestureDetector(
+                    child: Container(
+                      width: 50,
+                      height: 50,
+                      child: CircleAvatar(
+                        backgroundColor: thirdColor,
+                        child: Icon(
+                          controller.iconFavorite,
+                          color: Colors.white,
+                          size: 35,
+                        ),
+                      ),
+                    ),
+                    onTap: () {
+                      controller.addFavorites(product);
+                    },
+                  );
+                }),
               ],
             ),
             SizedBox(height: 6),

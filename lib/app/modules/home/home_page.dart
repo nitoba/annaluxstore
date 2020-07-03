@@ -3,6 +3,7 @@ import 'package:annaluxstore/app/modules/favorites/favorites_module.dart';
 import 'package:annaluxstore/app/modules/home/pages/home_content/homeContent_page.dart';
 import 'package:annaluxstore/app/modules/profile/profile_module.dart';
 import 'package:annaluxstore/app/modules/shared/consttants.dart';
+import 'package:annaluxstore/app/modules/shared/onboardscreen/onboardscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';

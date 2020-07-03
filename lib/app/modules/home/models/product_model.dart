@@ -1,3 +1,4 @@
+import 'package:annaluxstore/app/modules/buy/models/product_store_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProductModel {
@@ -7,6 +8,8 @@ class ProductModel {
   final List images;
   final double price;
   final String categorie;
+  final int quantity;
+  final double totalprice;
 
   ProductModel({
     this.id,
@@ -15,6 +18,8 @@ class ProductModel {
     this.images,
     this.price,
     this.categorie,
+    this.quantity,
+    this.totalprice,
   });
 
   factory ProductModel.fromDocument(DocumentSnapshot doc,
@@ -41,5 +46,34 @@ class ProductModel {
     );
   }
 
-  Map<String, dynamic> toJson() => {};
+  factory ProductModel.fromModelStore(ProductModelStore modelStore) {
+    return ProductModel(
+      id: modelStore.id,
+      title: modelStore.title,
+      description: modelStore.description,
+      images: modelStore.images,
+      price: modelStore.price,
+      categorie: modelStore.categorie,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'documentID': this.id,
+      'title': this.title,
+      'description': this.description,
+      'images': this.images,
+      'price': this.price,
+      'categories': this.categorie,
+    };
+  }
+
+  Map<String, dynamic> toOrder() {
+    return {
+      'title': this.title,
+      'price': this.price,
+      'quantity': this.quantity,
+      'totalprice': this.totalprice,
+    };
+  }
 }

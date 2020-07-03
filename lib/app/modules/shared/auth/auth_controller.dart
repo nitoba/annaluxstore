@@ -39,6 +39,9 @@ abstract class _AuthControllerBase with Store {
 
       return null;
     }
+    print(user.name);
+    print(user.photoUrl);
+    print(user.email);
   }
 
   @action
