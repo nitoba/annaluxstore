@@ -30,7 +30,7 @@ dependencies:
   cached_network_image: ^2.2.0+1
   carousel_pro: ^1.0.0
   cloud_firestore: ^0.13.6
-  
+  intro_views_flutter: ^2.8.1
   firebase_core: ^0.4.5
   flutter_vector_icons: ^0.2.1
   flutter_mobx: ^1.1.0
