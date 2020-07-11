@@ -39,31 +39,19 @@ class HomeRepository implements IHomeRepository {
 
     String categorieName;
 
-    categorieName = await _getCategoriesNames('mask');
+    List<String> categorieNamesID;
 
-    var masks = await _getProductsInsideCollection('mask');
+    var documents = await _instance.collection("products").getDocuments();
 
-    masks.documents.map((product) {
-      products.add(ProductModel.fromDocument(product, categorieName));
-    }).toList();
+    categorieNamesID = documents.documents.map((e) => e.documentID).toList();
 
-    categorieName = await _getCategoriesNames('dresses');
-
-    var dresses = await _getProductsInsideCollection('dresses');
-
-    dresses.documents.map((product) {
-      products.add(ProductModel.fromDocument(product, categorieName));
-    }).toList();
-
-    categorieName = await _getCategoriesNames('baby_clothes');
-
-    var babyClothes = await _getProductsInsideCollection('baby_clothes');
-
-    babyClothes.documents.map((product) {
-      products.add(ProductModel.fromDocument(product, categorieName));
-    }).toList();
-
-    //print(products[0].id);
+    for (String categorieID in categorieNamesID) {
+      var productsOfCategorie = await _getProductsInsideCollection(categorieID);
+      categorieName = await _getCategoriesNames(categorieID);
+      productsOfCategorie.documents.forEach((product) {
+        products.add(ProductModel.fromDocument(product, categorieName));
+      });
+    }
 
     return products;
   }

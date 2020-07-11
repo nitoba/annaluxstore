@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:annaluxstore/app/modules/buy/models/product_store_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -29,7 +31,7 @@ class ProductModel {
       title: doc.data['title'] ?? "",
       description: doc.data['description'] ?? "",
       images: doc.data['images'] ?? "",
-      price: doc.data['price'] ?? "",
+      price: doc.data['price'].toDouble() ?? "",
       categorie: categorieID ?? "",
     );
   }
