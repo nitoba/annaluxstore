@@ -1,3 +1,5 @@
+﻿![](assets/images/logo.png)
+
 # AnnaluxStore
 
 Aplicativo de ecomerce para estudos desenvolvido com Flutter.
