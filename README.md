@@ -1,4 +1,4 @@
-﻿![](assets/images/logo.png)
+﻿<img src="assets/images/logo.png" alt="alt text" width="240" height="240">
 
 # AnnaluxStore
 
